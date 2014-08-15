@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include "7z.h"
 #include "sqlzma.h"
+#include "error.h"
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
@@ -104,7 +105,7 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
         */
         outlen = outsize;
         inlen = size - LZMA_PROPS_SIZE;
-        fprintf(stderr, "standard_lzma_uncompress: lzma data block does not appear to contain a valid size field\n");
+        TRACE("standard_lzma_uncompress: lzma data block does not appear to contain a valid size field\n");
 
 	    res = LzmaUncompress(dest, &outlen, src + LZMA_PROPS_SIZE, &inlen, src, LZMA_PROPS_SIZE);
 	}
@@ -129,7 +130,7 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
 
     if((retval = standard_lzma_uncompress(dest, src, size, outsize, error)) != 0)
     {
-        fprintf(stderr, "standard_lzma_uncompress failed with error code %d\n", *error);
+        TRACE("standard_lzma_uncompress failed with error code %d\n", *error);
     }
     else
     {
@@ -139,11 +140,11 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
     if((retval = decompress_lzma_7z((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
     {
         *error = retval;
-        fprintf(stderr, "decompress_lzma_7z failed with error code %d\n", *error);
+        TRACE("decompress_lzma_7z failed with error code %d\n", *error);
     }
     else
     {
-        fprintf(stderr, "decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
+        TRACE("decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
         return outsize;
     }
 
@@ -152,7 +153,7 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
         un.un_lzma = 1;
         if(sqlzma_init(&un, un.un_lzma, 0) != 0)
         {
-            fprintf(stderr, "sqlzma_init failed!\n");
+            ERROR("sqlzma_init failed!\n");
             un.un_lzma = 0;
         }
     }
@@ -166,12 +167,12 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
         if((retval = sqlzma_un(&un, sbuf+Src, sbuf+Dst)) != 0)
         {
             *error = retval;
-            fprintf(stderr, "sqlzma_un failed with error code %d\n", *error);
+            TRACE("sqlzma_un failed with error code %d\n", *error);
             retval = -1;
         }
         else
         {
-            fprintf(stderr, "sqlzma_un succeeded in decompressing %d bytes!\n", (int) un.un_reslen);
+            TRACE("sqlzma_un succeeded in decompressing %d bytes!\n", (int) un.un_reslen);
             return un.un_reslen;
         }
     }

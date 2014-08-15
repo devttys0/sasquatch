@@ -25,6 +25,9 @@
 #include "compressor.h"
 #include "squashfs_fs.h"
 
+// CJH: Added these includes
+#include "error.h"
+
 #ifndef GZIP_SUPPORT
 static struct compressor gzip_comp_ops =  {
 	ZLIB_COMPRESSION, "gzip"
@@ -149,23 +152,23 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
     if(retval < 1)
     {
         current_compressor_id = comp->id;
-        fprintf(stderr, "%s decompressor failed! [%d %d]\n", comp->name, retval, *error);
+        TRACE("%s decompressor failed! [%d %d]\n", comp->name, retval, *error);
 
         for(i=0; compressor[i]->id; i++)
         {
             comp = compressor[i];
             if(comp->id != current_compressor_id && comp->uncompress)
             {
-                fprintf(stderr, "Trying to decompress with %s...\n", comp->name);
+                TRACE("Trying to decompress with %s...\n", comp->name);
                 retval = comp->uncompress(dest, src, size, block_size, error);
                 if(retval > 0)
                 {
-                    fprintf(stderr, "%s decompressor succeeded!\n", comp->name);
+                    TRACE("%s decompressor succeeded!\n", comp->name);
                     break;
                 }
                 else
                 {
-                    fprintf(stderr, "%s decompressor failed! [%d %d]\n", comp->name, retval, *error);
+                    TRACE("%s decompressor failed! [%d %d]\n", comp->name, retval, *error);
                 }
             }
         }
