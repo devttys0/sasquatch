@@ -188,21 +188,25 @@ int sqlzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
 }
 
 // CJH: lzmawrt varient decompressor
+extern int ddwrt_squash_image;
 int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
-    if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
+    // This decompressor is specific to DD-WRT and is rather fragile. Only use it if a DD-WRT image has been detected.
+    if(ddwrt_squash_image)
     {
-        *error = retval;
-        retval = -1;
-        printf("lzmawrt_uncompress failed: [%d] [%d]\n", retval, outsize);
-        TRACE("lzmawrt_uncompress failed with error code %d\n", *error);
-    }
-    else
-    {
-        printf("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
-        retval = outsize;
+        if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
+        {
+            *error = retval;
+            retval = -1;
+            TRACE("lzmawrt_uncompress failed with error code %d\n", *error);
+        }
+        else
+        {
+            TRACE("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
+            retval = outsize;
+        }
     }
 
     return retval;
@@ -232,7 +236,7 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
 
     for(i=0; (i<LZMA_VARIANTS_COUNT && retval < 1); i++)
     {
-        ERROR("Trying LZMA variant #%d\n", lzma_variants[i]);
+        if(detected_lzma_variant == -1) ERROR("Trying LZMA variant #%d\n", lzma_variants[i]);
 
         switch(lzma_variants[i])
         {

@@ -176,7 +176,8 @@ HRESULT LzmaDecoderCodeReal(
 
   if (anOutSize == NULL)
   {
-      printf("CodeReal: invalid argument %x\n", (UINT32) anOutSize );
+      // CJH: Be quiet.
+      //printf("CodeReal: invalid argument %x\n", (UINT32) anOutSize );
       return E_INVALIDARG;
   }
 
@@ -318,7 +319,8 @@ HRESULT LzmaDecoderCodeReal(
         }
         if (aDistance >= aNowPos64)
         {
-            printf("CodeReal: invalid data\n" );
+            // CJH: Be quiet.
+            //printf("CodeReal: invalid data\n" );
             return E_INVALIDDATA;
         }
         OutWindowCopyBackBlock(aDistance, aLen);

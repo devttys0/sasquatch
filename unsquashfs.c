@@ -77,6 +77,8 @@ unsigned int cur_blocks = 0;
 int inode_number = 1;
 int no_xattrs = XATTR_DEF;
 int user_xattrs = FALSE;
+// CJH: Used by lzma_wrapper.c if a DD-WRT magic signature is detected
+int ddwrt_squash_image = FALSE;
 
 int lookup_type[] = {
 	0,
@@ -1815,8 +1817,17 @@ int read_super(char *source)
     }
     
     // CJH: Warn if SquashFS magic doesn't look correct
-    if(generic.s_magic != SQUASHFS_MAGIC && generic.s_magic != SQUASHFS_MAGIC_SWAP)
+    if(generic.s_magic == SQUASHFS_DDWRT_MAGIC || generic.s_magic == SQUASHFS_DDWRT_MAGIC_SWAP)
+    {
+        ERROR("Detected DD-WRT SquashFS signature\n");
+        ddwrt_squash_image = TRUE;
+    }
+    else if(generic.s_magic != SQUASHFS_MAGIC && generic.s_magic != SQUASHFS_MAGIC_SWAP)
+    {
         ERROR("Non-standard SquashFS Magic: %.4s\n", (char *) &generic.s_magic);
+    }
+
+    // CJH: Notify if endianess is different
     if(swap)
         ERROR("Reading a different endian SQUASHFS filesystem on %s\n", source);
 

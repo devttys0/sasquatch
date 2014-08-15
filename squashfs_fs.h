@@ -31,6 +31,10 @@
 #define SQUASHFS_MAGIC_SWAP		0x68737173
 #define SQUASHFS_START			0
 
+// CJH: Added for identifying DD-WRT images
+#define SQUASHFS_DDWRT_MAGIC        0x74717368
+#define SQUASHFS_DDWRT_MAGIC_SWAP   0x68737174
+
 /* size of metadata (inode and directory) blocks */
 #define SQUASHFS_METADATA_SIZE		8192
 #define SQUASHFS_METADATA_LOG		13
