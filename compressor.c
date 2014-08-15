@@ -140,6 +140,7 @@ void display_compressor_usage(char *def_comp)
 }
 
 // CJH: calls the currently selected decompressor, unless that fails, then tries the other decompressors
+int compression_type_printed = 0;
 int compressor_uncompress(struct compressor *comp, void *dest, void *src, int size, int block_size, int *error)
 {
     int i = 0, retval = -1, current_compressor_id = -1;
@@ -174,6 +175,11 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
         }
     }
 
+    if(retval > 0 && !compression_type_printed)
+    {
+        ERROR("Detected %s compression\n", comp->name);
+        compression_type_printed = 1;
+    }
     return retval;
 }
 

@@ -35,6 +35,12 @@
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
+// CJH: LZMA variant list
+#define LZMA_STANDARD       1
+#define LZMA_7Z             2
+#define LZMA_SQLZMA         3
+#define LZMA_VARIANTS_COUNT 3
+
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
 {
@@ -122,31 +128,29 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
 	}
 }
 
-// CJH: A decompression wrapper for the various LZMA versions
-struct sqlzma_un un = { 0 };
-static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
+// CJH: lzma_7z variant decompressor
+int lzma_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
-    if((retval = standard_lzma_uncompress(dest, src, size, outsize, error)) != 0)
-    {
-        TRACE("standard_lzma_uncompress failed with error code %d\n", *error);
-    }
-    else
-    {
-        return retval;
-    }
-    
     if((retval = decompress_lzma_7z((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
     {
         *error = retval;
         TRACE("decompress_lzma_7z failed with error code %d\n", *error);
+        return -1;
     }
     else
     {
         TRACE("decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
         return outsize;
     }
+}
+
+// CJH: sqlzma variant decompressor
+struct sqlzma_un un = { 0 };
+int sqlzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int retval = -1;
 
     if(!un.un_lzma)
     {
@@ -157,18 +161,19 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
             un.un_lzma = 0;
         }
     }
+
     if(un.un_lzma)
     {
         enum {Src, Dst};
         struct sized_buf sbuf[] = {
-                {.buf = (void *)src, .sz = size},
-                {.buf = (void *)dest, .sz = outsize}
+                    {.buf = (void *)src, .sz = size},
+                    {.buf = (void *)dest, .sz = outsize}
         };
+        
         if((retval = sqlzma_un(&un, sbuf+Src, sbuf+Dst)) != 0)
         {
             *error = retval;
             TRACE("sqlzma_un failed with error code %d\n", *error);
-            retval = -1;
         }
         else
         {
@@ -176,8 +181,55 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
             return un.un_reslen;
         }
     }
-    
+
     return -1;
+}
+
+// CJH: A decompression wrapper for the various LZMA versions
+int detected_lzma_variant = -1;
+static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int i = 0, k = 0, retval = -1;
+    int lzma_variants[LZMA_VARIANTS_COUNT] = { 0 };
+
+    if(detected_lzma_variant != -1)
+    {
+        lzma_variants[i] = detected_lzma_variant;
+        i++;
+    }
+
+    for(k=LZMA_STANDARD; i<LZMA_VARIANTS_COUNT; i++,k++)
+    {
+        if(k == detected_lzma_variant)
+        {
+            k++;
+        }
+        lzma_variants[i] = k;
+    }
+
+    for(i=0; (i<LZMA_VARIANTS_COUNT && retval < 1); i++)
+    {
+        switch(lzma_variants[i])
+        {
+            case LZMA_STANDARD:
+                retval = standard_lzma_uncompress(dest, src, size, outsize, error);
+                break;
+            case LZMA_7Z:
+                retval = lzma_7z_uncompress(dest, src, size, outsize, error);
+                break;
+            case LZMA_SQLZMA:
+                retval = sqlzma_uncompress(dest, src, size, outsize, error);
+                break;
+        }
+
+        if(retval > 0 && detected_lzma_variant == -1)
+        {
+            ERROR("Detected LZMA variation #%d\n", lzma_variants[i]);
+            detected_lzma_variant = lzma_variants[i];
+        }
+    }
+    
+    return retval;
 }
 
 struct compressor lzma_comp_ops = {
