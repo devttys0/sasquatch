@@ -140,7 +140,7 @@ endif
 
 ifeq ($(LZMA_SUPPORT),1)
 # CJH: Added -lunlzma, -llzmawrt
-LIBS += -L$(LZMA_SQLZMA_DIR) -L$(LZMA_WRT_DIR) -lunlzma -llzmawrt
+LIBS += -L$(LZMA_SQLZMA_DIR) -lunlzma -L$(LZMA_WRT_DIR) -llzmawrt
 LZMA_OBJS = $(LZMA_DIR)/C/Alloc.o $(LZMA_DIR)/C/LzFind.o \
 	$(LZMA_DIR)/C/LzmaDec.o $(LZMA_DIR)/C/LzmaEnc.o $(LZMA_DIR)/C/LzmaLib.o
 # CJH: Added LZMA variant directories
@@ -296,7 +296,8 @@ unsquashfs: $(UNSQUASHFS_OBJS)
 
 # CJH: Added sasquatch target
 sasquatch: $(UNSQUASHFS_OBJS)
-	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LZMA_EXTRA_OBJS) $(LIBS) -o $@
+	$(CXX) $(LDFLAGS) $(EXTRA_LDFLAGS) $(LZMA_EXTRA_OBJS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
+
 unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
 	squashfs_compat.h xattr.h read_fs.h compressor.h
 

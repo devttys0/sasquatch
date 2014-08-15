@@ -29,9 +29,10 @@
 
 // CJH: Added these includes
 #include <stdio.h>
+#include "error.h"
 #include "7z.h"
 #include "sqlzma.h"
-#include "error.h"
+#include "lzmawrt.h"
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
@@ -39,7 +40,8 @@
 #define LZMA_STANDARD       1
 #define LZMA_7Z             2
 #define LZMA_SQLZMA         3
-#define LZMA_VARIANTS_COUNT 3
+#define LZMA_WRT            4   // CJH: This should always be tried last, it seems very buggy (segfaults, infinite loops)
+#define LZMA_VARIANTS_COUNT LZMA_WRT
 
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
@@ -185,6 +187,27 @@ int sqlzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
     return -1;
 }
 
+// CJH: lzmawrt varient decompressor
+int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int retval = -1;
+
+    if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
+    {
+        *error = retval;
+        retval = -1;
+        printf("lzmawrt_uncompress failed: [%d] [%d]\n", retval, outsize);
+        TRACE("lzmawrt_uncompress failed with error code %d\n", *error);
+    }
+    else
+    {
+        printf("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
+        retval = outsize;
+    }
+
+    return retval;
+}
+
 // CJH: A decompression wrapper for the various LZMA versions
 int detected_lzma_variant = -1;
 static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
@@ -221,6 +244,9 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
                 break;
             case LZMA_SQLZMA:
                 retval = sqlzma_uncompress(dest, src, size, outsize, error);
+                break;
+            case LZMA_WRT:
+                retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
                 break;
         }
 

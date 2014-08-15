@@ -392,7 +392,7 @@ free(thread);
 #endif
 
 // CJH: s/compress2/lzmawrt_compress2/
-ZEXTERN int ZEXPORT lzmawrt_compress2 OF((Bytef *dest,   uLongf *destLen,
+extern "C" int lzmawrt_compress2 OF((Bytef *dest,   uLongf *destLen,
                                   const Bytef *source, uLong sourceLen,
                                   int level))
 {
@@ -460,7 +460,7 @@ ZEXTERN int ZEXPORT lzmawrt_compress2 OF((Bytef *dest,   uLongf *destLen,
 }
 
 // CJH: s/uncompress/lzmawrt_uncompress/
-ZEXTERN int ZEXPORT lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
+extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
                                    const Bytef *source, uLong sourceLen))
 {
 	CInMemoryStream *inStreamSpec = new CInMemoryStream(source+4, sourceLen-4);
