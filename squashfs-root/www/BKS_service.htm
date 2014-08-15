@@ -1,0 +1,96 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function chgSel(index)
+{
+ document.forms[0].select.value = index;
+ return true;
+}
+
+<%179%>
+function chSession(newsession)
+{
+    if(newsession == 2)
+        top.formframe.location.href = "BKS_service_ppp2.htm";		
+    else if(newsession == 1)
+        top.formframe.location.href = "BKS_service.htm";		
+}
+<%180%>
+
+
+//-->
+</script> 
+</head>
+<body bgcolor="#ffffff" onload="loadhelp('BKS_service');document.forms[0].elements[0].focus();">
+<form name="frmService" method="POST" action="fw_serv.cgi">
+	<table border="0" cellpadding="0" cellspacing="3" width="100%">
+	<tr>
+		<td colspan="2"><h1><%207%></h1>
+<%182%>			
+			<input checked type="radio" name=pppoesession value=session1 onClick="chSession(1);"><%183%>
+			<input type="radio" name=pppoesession value=session2 onClick="chSession(2);"><%184%><br>
+<%185%>			
+		</td>
+	</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+ <TR>
+ <TD align="left" colspan="2"><a href="javascript:loadhelp('BKS_service','block')" tabindex="-1"><b><%208%></b></a><br>
+ <input type="radio" <%209%> name="skeyword" value="never"><%188%><br> 
+ <input type="radio" <%210%> name="skeyword" value="perschedule"><%190%><br>
+ <input type="radio" <%211%> name="skeyword" value="always"><%192%>
+ </TD>
+ </TR>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+	<td colspan="2">
+		<a href="javascript:loadhelp('BKS_service','table')" tabindex="-1"><b><%212%></b></a></td>
+</tr>
+	<tr>
+	<td colspan="2">
+		<table border="1" cellpadding="2" cellspacing="0" width="100%">
+		<tr>
+			<td nowrap align="center" width="6%">&nbsp;	 	</td>
+			<td nowrap align="center" width="6%"><span class="thead"># </span>	</td>
+			<td nowrap align="center"><span class="thead"><%213%></span></td>
+			<td nowrap align="center"><span class="thead"><%214%></span></td>
+			<td nowrap align="center"><span class="thead"><%215%></span></td>
+		</tr>
+		<%216%>
+        </table>
+	</td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+	<input type="Submit" name="Add" value=<%217%>>
+	<input type="Submit" name="Edit" value=<%218%>>
+	<input type="Submit" name="Delete" value=<%219%>></td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+ <input type="submit" name="apply" value=<%93%>>
+ <input type="reset" name="cancel" value=<%94%>>
+</td>
+</tr>
+</table>
+
+	<input type="hidden" name="select" value="-1">
+
+</form>
+</body>
+</html>
+

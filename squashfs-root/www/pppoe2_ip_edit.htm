@@ -1,0 +1,89 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+
+<STYLE TYPE="text/javascript">
+<!--
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+-->
+-->
+-->
+</style>
+<script language="javascript" type="text/javascript" src="utility.js"></script>
+<script language="javascript" type="text/javascript" src="browser.js"></script>
+<script language="javascript" type="text/javascript">
+<!--
+function loadSettings()
+{
+	var cf = document.forms[0];
+
+	var startIP = cf.startIP.value.split(".");
+	cf.Addr1.value = startIP[0];
+	cf.Addr2.value = startIP[1];
+	cf.Addr3.value = startIP[2];
+	cf.Addr4.value = startIP[3];
+
+}
+function checkData()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	
+	var i = parseInt(cf.Addr4.value);
+	var j = parseInt(cf.Addr5.value);
+	
+    if(checkIP(cf.Addr1,cf.Addr2,cf.Addr3,cf.Addr4,254)||checkIP(cf.Addr1,cf.Addr2,cf.Addr3,cf.Addr5,254)||(parseInt(cf.Addr4.value)==0)||(parseInt(cf.Addr5.value)==0) || i>j )
+	    msg+= "<%9%>";
+
+	if (msg.length > 1)
+	{
+		alert(msg);
+		return false;
+	}
+
+	cf.tempIP.value = cf.Addr1.value+'.'+cf.Addr2.value+'.'+cf.Addr3.value+'.'+cf.Addr4.value;
+    cf.endIP4.value = cf.Addr5.value;
+	return true;
+}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="loadSettings();">
+<FORM action="pppoe2_ip.cgi" method="post" name="formname">
+  <TABLE border=0 width="100%">
+    <TR>
+      <TD colspan="2" align="left"><h1><%1524%></h1></TD></TR>
+    <tr> <!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+
+    <TR>
+      <TD align="left" nowrap> <%1543%></td>
+      <td><INPUT type="text" name="trigger" maxlength="20" value="<%81%>" onfocus="this.blur()"></TD></TR>
+      
+    <tr>
+	  <TD align="left" nowrap> <%1543%></td>
+	  <td align="left" ><input type="text" name="Addr1" class="num" size="4" maxlength="3">.<input type="text" name="Addr2" class="num" size="4" maxlength="3">.<input type="text" name="Addr3" class="num" size="4" maxlength="3">.<input type="text" name="Addr4" class="num" size="4" maxlength="3" > - <input type="text" name="Addr5" class="num" size="4" maxlength="3" value=<%1545%>></td>
+    <tr>
+      <TD align="left" nowrap> <%235%></td>
+      <td><select name="Protocol"><option value="TCP/UDP"><%238%></option><option value="TCP"><%236%></option><option value="UDP"><%237%></option></select></td>
+    </TR>
+    </tr>
+           
+    <tr> <!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td colspan="2" align="center">
+        <INPUT type="submit" name="accept" value=" <%93%> " onclick="return checkData()">
+        <INPUT type="button" name="cancel" value=" <%94%> " onclick="location.href='BAS_basic.htm'">
+    <INPUT name=startIP type=hidden value= "<%1546%>">
+    <input type="hidden" name="policyIndex" value=<%1544%>>
+    <INPUT name=tempIP type=hidden value= "">
+    <INPUT name=endIP4 type=hidden value= "">
+</form>
+</body>
+</html>
+

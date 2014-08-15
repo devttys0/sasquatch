@@ -1,0 +1,212 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function init()
+{
+    var cf = document.forms[0];
+    var lanSplit = cf.lanIP.value.split(".");
+
+    cf.SV_IP1.value=lanSplit[0];
+    cf.SV_IP2.value=lanSplit[1];
+    cf.SV_IP3.value=lanSplit[2];
+    cf.SV_IP4.value="";
+
+    return true;
+}
+
+function validIp()
+{
+    var cf = document.forms[0];
+    if(checkIP(cf.SV_IP1,cf.SV_IP2,cf.SV_IP3,cf.SV_IP4,254)
+        || parseInt(cf.SV_IP4.value,10) == 0)
+    return alertR(msg_invalid_ip);
+    return true;
+}
+
+function showIP()
+{
+    var cf = document.forms[0];
+    var num = cf.entryData.value.split("#");
+    var nowName = cf.svs_gm.options[cf.svs_gm.selectedIndex].value;
+    var i, data1, data2, data3, flag=0;
+
+    for(i=0; i<=num[1]; i++)
+    {
+        data1 = num[0].split("@");
+        if(i>0)
+        {
+            data2 = data1[i].split(";");
+            if(data2[0] == nowName)
+            {
+                data3 = data2[1].split(".");
+                cf.SV_IP1.value=data3[0];
+                cf.SV_IP2.value=data3[1];
+                cf.SV_IP3.value=data3[2];
+                cf.SV_IP4.value=data3[3];
+                flag=1;
+                break;
+            }
+        }
+    }
+    if(flag == 0)
+    {
+        var lanSplit = cf.lanIP.value.split(".");
+
+        cf.SV_IP1.value=lanSplit[0];
+        cf.SV_IP2.value=lanSplit[1];
+        cf.SV_IP3.value=lanSplit[2];
+        cf.SV_IP4.value="";
+    }
+    return true;
+}
+
+function Check(caller)
+{
+    var cf = document.forms[0];
+    var form_size = cf.elements.length;
+    var checkFlag = 0;
+
+    cf.selectEntry.value = "";
+
+    if(caller == "0")
+    {
+        cf.action.value = "add";
+        cf.SV_IP1.value = parseInt(cf.SV_IP1.value,10);
+        cf.SV_IP2.value = parseInt(cf.SV_IP2.value,10);
+        cf.SV_IP3.value = parseInt(cf.SV_IP3.value,10);
+        cf.SV_IP4.value = parseInt(cf.SV_IP4.value,10);
+        cf.inputIP.value=cf.SV_IP1.value + "." + cf.SV_IP2.value+ "." + cf.SV_IP3.value+ "." + cf.SV_IP4.value;
+        cf.selectService.value=cf.svs_gm.options[cf.svs_gm.selectedIndex].value;
+    }
+    else if(caller == "1")
+        cf.action.value = "edit";
+    else if(caller == "2")
+        cf.action.value = "delete";
+    else if(caller == "3")
+        cf.action.value = "custom";
+
+    if(caller == "1" || caller == "2")
+    {
+    	for (var i = 0; i < form_size; i++)
+    	{
+    		if (cf.elements[i].type == "radio")
+    		{
+		if(cf.elements[i].name != "serv_type" && cf.elements[i].checked == true)
+                {
+                    cf.selectEntry.value = i-7;
+                }
+            }
+        }
+    }
+    return;
+}
+function doTypeChange(newIndex)
+{
+	var cf = document.forms[0];
+	if (newIndex == 0)
+		location.href = "FW_forward.htm";
+	else if (newIndex == 1)
+		location.href = "FW_pt.htm";
+}
+
+function enableFwpf()
+{
+	var cf = document.forms[0];
+	if (cf.enable.checked)
+		cf.fwpf_enable.value = 0;
+	else
+		cf.fwpf_enable.value = 1;
+}
+//-->
+
+</script>
+</head>
+<body bgcolor="#ffffff" onload="loadhelp('FW_forward'); init();">
+<form name="formname" method="POST" action="pforward.cgi">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+    <td colspan="2"><h1><%333%></h1></td>
+</tr>
+<tr>
+    <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+<td colspan="2">
+<p><tabindex="-1"><b><%334%></b></a></p></td>
+</tr>
+<tr>
+<td colspan="2"><input type="radio" checked name="serv_type" value="pf" onClick="doTypeChange(0)"><%335%></td>
+</tr>
+<tr>
+<td colspan="2"><input type="radio" name="serv_type" value="pt" onClick="doTypeChange(1)"><%336%></td>
+</tr>
+
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+<!--</tr>
+<tr><td nowrap width="46%"><input type="checkbox" name="enable" value="1" <%337%> onClick="enableFwpf();submit();"><B><a href="javascript:loadhelp('FW_forward')">Disable Port Forwarding</a></B></td>
+    <td nowrap width="54%"></td></tr>
+<tr></tr>
+<tr></tr>-->
+<tr></tr>
+<tr>
+    <td width="45%" valign="top"><a href="javascript:loadhelp('FW_forward','setup')" tabindex="-1"><b><%338%></b></a></td>
+    <td width="65%"><a href="javascript:loadhelp('FW_forward','setup')" tabindex="-1"><b><%339%></b></a></td>
+</tr>
+<tr>
+    <td valign="top">
+	    <select name="svs_gm" size="1" onChange="javascript:showIP()">
+	        <%340%>
+	        </SELECT></td>
+    <td nowrap>
+        <input type="text" name="SV_IP1" class="num" size="4" maxlength="3" value="192" onFocus="this.select();">.
+        <input type="text" name="SV_IP2" class="num" size="4" maxlength="3" value="168" onFocus="this.select();">.
+        <input type="text" name="SV_IP3" class="num" size="4" maxlength="3" value="0" onFocus="this.select();">.
+        <input type="text" name="SV_IP4" class="num" size="4" maxlength="3" value="" onFocus="this.select();">
+	    <input type="Submit" name="svAdd" value="<%217%>" onclick="if(!validIp()) return false; Check(0);"></td></tr>
+<tr>
+    <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+<tr><td colspan="2">
+        <table border ="1" cellpadding ="2" cellspacing ="0" width="100%">
+			<tr>
+				<td nowrap width="3%" align="center"><span class="thead">&nbsp;</span></td>
+				<td nowrap width="3%" align="center"><span class="thead">#</span></td>
+		 	    <td nowrap width="30%" align="center"><span class="thead"><%338%></span></td>
+				<td nowrap width="12%" align="center"><span class="thead"><%341%></span></td>
+				<td nowrap width="12%" align="center"><span class="thead"><%342%></span></td>
+				<td nowrap width="27%" align="center"><span class="thead"><%339%></span></td></tr>
+		    <%343%>
+		</table>
+</td></tr>
+
+<tr>
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+
+
+<tr><td colspan="2" align="center" height="35" valign="bottom">
+	<input type="Submit" name="Edit" value="&nbsp; <%344%> &nbsp;" onclick="Check(1);">
+	<input type="Submit" name="Delete" value="<%345%>" onclick="Check(2);">
+<BR><BR>
+	<input type="Submit" name="Add" value="<%346%>" onclick="Check(3);">
+</td></tr>
+</table>
+    <input type="hidden" name="selectService" value="">
+    <input type="hidden" name="lanIP" value="<%347%>">
+    <input type="hidden" name="action" value="init">
+    <input type="hidden" name="selectEntry" value="">
+    <input type="hidden" name="inputIP" value="">
+    <input type="hidden" name="entryData" value="<%348%>">
+    <input type="hidden" name="fwpf_enable">
+</form>
+</body>
+</html>

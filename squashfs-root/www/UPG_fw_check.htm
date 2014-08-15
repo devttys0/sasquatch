@@ -1,0 +1,134 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<%28%>
+<script language="javascript" type="text/javascript">
+<!-- hide script from old browsers
+
+
+var showit = (document.layers) ? "show" : "visible";
+var hideit = (document.layers) ? "hide" : "hidden";
+var NS4 = (document.layers);
+var animationTimer = null;
+var pgbarTimer = null;
+
+function setVisible(divID, setto)
+{
+	if (NS4)
+		document.layers[divID].visibility = setto;
+	else if (document.all)
+		document.all(divID).style.visibility = setto;
+	else if (document.getElementById)
+		document.getElementById(divID).style.visibility = setto;
+}
+
+function stopAnimation()
+{
+	if(animationTimer != null)
+		clearTimeout(animationTimer);
+	setVisible('animation', hideit);
+	
+    if(pgbarTimer != null)
+		clearTimeout(pgbarTimer);
+	setVisible('pgbar', hideit);
+}
+function checkData()
+{
+    updateProgress();
+    return true;
+}
+var pchar = "|"; // progress char
+var maxchars = 94;
+var delay_time = <%858%>;
+var charcount = 0;
+
+function makeStr(strSize, fillChar)
+{
+	var temp = "";
+	for (i=0; i < strSize ; i ++)
+		temp = temp + fillChar;
+	return temp;
+}
+function updateProgress()
+{
+	var cf = document;
+	var pf = document.forms[0];
+	
+	if ( charcount == 1 )
+	{
+        pf.Yes.style.display="none";
+        pf.No.style.display="none";
+        setVisible('animation', showit);
+        setVisible('pgbar', showit);
+	}
+	
+	if (charcount < maxchars)
+	{
+		charcount ++;
+		//document.all("progress").value = makeStr(charcount,pchar);
+		document.forms[1].progress.value = makeStr(charcount,pchar);
+		setTimeout("updateProgress()",delay_time);
+	}
+}
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff">
+<form name="formname" method="POST" action="upgrade.cgi"> 
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+<td colspan="2">
+	<h1><%555%></H1>
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+    <td colspan="2"><b><%1176%> </b></td>
+</tr>
+<tr></tr>
+<tr>
+	<td width="50%"><%1153%></td>
+        <td width="50%"><%1177%></td>
+</tr>
+<tr></tr>
+<tr>
+	<td width="50%"><%1178%></td>
+        <td width="50%"><%1179%></td>
+</tr>
+<tr></tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="submit" name="Yes" value=" <%43%> " onClick="return checkData();">
+		<input type="button" name="No" value="  <%44%>  " onClick="self.location.href='UPG_upgrade.htm'">
+	</td></tr>
+</table>
+</form>
+<form name="display">
+<div align="left" ID="pgbar" style="position:relative;top:0;left:0;visibility:hide;visibility:hidden;">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+ <td><B><BIG><%865%> 1.5 <%866%>
+ </BIG></B></td>
+</tr>
+<tr>
+<td align="center"><input type="text" name="progress" class="prgbar" value="" style="color: blue" size="42"
+    contentEditable=false onkeydown="return false;" onbeforeeditfocus="return false;" onpaste="return false;"></td>
+</tr>
+</table>
+</div>
+</form>
+<div align="center" ID="animation" style="position:relative;top:0;left:0;visibility:hide;visibility:hidden;">
+<br><img src="upload.gif" width="290" height="82" alt="" border="0"></div>
+</body>
+</html>
+

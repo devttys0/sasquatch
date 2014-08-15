@@ -1,0 +1,144 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function chkMacLen(mac)
+{
+    var myRE = /[0-9a-fA-F]{12}/;
+    if((mac.value.length != 12) || (mac.value=="000000000000")||(myRE.test(mac.value)!=true)){
+	    alert("<%0%>");
+	    //mac.value =MacAddress;
+	    return false;
+    } else {
+        return true;
+    }
+}
+function checkmac(F)
+{
+    var temp;
+    F.adr.value = F.adr.value.toLowerCase();
+    temp=F.adr.value;
+    if(F.adr.value==""){
+        alert("<%1078%>");
+        return false;
+    }else{
+        if((F.device.value == "UNKNOWN")||(F.device.value == "UNKNOWN NAME")||(""==F.device.value)){
+            alert("<%1079%>");
+            return false;
+        }
+        /*
+        if (F.device.value.match(/[\"|\'| ]/g))
+        {
+            alert("<%0%>");
+            return false;
+        }
+        */
+        if (F.adr.value.indexOf(':')!=-1){
+            if(MACAddressBlur(F.adr)){
+                return true;
+	        } else {
+                F.adr.value=temp;
+	 		    return false;
+	        }
+		}else{
+            if (chkMacLen(F.adr)) {
+		        return true;
+            } else
+                return false;
+        }
+    }
+}
+function MACAddressBlur(address)
+{
+	var MAC = address.value;
+	if (checkMacStr(address))
+	{
+		alert("<%0%>");
+		return false;
+	} else {
+		MAC = MAC.replace(/:/g,"");
+		address.value = MAC;
+		return true;
+	}
+}
+function setBtnName(x)
+{
+    if(x==1)
+        document.formname.Button.value="Manual Add";
+    if(x==2)
+        document.formname.Button.value="Apply";
+    document.formname.lastpage.value="0";
+}
+
+function fresh()
+{
+    window.location.href="WLG_acl_add.htm";
+}
+function init_data()
+{
+    var cf = document.forms[0];
+    cf.macaddr.value = "";
+}
+function sel(dev, adr)
+{
+    var cf = document.forms[0];
+    if (dev != "UNKNOWN")
+        cf.device.value = dev;
+    else
+        cf.device.value = "";    
+    cf.adr.value = adr;
+}
+//-->
+</SCRIPT>
+</HEAD>
+<BODY bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="init_data();loadhelp('WLG_acl_add')">
+<FORM action="wlan_acl_add.cgi" method="post" name="formname">
+  <TABLE border=0 width="100%">
+    <TR>
+      <TD colspan="2" align="left"><h1><%1067%></h1></TD></TR>
+    <tr> <!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td colspan="2" align="left"><a href="javascript:loadhelp('WLG_acl_add','card')" tabindex="-1"><b><%1080%></b></a></td></tr>
+    <TR>
+      <TD colspan="2">
+        <table border="1" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="10%" align="center"><span class="thead">&nbsp;</span></td>
+	        <td width="45%" align="center"><span class="thead"><%273%></span></td>
+	        <td width="45%" align="center"><span class="thead"><%274%></span></td></tr>
+	      <%1081%></table></td></tr>
+    <tr><!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td align="left" colspan="2"><a href="javascript:loadhelp('WLG_acl_add','entry')" tabindex="-1"><b> <%1082%></b></a></td></tr>
+    <tr>
+      <td colspan="2"><!-- mac add //-->
+        <TABLE border=0 width="100%" align="left">
+          <TR>
+            <TD align="left" nowrap> <%273%>:</td>
+            <td><INPUT type="text" name="device" maxLength=20 value=""></TD></TR>
+          <TR>
+            <TD align="left" nowrap> <%274%>:</td>
+            <td><INPUT type="text" name="adr" maxLength=17 value=""></TD></TR></table></td></tr>
+    <tr><!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit" name="add" value=" <%217%> " onclick="return checkmac(this.form)">
+        <input type="button" name="cancel" value="<%94%>" onClick="location.href='WLG_acl.htm'">
+        <input type="button" name="refresh" value="<%278%>" OnClick="fresh();"></TD></TR></table>
+  <input type="hidden" name="macaddr" value="">
+</form>
+</body>
+</html>
+

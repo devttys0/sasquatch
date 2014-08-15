@@ -1,0 +1,96 @@
+<html>
+<head>
+
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<script language="javascript" type="text/javascript"> 
+function do_submit()
+{
+    document.forms[0].submit();
+}
+
+function wait()
+{
+    var Sys = {};
+    var cf = document.forms[0];
+    var ua = navigator.userAgent.toLowerCase();
+    if (window.ActiveXObject)
+        Sys.ie = ua.match(/msie ([\d.]+)/)[1]
+    
+    if (Sys.ie)
+        cf.browser.value = "ie";    
+    
+    if (Sys.ie)
+    {
+        var brslang=navigator.browserLanguage;
+        var browser_language=brslang.toLowerCase();
+        var subBrowser=brslang.substring(0,3);
+        
+        if ( browser_language == "zh" || subBrowser == "zh-" )
+            browser_language="Chinese";
+        else if ( browser_language == "de" || subBrowser == "de-" )
+            browser_language="German";
+        else if ( browser_language == "ko" || subBrowser == "ko-" )
+            browser_language="Korean";
+        else if ( browser_language == "ru" || subBrowser == "ru-" )
+            browser_language="Russian";
+        else if ( browser_language == "pl" || subBrowser == "pl-" )
+            browser_language="Polish";
+        else if ( browser_language == "es" || subBrowser == "es-" )
+            browser_language="Spanish";
+        else if ( browser_language == "fr" || subBrowser == "fr-" )
+            browser_language="French";
+        else if ( browser_language == "pt" || subBrowser == "pt-" )
+            browser_language="Portuguese";
+        else if ( browser_language == "it" || subBrowser == "it-")
+            browser_language="Italian";
+        else if ( browser_language == "sv" || subBrowser == "sv-")
+            browser_language="Swedish";
+        else if ( browser_language == "da" || subBrowser == "da-")
+            browser_language="Danish";
+        else if ( browser_language == "el" || subBrowser == "el-")
+            browser_language="Greek";
+        else if ( browser_language == "nn" || subBrowser == "nn-")
+            browser_language="Norwegian";
+        else if ( browser_language == "cs" || subBrowser == "cs-")
+            browser_language="Czech";
+        else if ( browser_language == "sl" || subBrowser == "sl-")
+            browser_language="Slovenian";
+        else if ( browser_language == "hu" || subBrowser == "hu-")
+            browser_language="Hungarian";
+        else if ( browser_language == "ro" || subBrowser == "ro-")
+            browser_language="Romanian";
+        else if ( browser_language == "fi" || subBrowser == "fi-")
+            browser_language="Finnish";
+        else if ( browser_language == "sk" || subBrowser == "sk-")
+            browser_language="Slovak"; 
+        else if ( browser_language == "nl" || subBrowser == "nl-")
+            browser_language="Dutch";
+        
+        cf.brslanguage.value=browser_language;
+     }
+     else
+     {
+        cf.brslanguage.value="";
+     }
+
+     cf.version.value=navigator.appVersion;
+     document.forms[0].submit();
+}
+</script>
+</head>
+<body bgcolor="#ffffff" onLoad="wait();">
+<form name="brscheck" method="POST" action="langbrscheck.cgi">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+ <tr>
+  <td>&nbsp</td>
+ </tr>
+</table>
+<input type="hidden" name="brslanguage" value="">
+<input type="hidden" name="version" value="">
+<input type="hidden" name="browser" value="">
+</form>
+</body>
+</html>
+
+

@@ -1,0 +1,95 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<script language="javascript" type="text/javascript">
+<!--
+function chkMacLen(mac)
+{
+    var myRE = /[0-9a-fA-F]{12}/; 
+    if((mac.value.length != 12) || (mac.value=="000000000000")||(myRE.test(mac.value)!=true)){
+        alert("<%0%>");
+        return false;
+    } else {
+        return true;
+    }
+}
+function checkmac(F)
+{
+    var temp;
+    F.adr.value = F.adr.value.toLowerCase();
+    temp = F.adr.value;
+    /*
+    if (F.device.value.match(/[\"|\'| ]/g))
+    {
+        alert("<%482%>");
+        return false;
+    }
+    */
+    if (F.adr.value.indexOf(':')!=-1) { 	
+        if (MACAddressBlur(F.adr)) {	 
+            return true;
+        } else {
+            F.adr.value=temp;
+	        return false;
+        }		
+    } else {
+        if (chkMacLen(F.adr)) {			 
+            return true;
+		 } else 	
+            return false;
+    }
+}
+function MACAddressBlur(address)
+{
+    var myRE = /[0-9a-fA-F]{12}/;
+    var MAC = address.value;	
+    MAC = MAC.replace(/:/g,"");
+    address.value = MAC;    
+    if ((MAC.length != 12) || (MAC=="000000000000")||(myRE.test(MAC)!=true)){
+        alert("<%0%>");	
+        return false;
+    } else {
+        return true;
+    }
+} 
+function loadhelp(fname,anchname)
+{
+    if ((loadhelp.arguments.length == 1 ) || (anchname == "" ))
+        top.helpframe.location.href=fname+"_h"+".htm";
+    else
+        top.helpframe.location.href=fname+"_h"+".htm#" + anchname;
+}
+//-->
+</SCRIPT>
+</HEAD>
+<BODY bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="loadhelp('WLG_acl','editpc')">
+<CENTER>
+<FORM action="wlan_acl_edit.cgi" method="post" name="formname">
+  <TABLE border=0 width="100%"> 
+    <TR>
+      <TD colspan="2" align="left"><h1><%1067%></h1></TD></TR>
+	<tr> <!-- RULE -->
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <TR>
+      <TD width="50%" nowrap align="left"><%273%>:</td>
+      <TD width="50%" nowrap align="left"><INPUT TYPE="text" name="device" maxLength=20 value="<%1084%>" ></TD></TR> 
+    <TR>
+       <TD nowrap align="left"><%274%>:</td>
+       <TD nowrap align="left"><INPUT TYPE="text" class="num" maxLength=17 name="adr" value=<%1085%> ></TD> </TR> 
+    <tr> <!-- RULE -->
+       <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+        <td colspan="2" align="center">
+          <input type="submit" name="accept" value="<%222%>" onclick="return checkmac(this.form)">
+          <input type="button" name="cancel" value="<%94%>" onClick="location.href='WLG_acl.htm'"></TD> </TR>
+  </table>
+  <input type="hidden" name="macaddr" value="<%1085%>">
+</form>
+</center></body>
+</html> 

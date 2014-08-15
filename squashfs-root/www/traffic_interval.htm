@@ -1,0 +1,119 @@
+<HTML>
+<head>
+<%10%>
+ <title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!-- hide script from old browsers
+var defaultInterval = 10;
+var interval = 10;
+
+function loadInterval()
+{
+    intervalId = setInterval("getStatisticPage()", interval * 1000);
+    intervalId2 = setInterval("setDefaultInterval()", 20);
+}
+
+function setDefaultInterval()
+{
+    document.SetIntervalForm.interval.value = defaultInterval ;
+    clearInterval(intervalId2) ;
+}
+
+
+function resetInterval(newInterval)
+{
+    interval = parseInt(newInterval);
+    if ( isNaN(interval) || interval < 0)
+    {
+        interval = defaultInterval
+    }
+    document.SetIntervalForm.interval.value = interval;
+    clearInterval(intervalId) ;
+    intervalId = setInterval("getStatisticPage()", interval * 1000);
+}
+
+function stopInterval() 
+{
+    clearInterval(intervalId) ;
+    document.SetIntervalForm.interval.value = "" ;
+}
+
+function getStatisticPage()
+{
+    myTitle = "PNC Statistic " ;
+    parent.StatTable.location.href = "traffic_stattbl.htm" ;
+}
+
+submitflag = false;
+function showWarningMsg()
+{
+    var cf = document.forms[0];
+    var msg = "";
+
+    if (cf.traffic_on.value == "0")
+        return true;
+    if (cf.contrl_type.value == "0")
+        if (cf.contrl_dir.value == "0")
+            return true;
+    
+    submitflag = false;
+    if (cf.warning_state.value == "1")
+    {
+        if (cf.watermark.value == "0")
+            return true;
+        
+        msg+="<%1256%>";
+        if (cf.contrl_type.value == "1")
+            msg+=cf.watermark.value + " <%1257%> ";
+        else
+            msg+=cf.watermark.value + " <%1258%> ";
+
+        msg+="<%1259%> ";
+        msg+=cf.warning_time.value;
+        submitflag = true;
+    }
+    else if (cf.warning_state.value == "3")
+    {
+        msg+="<%1260%>";
+        if (cf.contrl_type.value == "1")
+            msg+= cf.cntime_limit.value + " <%1261%>) ";
+        else
+            msg+=cf.volume_limit.value + " <%1258%>) ";
+        msg+="<%1262%> ";
+        msg+=cf.warning_time.value;
+    }
+    
+    if (msg.length > 1)
+		alert(msg);
+    if (submitflag)
+        cf.submit();
+        
+    return true;
+}
+//-->
+</script>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" onLoad="loadInterval();document.forms[0].elements[1].focus();">
+<FORM method="POST" NAME="SetIntervalForm" action="traffic_status.cgi" onSubmit="resetInterval(document.SetIntervalForm.interval.value);return false;">
+<div align="CENTER">
+<TABLE BORDER=0 WIDTH=400 HEIGHT=34 VALIGN=top>
+<tr>
+    <td><b><%789%>:</b><INPUT TYPE="TEXT" NAME="interval" SIZE="4" MAXLENGTH="4" VALUE=" "> <%790%></td>
+    <td><INPUT TYPE="BUTTON" NAME="SetIntvl" VALUE="<%791%>" WIDTH="80" onClick="resetInterval(document.SetIntervalForm.interval.value)"></td>
+</tr>
+</TABLE>
+</div>
+<input type="hidden" name="Button" value="Apply">
+<input name=traffic_on type=hidden value= "<%1263%>">
+<input name=contrl_type type=hidden value= "<%1264%>">
+<input name=contrl_dir type=hidden value= "<%1265%>">
+<input name=volume_limit type=hidden value= "<%1266%>">
+<input name=cntime_limit type=hidden value= "<%1267%>">
+<input name=watermark type=hidden value= "<%1268%>">
+<input name=warning_state type=hidden value= "<%14%>">
+<input name=warning_time type=hidden value= "<%1269%>">
+</FORM>
+</BODY>
+</HTML>

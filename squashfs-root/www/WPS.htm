@@ -1,0 +1,61 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<%28%>
+<script language="javascript" type="text/javascript">
+<!-- hide script from old browsers
+var submit_flag = false;    
+function do_submit()
+{
+	var cf = document.forms[0];
+	if (submit_flag)
+		return false;
+	submit_flag = true;
+	cf.WPS_type[0].disabled = true;
+	cf.WPS_type[1].disabled = true;
+	//top.contents.location.href="MNU_menu_no_link.htm";
+	cf.submit();
+	return true;
+}
+
+// -->
+</script>
+</head>
+
+<body bgcolor="#ffffff" onload="loadhelp('WPS');document.forms[0].elements[0].focus();">
+<div class=Section1>
+<form method=post action="wps_button.cgi">
+<table class=MsoNormalTable border=0 cellspacing=3 cellpadding=0 width="100%">
+<tr><td colspan=3><h1><%530%></h1></td></tr>
+
+<tr><td colspan=3 background=liteblue.gif>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+</td></tr>
+
+<tr></tr>
+<tr><p class=MsoNormal><td><b><%1456%>:</b></td></p></tr>
+<tr>
+<td colspan="3"><input type="radio" name="WPS_type" value="Push Button" checked><%1457%>
+</td></tr>
+   <tr><td><p style='margin-left:15pt'><%1458%></p></td></tr>
+<tr>
+<TD colspan=3>
+<p class=MsoNormal align=center>
+        <Button name="wps_button" onClick="do_submit();"><img src="wps_icon_on.bmp"> </Button>
+</p></TD></TR>
+<tr>
+<td colspan="3"><input type="radio" name="WPS_type" value="PIN Number" onClick="location.href='WPS_PIN.htm'" ><%1459%></td></tr>
+<tr>
+<td colspan=3 background=liteblue.gif>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+</td>
+</tr>
+<tr></tr>
+</table>
+<INPUT TYPE="hidden" NAME="wps_in_progress" VALUE="<%1460%>">
+</form>
+</div>
+</body>
+</html>

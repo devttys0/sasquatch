@@ -1,0 +1,232 @@
+<html>
+<head>
+<%10%>
+<link rel="stylesheet" href="form.css">
+<title>NETGEAR Router <%11%></title>
+<STYLE TYPE="text/javascript">
+classes.num.all.fontFamily = "Courier";
+classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function setPolicyName()
+{
+	var cf = document.forms[0];
+	if (cf.add_edit.value == "add") {
+		if (cf.category.value == 0 || cf.category.value == 1) {
+			if (cf.apps[cf.apps.selectedIndex].value != 99)
+				cf.name.value = cf.apps[cf.apps.selectedIndex].text;
+			else 
+				cf.name.value = "";
+		}
+		else if (cf.category.value == 2)
+			cf.name.value = "LAN Port " + cf.port_num.value;
+		else if (cf.category.value == 3)
+			cf.name.value = "";
+	}
+}
+
+function loadSettings()
+{
+	var cf = document.forms[0];
+
+	if (cf.select_name.value != "")
+		cf.name.value = cf.select_name.value;
+
+	cf.category.selectedIndex = cf.select_category.value;
+
+	if (cf.category.value == 0 || cf.category.value == 1) {
+		if (cf.select_apps.value == 99)
+			cf.apps.selectedIndex = cf.apps.options.length - 1;
+		else
+			cf.apps.selectedIndex = cf.select_apps.value;
+
+		if (cf.select_apps.value == 99) {
+			cf.protocol.selectedIndex = cf.select_protocol.value;
+			if (cf.select_port_start.value != 0)
+				cf.port_start.value = cf.select_port_start.value;
+			if (cf.select_port_end.value != 0)
+				cf.port_end.value = cf.select_port_end.value;
+		}
+	} else if (cf.category.value == 2) {
+		if (cf.select_lan_port.value >= 1 && cf.select_lan_port.value <= 4)
+			cf.port_num.selectedIndex = cf.select_lan_port.value - 1;
+		else
+			cf.port_num.selectedIndex = 0;
+	} else if (cf.category.value == 3) {
+		if (cf.select_dev_mac.value != "" && cf.select_dev_mac.value != "00:00:00:00:00:00") {
+			var mac = cf.select_dev_mac.value.split(":");
+			cf.mac1.value = mac[0];
+			cf.mac2.value = mac[1];
+			cf.mac3.value = mac[2];
+			cf.mac4.value = mac[3];
+			cf.mac5.value = mac[4];
+			cf.mac6.value = mac[5];
+		}
+		cf.dev_name.value = cf.select_dev_name.value;
+	}
+	setPolicyName();
+
+	if (cf.select_priority.value != "")
+		cf.priority.selectedIndex = 3 - cf.select_priority.value;
+	else
+		cf.priority.selectedIndex = 2;
+}
+function check_data()
+{
+	var cf = document.forms[0];
+	if (cf.category.selectedIndex == 3) {
+		if (cf.add_edit.value == "edit") {
+			if (!check_mac())
+				return false;
+		}
+	} else if (cf.name.value == "") { 
+		alert("<%1218%>");
+		return false;
+	}
+	return true;
+}
+
+function show_qos_apps()
+{
+	var cf = document.forms[0];
+	cf.action.value = "show_qos_apps";
+	cf.submit();
+}
+
+function show_custom()
+{
+	var cf = document.forms[0];
+	cf.action.value = "show_custom";
+	cf.submit();
+}
+
+function sel(mac_index, policy_name, dev_name, macaddr, priority)
+{
+	var cf = document.forms[0];
+	var mac = macaddr.split(":");
+	cf.mac1.value = mac[0];
+	cf.mac2.value = mac[1];
+	cf.mac3.value = mac[2];
+	cf.mac4.value = mac[3];
+	cf.mac5.value = mac[4];
+	cf.mac6.value = mac[5];
+	cf.name.value = policy_name;
+	cf.dev_name.value = dev_name;
+	cf.priority.selectedIndex = 3 - priority;
+	cf.select.value = mac_index;
+}
+function check_mac()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	var m1;
+
+	msg = checkBlank(cf.name, "");
+	if (msg.length > 1)
+		msg = "<%1218%>\n";
+	else
+		msg = "";
+	if(checkMacAddress(cf.mac1, cf.mac2, cf.mac3, cf.mac4, cf.mac5, cf.mac6))
+		msg += "<%0%>\n";
+	else if (cf.mac1.value == "00" && cf.mac2.value == "00" && cf.mac3.value == "00" && 
+		cf.mac4.value == "00" && cf.mac5.value == "00" && cf.mac6.value == "00")
+		msg += "<%0%>\n";
+	else if (cf.mac1.value == "FF" && cf.mac2.value == "FF" && cf.mac3.value == "FF" && 
+		cf.mac4.value == "FF" && cf.mac5.value == "FF" && cf.mac6.value == "FF")
+		msg += "<%0%>\n";
+	else {
+		m1 = parseInt(cf.mac1.value, 16);
+		if (m1 & 1)
+			msg += "<%0%>\n";
+	}
+
+	if (msg.length > 1) {
+		alert(msg);
+		return false;
+	}
+
+	return true;
+}
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="loadSettings();">
+<form name="formname" method="POST" action="qos_serv.cgi">
+<div id="main" align="center">
+<center>
+
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+<td colspan="2">
+<h1><%1219%></h1>
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+</table>
+<table border ="0" cellpadding ="0" cellspacing ="0" width="100%">
+
+<tr>
+<td colspan="2" tabindex="-1"><b><%1220%></b></a></td></tr>
+    
+<tr>
+<td width="50%" size=1><%1221%></td>
+ <td width="50%"> 
+ <input type="text" name="name" size="33" maxlength="32">
+</td>
+</tr>
+
+<tr>
+<td width="50%" tabindex="-1"><%1222%></td>
+ <td width="50%"> 
+<select name="category" size=1 onChange="show_qos_apps();"><option value="0"><%1223%></option><option value="1"><%1224%></option><option value="2"><%1225%></option><option value="3"><%274%></option></select>
+</td>
+</tr>
+
+<%1226%>
+<%1227%>
+<%1228%>
+<%1229%>
+
+<tr>
+<td width="50%" tabindex="-1"><%1220%></td>
+<td width="50%"> 
+<select name="priority"><option value=3><%1230%></option><option value=2><%1231%></option><option value=1><%1232%></option><option value=0><%1233%></option></select>
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+<td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+
+<%1234%>
+<%1235%>
+
+</table>
+<tr><td colspan="2" align="center">
+<input type="submit" name="apply" value=" <%93%> " onclick="return check_data();">
+<input type="button" name="cancel" value="<%94%>" onClick="location.href='QOS_ruletab.htm'">
+</td></tr>
+<input type="hidden" name="action" value="">
+<input type="hidden" name="select_name" value="<%1236%>">
+<input type="hidden" name="select_category" value="<%1237%>">
+<input type="hidden" name="select_apps" value="<%1238%>">
+<input type="hidden" name="select_priority" value="<%1239%>">
+<input type="hidden" name="select_protocol" value="<%1240%>">
+<input type="hidden" name="select_port_start" value="<%1241%>">
+<input type="hidden" name="select_port_end" value="<%1242%>">
+<input type="hidden" name="select_lan_port" value="<%1243%>">
+<input type="hidden" name="select_dev_mac" value="<%1244%>">
+<input type="hidden" name="select_dev_name" value="<%1245%>">
+<input type="hidden" name="select" value="<%1246%>">
+<input type="hidden" name="add_edit" value="<%1247%>">
+</center>
+</div>
+</form>
+</body>
+</html>
+

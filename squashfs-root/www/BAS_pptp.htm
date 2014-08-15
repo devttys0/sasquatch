@@ -1,0 +1,516 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!-- 
+var DisableFixedDNS = false;
+var DisableFixedMAC = false;
+var MacAddress;
+var DodDisable = false;
+var DodIndex = <%152%>;
+
+function goTestApply()
+{
+	var winoptions = "width=640,height=480,menubar=yes,toolbar=yes,status=yes,location=yes,resizable=yes";
+	if(document.forms[0].runtest.value == "yes")
+		window.open('BAS_wtest_l.htm','test_win',winoptions);
+}
+
+function loadcheck()
+{
+	var cf = document.forms[0];
+	if(isIE()){
+		cf.pptp_username.size="24";
+		cf.pptp_passwd.size="24";
+	}
+ MacAddress=document.formname.Spoofmac.value;
+	loadhelp('BAS_pptp');
+	setDNS();
+	setMAC();
+	setServer();
+}
+
+function setDNS()
+{
+	var cf = document.forms[0];
+	var dflag = (cf.DNSAssign[0].checked || cf.DNSAssign[1].disabled);
+	setDisabled(dflag,cf.DAddr1,cf.DAddr2,cf.DAddr3,cf.DAddr4,cf.PDAddr1,cf.PDAddr2,cf.PDAddr3,cf.PDAddr4);
+	DisableFixedDNS = dflag;
+}
+function setMAC()
+{
+	var cf = document.forms[0];
+
+	if (cf.MACAssign[0].checked)
+		cf.Spoofmac.value = cf.wan_hwaddr_def.value;
+	else if(cf.MACAssign[1].checked)
+		cf.Spoofmac.value = cf.wan_hwaddr_pc.value;
+	else if (cf.MACAssign[2].checked)
+		cf.Spoofmac.value = cf.wan_hwaddr2.value;
+
+	if (cf.MACAssign[2].checked)
+		cf.Spoofmac.disabled = false;
+	else
+		cf.Spoofmac.disabled = true;
+	DisableFixedMAC = cf.Spoofmac.disabled;
+}
+
+function setServer()
+{
+	var cf = document.forms[0];
+	var stype = cf.login_type.selectedIndex;
+	if(stype==1) //pppoe
+		window.location.href="BAS_pppoe.htm";
+}
+
+function setConnMode()
+{
+    var cf = document.forms[0];
+    var conn_mode = cf.pptp_dod.selectedIndex;
+
+    if(conn_mode == 1) // Dial on Demand
+        DodDisable = false;
+    else
+        DodDisable = true;
+    var msg = "";
+    if((conn_mode != 1) && !_isNumeric(cf.pptp_idletime.value))
+    {
+        cf.pptp_dod.selectedIndex = DodIndex;
+        if(cf.pptp_idletime.value.length<=0)
+            msg+= "<%115%>";
+        else if(!_isNumeric(cf.pptp_idletime.value))
+            msg+= "<%116%>";
+        if (msg.length > 1)
+        {
+            alert(msg);
+            return false;
+        }
+    }
+    else
+    {
+        DodIndex = cf.pptp_dod.selectedIndex;
+        setDisabled(DodDisable,cf.pptp_idletime);
+    }
+    return true;
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	var region_gui = cf.gui_region.value;
+	
+	msg+= checkBlank(cf.pptp_username, "<%117%>");
+	if(cf.pptp_idletime.value.length<=0)
+	 msg+= "<%115%>";
+	else if(!_isNumeric(cf.pptp_idletime.value))
+	 msg+= "<%116%>";
+	
+	if((cf.myip_1.value.length>0)||(cf.myip_2.value.length>0)||(cf.myip_3.value.length>0)||(cf.myip_4.value.length>0))
+	{
+		if(checkIP(cf.myip_1,cf.myip_2,cf.myip_3,cf.myip_4,254)||(parseInt(cf.myip_4.value,10)==0))
+			msg+= "<%153%>";
+		else if (region_gui == "Russian")
+		{
+			if (checkIPMatchWithNetmask(cf.mymask_1,cf.mymask_2,cf.mymask_3,cf.mymask_4,cf.myip_1,cf.myip_2,cf.myip_3,cf.myip_4))
+				msg+= "<%153%>";
+			if(checkIP(cf.mymask_1,cf.mymask_2,cf.mymask_3,cf.mymask_4,255))
+				msg += "<%67%>";
+		}
+		else
+		{
+			cf.myip_1.value = parseInt(cf.myip_1.value,10);
+			cf.myip_2.value = parseInt(cf.myip_2.value,10);
+			cf.myip_3.value = parseInt(cf.myip_3.value,10);
+			cf.myip_4.value = parseInt(cf.myip_4.value,10);
+		}
+		if (region_gui == "Russian")
+		{
+			if (cf.DNSAssign[1].checked )
+			{
+				var myIpAddr = (cf.myip_1.value << 24) | (cf.myip_2.value << 16) | (cf.myip_3.value << 8) | (cf.myip_4.value);
+				var netMask = (cf.mymask_1.value << 24) | (cf.mymask_2.value << 16) | (cf.mymask_3.value << 8) | (cf.mymask_4.value);
+				var dnsIpAddr1 = (cf.DAddr1.value << 24) | (cf.DAddr2.value << 16) | (cf.DAddr3.value << 8) | (cf.DAddr4.value);
+				var dnsIpAddr2 = (cf.PDAddr1.value << 24) | (cf.PDAddr2.value << 16) | (cf.PDAddr3.value << 8) | (cf.PDAddr4.value);
+				if(((myIpAddr&netMask) != (dnsIpAddr1&netMask)) && ((myIpAddr&netMask) != (dnsIpAddr2&netMask)))
+				{
+					if(!((cf.mygw_1.value.length>0)||(cf.mygw_2.value.length>0)||(cf.mygw_3.value.length>0)||(cf.mygw_4.value.length>0)))
+					{
+						msg+= "IP адрес шлюза должен быть указан.\n"; 
+					}
+				}
+			}
+		}
+		cf.static_pptp_enable.value = 1;
+	}
+	else
+		cf.static_pptp_enable.value = 0;
+
+	if((cf.mygw_1.value.length>0)||(cf.mygw_2.value.length>0)||(cf.mygw_3.value.length>0)||(cf.mygw_4.value.length>0))
+	{
+		if (region_gui == "Russian")
+		{
+			var myIpAddr = (cf.myip_1.value << 24) | (cf.myip_2.value << 16) | (cf.myip_3.value << 8) | (cf.myip_4.value);
+			var netMask = (cf.mymask_1.value << 24) | (cf.mymask_2.value << 16) | (cf.mymask_3.value << 8) | (cf.mymask_4.value);
+			var myGateway = (cf.mygw_1.value << 24) | (cf.mygw_2.value << 16) | (cf.mygw_3.value << 8) | (cf.mygw_4.value);
+			var tmpip = cf.myip_1.value+'.'+cf.myip_2.value+'.'+cf.myip_3.value+'.'+cf.myip_4.value;
+			var tmpgateway = cf.mygw_1.value+'.'+cf.mygw_2.value+'.'+cf.mygw_3.value+'.'+cf.mygw_4.value;
+			if((myIpAddr&netMask) != (myGateway&netMask))
+			{
+				msg+= 'IP-адреса' +tmpip+ 'отличается от адреса шлюза'+ tmpgateway+'\n';
+			}
+		}
+	
+		if(checkIP(cf.mygw_1,cf.mygw_2,cf.mygw_3,cf.mygw_4,254)||(parseInt(cf.mygw_4.value,10)==0))
+			msg+= "<%68%>";
+		else
+		{
+			cf.mygw_1.value = parseInt(cf.mygw_1.value,10);
+			cf.mygw_2.value = parseInt(cf.mygw_2.value,10);
+			cf.mygw_3.value = parseInt(cf.mygw_3.value,10);
+			cf.mygw_4.value = parseInt(cf.mygw_4.value,10);
+		}
+	}
+
+	var data;
+	data = cf.pptp_serv_ip.value.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+	if ((data && !isValidIPaddr(cf.pptp_serv_ip.value))
+		|| ((!data) && (cf.static_pptp_enable.value == 1) && (region_gui != "Russian"))
+		|| cf.pptp_serv_ip.value == ""
+		|| cf.pptp_serv_ip.value.match( /[^\x20-\x7E]/ ))
+		msg+= "<%154%>";
+
+	if(cf.DNSAssign[1].checked && !cf.DNSAssign[1].disabled)
+	{	
+		if(checkIP(cf.DAddr1,cf.DAddr2,cf.DAddr3,cf.DAddr4,254)||(parseInt(cf.DAddr4.value,10)==0))
+			msg+= "<%71%>";
+		else
+		{
+			cf.DAddr1.value = parseInt(cf.DAddr1.value,10);
+			cf.DAddr2.value = parseInt(cf.DAddr2.value,10);
+			cf.DAddr3.value = parseInt(cf.DAddr3.value,10);
+			cf.DAddr4.value = parseInt(cf.DAddr4.value,10);
+		}
+		if(cf.PDAddr1.value.length>0 || cf.PDAddr2.value.length>0 || cf.PDAddr3.value.length>0 || cf.PDAddr4.value.length>0)
+		{
+			if(checkIP(cf.PDAddr1,cf.PDAddr2,cf.PDAddr3,cf.PDAddr4,254)||(parseInt(cf.PDAddr4.value,10)==0))
+				msg+= "<%72%>";
+			else
+			{
+				cf.PDAddr1.value = parseInt(cf.PDAddr1.value,10);
+				cf.PDAddr2.value = parseInt(cf.PDAddr2.value,10);
+				cf.PDAddr3.value = parseInt(cf.PDAddr3.value,10);
+				cf.PDAddr4.value = parseInt(cf.PDAddr4.value,10);
+			}
+		}
+	}
+	if( checkMacStr(cf.Spoofmac) || MacStrallf(cf.Spoofmac) )
+		msg+= "<%0%>";
+	if (msg.length > 1)
+	{
+		alert(msg);
+		return false;
+	}
+	if (region_gui == "Russian")
+		cf.pptp_user_netmask.value = cf.mymask_1.value+'.'+cf.mymask_2.value+'.'+cf.mymask_3.value+'.'+cf.mymask_4.value;
+	cf.pptp_user_ip.value = cf.myip_1.value+'.'+cf.myip_2.value+'.'+cf.myip_3.value+'.'+cf.myip_4.value;
+	cf.pptp_gateway.value = cf.mygw_1.value+'.'+cf.mygw_2.value+'.'+cf.mygw_3.value+'.'+cf.mygw_4.value;
+	cf.wan_dns1_pri.value = cf.DAddr1.value+'.'+cf.DAddr2.value+'.'+cf.DAddr3.value+'.'+cf.DAddr4.value;
+	cf.wan_dns1_sec.value = cf.PDAddr1.value+'.'+cf.PDAddr2.value+'.'+cf.PDAddr3.value+'.'+cf.PDAddr4.value;
+	cf.wan_hwaddr2.value = cf.Spoofmac.value;
+	
+	return sumvalue(cf);
+}
+
+function loadSettings()
+{
+    var cf = document.forms[0];
+    var pptp_user_ip = cf.pptp_user_ip.value.split(".");
+    var pptp_user_netmask = cf.pptp_user_netmask.value.split(".");
+    var pptp_gateway = cf.pptp_gateway.value.split(".");
+    var region_gui = cf.gui_region.value;
+
+    var wan_dns_sel = cf.wan_dns_sel.value;
+    var wan_dns1_pri = cf.wan_dns1_pri.value.split(".");
+    var wan_dns1_sec = cf.wan_dns1_sec.value.split(".");
+    var wan_hwaddr_sel = cf.wan_hwaddr_sel.value;
+
+    // Get pptp_dod (nvram)
+    cf.pptp_dod.selectedIndex = <%152%>;
+    if (cf.pptp_dod.selectedIndex == 1)
+        DodDisable = false;
+    else
+        DodDisable = true;
+    setDisabled(DodDisable,cf.pptp_idletime);
+
+    if(cf.static_pptp_enable.value == 1)
+    {
+        if (cf.pptp_user_ip.value != "")
+        {
+            cf.myip_1.value = pptp_user_ip[0];
+            cf.myip_2.value = pptp_user_ip[1];
+            cf.myip_3.value = pptp_user_ip[2];
+            cf.myip_4.value = pptp_user_ip[3];
+        }
+        if ( (cf.pptp_user_netmask.value != "") && ( region_gui == "Russian") )
+        {
+            cf.mymask_1.value = pptp_user_netmask[0];
+            cf.mymask_2.value = pptp_user_netmask[1];
+            cf.mymask_3.value = pptp_user_netmask[2];
+            cf.mymask_4.value = pptp_user_netmask[3];
+        }
+
+        if (cf.pptp_gateway.value != "")
+        {
+            cf.mygw_1.value = pptp_gateway[0];
+            cf.mygw_2.value = pptp_gateway[1];
+            cf.mygw_3.value = pptp_gateway[2];
+            cf.mygw_4.value = pptp_gateway[3];
+        }
+    }
+    else
+    {
+        setDisabled(true, cf.mygw_1, cf.mygw_2, cf.mygw_3, cf.mygw_4);
+    }
+    if ( (cf.pptp_user_ip.value == "...") || (cf.pptp_user_ip.value == "") )
+    {
+        setDisabled(true, cf.mygw_1, cf.mygw_2, cf.mygw_3, cf.mygw_4);
+    }
+    cf.pptp_serv_ip.value = cf.serv_ip.value;
+    cf.DNSAssign[wan_dns_sel].checked = true;
+    dns_update();
+    setDNS();
+    if (cf.wan_dns1_pri.value != "")
+    {
+        cf.DAddr1.value = wan_dns1_pri[0];
+        cf.DAddr2.value = wan_dns1_pri[1];
+        cf.DAddr3.value = wan_dns1_pri[2];
+        cf.DAddr4.value = wan_dns1_pri[3];
+    }
+    if (cf.wan_dns1_sec.value != "")
+    {
+        cf.PDAddr1.value = wan_dns1_sec[0];
+        cf.PDAddr2.value = wan_dns1_sec[1];
+        cf.PDAddr3.value = wan_dns1_sec[2];
+        cf.PDAddr4.value = wan_dns1_sec[3];
+    }
+
+    if (wan_hwaddr_sel == 0)
+        cf.Spoofmac.value = cf.wan_hwaddr_def.value;
+    else if (wan_hwaddr_sel == 2)
+        cf.Spoofmac.value = cf.wan_hwaddr2.value;
+    cf.MACAssign[wan_hwaddr_sel].checked = true;
+}
+
+function myip_update()
+{
+    var cf = document.forms[0];
+
+    if((cf.myip_1.value.length>0)&&(cf.myip_2.value.length>0)&&(cf.myip_3.value.length>0)&&(cf.myip_4.value.length>0))
+    {
+        setDisabled(false, cf.mygw_1, cf.mygw_2, cf.mygw_3, cf.mygw_4);
+    }
+    else
+    {
+        setDisabled(true, cf.mygw_1, cf.mygw_2, cf.mygw_3, cf.mygw_4);
+    } 
+}
+function dns_update()
+{
+    var cf = document.forms[0];
+    var region_gui = cf.gui_region.value;
+    
+    if((cf.myip_1.value.length>0)&&(cf.myip_2.value.length>0)&&(cf.myip_3.value.length>0)&&(cf.myip_4.value.length>0))
+    {
+        var data = cf.pptp_serv_ip.value.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+        if (data && isValidIPaddr(cf.pptp_serv_ip.value))
+        {
+            cf.DNSAssign[0].disabled = false;
+            cf.DNSAssign[1].disabled = false;
+        }
+        else
+        {
+            if (region_gui == "Russian")
+            {
+                cf.DNSAssign[0].disabled = true;
+                cf.DNSAssign[1].checked = true;
+            }
+            else
+            {
+                cf.DNSAssign[0].disabled = true;
+                cf.DNSAssign[1].disabled = true;
+            }
+        }
+    }
+    else
+    {
+        cf.DNSAssign[0].disabled = false;
+        cf.DNSAssign[1].disabled = false;
+    } 
+    setDNS();
+}
+function pw_onfocus()
+{
+    var cf = document.forms[0];
+    cf.pptp_passwd.value = "";
+    
+    document.getElementById("passwdEnterStatus").innerHTML="<input type=\"text\" name=\"pptp_passwd\" size=\"15\" style=\"width:180px\" maxlength=\"63\" value=\"\">";       
+    setTimeout("document.forms[0].pptp_passwd.focus();", 50);
+    return true;
+}
+
+//-->
+</script>
+
+</head>
+
+<body bgcolor="#ffffff" onload="loadSettings();loadcheck();document.forms[0].elements[0].focus();goTestApply();">
+<form name="formname" method="POST" action="pptp.cgi" target="_parent"> 
+<table border="0" cellpadding="0" cellspacing="3" width="99%">
+<tr>
+ <td width="50%"><a href="javascript:loadhelp('BAS_pptp','isp')" tabindex="-1"><b><%121%></b></a></td>
+ <td width="50%" align="right"><select name="login_type" onChange="setServer()"><option selected><%122%></option><option><%123%></option></select></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"></td>
+</tr>
+
+<tr>
+	<td><a href="javascript:loadhelp('BAS_pptp','login')" tabindex="-1"><b><%127%></b></a></td>
+	<td align="right"><input type="text" name="pptp_username" size="15" style="width:180px" maxlength="63" value="<%155%>"></td>
+</tr>
+<tr>
+	<td><a href="javascript:loadhelp('BAS_pptp','password')" tabindex="-1"><b><%129%></b></a></td>
+	<td align="right">
+	<div id="passwdEnterStatus" style ="visibility:visible">
+	<input type="password" name="pptp_passwd" size="15"  style="width:180px" maxlength="63" value="<%156%>" onfocus="pw_onfocus();">
+	</div>
+	</td>
+</tr>
+<tr>
+<td width="50%" nowrap><a href="javascript:loadhelp('BAS_pptp','conn_mode')" tabindex="-1"><b><%133%></b></a></td>
+<td width="50%" align="right">
+    <select name="pptp_dod" onChange="setConnMode()" size="1">
+        <option value=0><%134%></option>
+        <option value=1><%135%></option>
+        <option value=2><%136%></option>
+    </select></td>
+</tr>
+<tr>
+	<td nowrap><a href="javascript:loadhelp('BAS_pptp','idletime')" tabindex="-1"><%137%></a></td>
+	<td align="right"><input type="text" class="num" name="pptp_idletime" size="3" maxlength="3" value="<%157%>"></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"></td>
+</tr>
+
+<tr>
+ <td><a href="javascript:loadhelp('BAS_pptp','myip')" tabindex="-1"><b><%158%></b></a></td>
+ <td align="right" class="num">
+ <input type="text" name="myip_1" class="num" size="4" maxlength="3" onBlur="myip_update()">.<input type="text" name="myip_2" class="num" size="4" maxlength="3" onBlur="myip_update()">.<input type="text" name="myip_3" class="num" size="4" maxlength="3" onBlur="myip_update()">.<input type="text" name="myip_4" class="num" size="4" maxlength="3" onBlur="myip_update()"></td>
+</tr>
+
+<%138%>
+<tr>
+	<td nowrap><b><%139%></b></td>
+	<td align="right" class="num">
+	<input type="text" name="mymask_1" class="num" size="4" maxlength="3">.<input type="text" name="mymask_2" class="num" size="4" maxlength="3">.<input type="text" name="mymask_3" class="num" size="4" maxlength="3">.<input type="text" name="mymask_4" class="num" size="4" maxlength="3"></td>
+</tr>
+<%140%>
+
+<tr>
+ <td><a href="javascript:loadhelp('BAS_pptp','serverip')" tabindex="-1"><b><%159%></b></a></td>
+ <td align="right"><input type="text" name="pptp_serv_ip" size="24" maxlength="63" value="" onBlur="dns_update();"></td>
+</tr>
+
+<tr>
+ <td><a href="javascript:loadhelp('BAS_pptp','gwip')" tabindex="-1"><b><%160%></b></a></td>
+ <td align="right" class="num">
+ <input type="text" name="mygw_1" class="num" size="4" maxlength="3">.<input type="text" name="mygw_2" class="num" size="4" maxlength="3">.<input type="text" name="mygw_3" class="num" size="4" maxlength="3">.<input type="text" name="mygw_4" class="num" size="4" maxlength="3"></td>
+</tr>
+
+<tr>
+ <td><a href="javascript:loadhelp('BAS_pptp','id')" tabindex="-1"><b><%161%></b></a></td>
+ <td align="right"><input type="text" name="pptp_conn_id" size="12" maxlength="63" value="<%162%>"></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"></td>
+</tr>
+
+<tr>
+	<td colspan="2"><a href="javascript:loadhelp('BAS_pptp','DNSaddress')" tabindex="-1"><b><%84%> </b></a></td>
+</tr>
+
+<tr>
+	<td colspan="2"><input type="radio" name="DNSAssign" value="0" onClick="setDNS()"><%85%></td>
+</tr>
+
+<tr>
+	<td colspan="2"><input type="radio" name="DNSAssign" value="1" onClick="setDNS()"><%86%></td>
+</tr>
+
+<tr>
+	<td><img src="spacer.gif" width="20" height="12" border="0"><%87%></td>
+	<td align="right" class="num"><input type="text" name="DAddr1" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr2" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr3" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr4" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()"></td>
+</tr>
+<tr>
+	<td><img src="spacer.gif" width="20" height="12" border="0"><a href="javascript:loadhelp('BAS_pptp','DNSaddress')" tabindex="-1"><%88%></a></td>
+	<td align="right" class="num"><input type="text" name="PDAddr1" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr2" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr3" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr4" class="num" size="4" maxlength="3" onFocus="if(DisableFixedDNS) this.blur()"></td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"></td>
+</tr>
+
+<tr>
+	<td nowrap colspan="2"><a href="javascript:loadhelp('BAS_pptp','localaddress')" tabindex="-1"><b><%89%></b></a></td>
+</tr>
+<tr>
+	<td colspan="2" nowrap><input type="radio" name="MACAssign" value="0" onClick="setMAC()"><%90%></td>
+</tr>
+<tr>
+	<td nowrap colspan="2"><input type="radio" name="MACAssign" value="1" onClick="setMAC()"><%91%></td>
+</tr>
+<tr>
+	<td nowrap align="left"><input type="radio" name="MACAssign" value="2" onClick="setMAC()"><%92%></td>
+	<td align="right" class="num"><input type="text" class="num" name="Spoofmac" size="17" value="IP &#1072;&#1076;&#1088;&#1077;&#1089; &#1096;&#1083;&#1102;&#1079;&#1072; &#1076;&#1086;&#1083;&#1078;&#1077;&#1085; &#1073;&#1099;&#1090;&#1100; &#1091;&#1082;&#1072;&#1079;&#1072;&#1085;" maxlength="17" onFocus="if(DisableFixedMAC) this.blur()"></td>
+</tr>
+
+<tr>
+ <td colspan="2" background="liteblue.gif" height="12"></td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center"><div ID="buttons" onmouseover="loadhelp('BAS_pptp','buttons')">
+	<input type="SUBMIT" name="apply" value=<%93%> onClick="return checkData()">
+	<input type="BUTTON" name="Cancel" value=<%94%> onClick="reset();loadSettings();">
+	<input type="SUBMIT" name="Test" value=<%96%> onClick="return checkData()">
+	</div></td></tr>
+</table>
+<input type="hidden" name="runtest" value="<%98%>">
+<INPUT name=pptp_user_ip type=hidden value= "<%163%>">
+<INPUT name=serv_ip type=hidden value= "<%164%>">
+<INPUT name=wan_dns_sel type=hidden value= "<%102%>">
+<INPUT name=wan_dns1_pri type=hidden value= "<%103%>">
+<INPUT name=wan_dns1_sec type=hidden value= "<%104%>">
+<INPUT name=wan_hwaddr_sel type=hidden value= "<%105%>">
+<INPUT name=wan_hwaddr_def type=hidden value= "<%106%>">
+<INPUT name=wan_hwaddr2 type=hidden value= "<%107%>">
+<INPUT name=wan_hwaddr_pc type=hidden value= "<%108%>">
+<INPUT name=pptp_gateway type=hidden value="<%165%>">
+<INPUT name=gui_region type=hidden value="<%149%>">
+<INPUT name=pptp_user_netmask type=hidden value="<%166%>">
+<INPUT name=static_pptp_enable type=hidden value= "<%167%>">
+</form>
+<p></p>
+</body>
+</html>

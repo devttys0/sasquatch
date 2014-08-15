@@ -1,0 +1,265 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+    classes.num.all.fontFamily = "Courier";
+    classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!-- hide script from old browsers
+var initialized = false;
+
+function ssid_submit()
+{
+    var fm=document.forms[0];
+    fm.ssid_sel_submit.value = "1";
+    fm.secure_sel_submit.value = "0";
+    
+    fm.submit();
+    return true;
+}
+
+function secure_submit()
+{
+    var fm=document.forms[0];
+    fm.ssid_sel_submit.value = "0";
+    fm.secure_sel_submit.value = "1";
+    
+    fm.submit();
+    return true;
+}
+
+function initScrn()
+{
+    var defaultKey;
+    var fm=document.forms[0];
+    var i;
+
+    var profile_idx = <%1400%>;
+    if (!profile_idx || profile_idx < 1 || profile_idx > 3)
+        profile_idx = 1;
+    var sel_index = profile_idx - 1;
+    //fm.ssidSelect[sel_index].checked = true;
+
+    if (fm.bssid_enable.value == "1")
+        fm.enable_bssid.checked = true;
+    else
+        fm.enable_bssid.checked = false;
+
+    if (fm.ssid_bc_enable.value == "1")
+        fm.enable_ssid_bc.checked = true;
+    else
+        fm.enable_ssid_bc.checked = false;
+
+    if (fm.enable_allow_access.value == "1")
+        fm.allow_access.checked = true;
+    else
+        fm.allow_access.checked = false;
+        
+    if (fm.enable_isolation.value == "1")
+        fm.enable_isolate.checked = true;
+    else if (fm.enable_isolation.value != "111")
+        fm.enable_isolate.checked = false;
+        
+    initialized=true;
+}
+
+function checkData()
+{
+    var cf = document.forms[0];
+
+    
+    if (cf.ssid.value == "")
+    {
+        alert("<%949%>");
+        return false;
+    }
+
+    if (cf.ssid.value.match( /[^\x20-\x7E]/ ))
+    {
+        alert("<%950%>");
+        cf.ssid.focus();
+        return false;
+    }
+
+    if(cf.passphrase.value.length < 8)
+    {
+        alert("<%1027%>");
+        return false;    
+    }
+    if(cf.passphrase.value.length > 63)
+    {
+        if ( isHex(cf.passphrase.value) == false && cf.pfChanged.value==1)
+        {
+            alert("<%1028%>");
+            cf.passphrase.value = "";
+            return false;
+        }    
+    }
+    
+    if (cf.passphrase.value.match( /[^\x20-\x7E]/ ))
+    {
+        alert("<%1029%>");
+        cf.passphrase.focus();
+        return false;
+    }
+
+    return true;
+}
+function showWpsAlert()
+{
+    var cf = document.forms[0];
+    if(cf.show_wps_alert.value == "1")
+        alert("<%955%>");
+}
+// -->
+</script>
+</head>
+<body bgcolor="#ffffff" onload="initScrn();loadhelp('WLG_wireless_2');top.contents.location.href='MNU_menu.htm';document.forms[0].elements[0].focus();showWpsAlert();">
+<form method="POST" action="wlg_sec_profile_main.cgi">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+	<td colspan="2" align='left'><h1><%1401%></h1></td>
+</tr>
+<!--
+<tr>
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<p><tabindex="-1"><b><%1402%></b></a></p></td>
+</tr>
+
+<tr>
+<td colspan="2">
+<table border ="1" cellpadding ="0" cellspacing ="0" width="100%">
+<TR>
+	<td nowrap width="3%" align="center"><span class="thead">&nbsp;</span></td>
+	<td nowrap width="3%" align="center"><span class="thead"><%1403%></span></td>
+	<td nowrap align="center"><span class="thead"><%1404%></span></td>
+	<td nowrap align="center"><span class="thead"><%1405%></span></td>
+	<td nowrap align="center"><span class="thead"><%143%></span></td>
+    <td nowrap align="center"><span class="thead"><%1406%></span></td>
+</TR> 
+<tr>
+	<td nowrap align=center> &nbsp;<input type=RADIO name=ssidSelect value=2 onClick="return ssid_submit();"> &nbsp;</td>
+	<td nowrap align=center><span class=thead>1</span></td>
+    <td nowrap align=center><span class=ttext><%692%></span></td>
+    <td nowrap align=center><span class=ttext><%1407%></span></td>
+    <td nowrap align=center><span class=ttext><%1408%></span></td>
+    <td nowrap align=center><span class=ttext><%693%></span></td>
+</tr>
+<tr>
+	<td nowrap align=center> &nbsp;<input type=RADIO name=ssidSelect value=3 onClick="return ssid_submit();"> &nbsp;</td>
+	<td nowrap align=center><span class=thead>2</span></td>
+	<td nowrap align=center><span class=ttext><%698%></span></td>
+	<td nowrap align=center><span class=ttext><%1409%></span></td>
+	<td nowrap align=center><span class=ttext><%1410%></span></td>
+    <td nowrap align=center><span class=ttext><%699%></span></td>
+</tr>
+<tr>
+	<td nowrap align=center> &nbsp;<input type=RADIO name=ssidSelect value=4 onClick="return ssid_submit();"> &nbsp;</td>
+	<td nowrap align=center><span class=thead>3</span></td>
+	<td nowrap align=center><span class=ttext><%703%></span></td>
+	<td nowrap align=center><span class=ttext><%1411%></span></td>
+	<td nowrap align=center><span class=ttext><%1412%></span></td>
+    <td nowrap align=center><span class=ttext><%704%></span></td>
+</tr>
+</table>
+</td>
+</tr>
+-->
+</TABLE> 
+
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2"><a href="javascript:loadhelp('WLG_wireless_2','wireless')" tabindex="-1"><b><%534%> - <%1403%> <%1400%></b></a></td>
+</tr>
+
+<tr>
+<td align="left"><input type="checkbox" name="enable_bssid" value="1"><%1413%></td>
+</tr>
+
+<tr>
+<td align="left"><input type="checkbox" name="enable_ssid_bc" value="1"><%958%></td>
+</tr>
+
+<tr>
+<td align="left"><input type="checkbox" name="allow_access" value="1"><%1414%></td>
+</tr>
+
+<%670%>
+<tr>
+<td align="left"><input type="checkbox" name="enable_isolate" value="1"><%960%></td>
+</tr>
+<%673%>
+
+<tr>
+<td align="left"><%1415%><input type="text" name="ssid" value="<%1416%>" size="20" maxlength="32"></td>
+</tr>
+
+<tr>
+    <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+<tr>
+    <td colspan="2"><a href="javascript:loadhelp('WLG_wireless_2','security')" tabindex="-1"><b><%994%> - <%1403%> <%1400%></b></a></td></tr>
+
+<tr><td colspan="2">
+<table cellpadding="0" cellspacing="3" width="100%">
+<tr>
+        <td colspan="2"><input type="radio" name="security_type" value="Disable" onClick="return secure_submit();" ><%315%><td></tr>
+<tr>
+	<td colspan="2"><input type="radio" name="security_type" value="WEP" onClick="return secure_submit();" ><%995%></td></tr>
+<tr>
+	<td colspan="2"><input type="radio" name="security_type" value="WPA-PSK" <%996%> <%1429%> onClick="return secure_submit();" ><%997%></td></tr>
+<tr>
+	<td colspan="2"><input type="radio" name="security_type" value="WPA2-PSK" <%996%> <%1430%> onClick="return secure_submit();" ><%998%></td></tr>
+<tr>
+	<td colspan="2"><input type="radio" name="security_type" value="AUTO-PSK" <%996%> <%1431%> onClick="return secure_submit();" ><%999%></td></tr>
+<!--
+        <tr>
+        <td colspan="2"><input type="radio" name="security_type" value="WPA" <%996%> <%1432%> onClick="return secure_submit();" >WPA with Radius</td></tr>
+    <tr>
+        <td colspan="2"><input type="radio" name="security_type" value="WPA2" <%996%> <%1433%> onClick="return secure_submit();" >WPA2 with Radius</td></tr>
+    <tr>
+        <td colspan="2"><input type="radio" name="security_type" value="WPA-AUTO" <%996%> <%1434%> onClick="return secure_submit();" >WPA and WPA2 with Radius</td></tr>
+-->
+</table>
+</td></tr>
+
+    <tr>
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    
+    <%1435%>
+    
+    <tr>
+      <td colspan="2">&nbsp;&nbsp;<%1010%>: <input type="text" name="passphrase" size=20 maxLength=64 value="<%1436%>" onFocus="if (this.form.pfChanged.value=='0') this.form.passphrase.value=''; this.form.pfChanged.value='1';">&nbsp;&nbsp;<%1035%></td></tr>
+    <tr>
+      <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td colspan="2" align="center">
+      <input type="SUBMIT" name="Apply" value="<%93%>" onclick="return checkData();">
+      <input type="SUBMIT" name="Cancel" value="<%94%>"></td></tr>
+  </table>
+  <input type="hidden" name="pfChanged" value="0">
+  <input type="hidden" name="only_mode" value="0">
+  <input type="hidden" name="bssid_enable" value="<%1425%>">
+  <input type="hidden" name="ssid_bc_enable" value="<%1426%>">
+  <input type="hidden" name="enable_allow_access" value="<%1427%>">
+  <input type="hidden" name="enable_isolation" value="<%1428%>">  
+  <input type="hidden" name="ssid_sel_submit" value="0">
+  <input type="hidden" name="secure_sel_submit" value="0">
+  <input type="hidden" name="show_wps_alert" value="<%1026%>">
+</form>
+<p>
+</p>
+</body>
+</html>
+

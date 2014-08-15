@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<URLBase><%url_base();%></URLBase>
+<device>
+<deviceType>urn:schemas-upnp-org:device:InternetGatewayDevice:1</deviceType>
+<friendlyName><%friend_name();%></friendlyName>
+<manufacturer>NETGEAR, Inc.</manufacturer>
+<manufacturerURL>http://www.NETGEAR.com</manufacturerURL>
+<modelDescription><%model_description();%></modelDescription>
+<modelNumber><%model_number();%></modelNumber>
+<modelName><%model_name();%></modelName>
+<modelURL><%model_URL();%></modelURL>
+<UDN><%device_uuid(InternetGatewayDevice);%></UDN>
+<serviceList>
+<service>
+<serviceType>urn:schemas-upnp-org:service:Layer3Forwarding:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:L3Forwarding1</serviceId>
+<SCPDURL>/Public_UPNP_Layer3F.xml</SCPDURL>
+<controlURL>/Public_UPNP_C1</controlURL>
+<eventSubURL>/Public_UPNP_Event_1</eventSubURL>
+</service>
+</serviceList>
+<deviceList>
+<device>
+<deviceType>urn:schemas-upnp-org:device:WANDevice:1</deviceType>
+<friendlyName>WAN Device</friendlyName>
+<manufacturer>NETGEAR, Inc.</manufacturer>
+<manufacturerURL>http://www.NETGEAR.com</manufacturerURL>
+<modelDescription><%model_description();%></modelDescription>
+<modelNumber><%model_number();%></modelNumber>
+<modelName><%model_name();%></modelName>
+<modelURL><%model_URL();%></modelURL>
+<UDN><%device_uuid(WANDevice);%></UDN>
+<serviceList>
+<service>
+<serviceType>urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:WANCommonIFC1</serviceId>
+<SCPDURL>/Public_UPNP_WAND.xml</SCPDURL>
+<controlURL>/Public_UPNP_C2</controlURL>
+<eventSubURL>/Public_UPNP_Event_2</eventSubURL>
+</service>
+</serviceList>
+<deviceList>
+<device>
+<deviceType>urn:schemas-upnp-org:device:WANConnectionDevice:1</deviceType>
+<friendlyName>WAN Connection Device</friendlyName>
+<manufacturer>NETGEAR, Inc.</manufacturer>
+<manufacturerURL>http://www.NETGEAR.com</manufacturerURL>
+<modelDescription><%model_description();%></modelDescription>
+<modelNumber><%model_number();%></modelNumber>
+<modelName><%model_name();%></modelName>
+<modelURL><%model_URL();%></modelURL>
+<UDN><%device_uuid(WANConnectionDevice);%></UDN>
+<serviceList>
+<service>
+<serviceType>urn:schemas-upnp-org:service:WANEthernetLinkConfig:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:WANEthLinkC1</serviceId>
+<SCPDURL>/Public_UPNP_WANEtherLinkCfg.xml</SCPDURL>
+<controlURL>/Public_UPNP_C4</controlURL>
+<eventSubURL>/Public_UPNP_Event_4</eventSubURL>
+</service>
+<service>
+<serviceType>urn:schemas-upnp-org:service:WANIPConnection:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:WANIPConn1</serviceId>
+<SCPDURL>/Public_UPNP_WANIPConn.xml</SCPDURL>
+<controlURL>/Public_UPNP_C3</controlURL>
+<eventSubURL>/Public_UPNP_Event_3</eventSubURL>
+</service>
+<service>
+<serviceType>urn:schemas-upnp-org:service:WANPPPConnection:1</serviceType>
+<serviceId>urn:upnp-org:serviceId:WANPPPConn1</serviceId>
+<SCPDURL>/Public_UPNP_WANPPPConn.xml</SCPDURL>
+<controlURL>/Public_UPNP_C5</controlURL>
+<eventSubURL>/Public_UPNP_Event_5</eventSubURL>
+</service>
+</serviceList>
+</device>
+</deviceList>
+</device>
+</deviceList>
+<presentationURL>http://www.routerlogin.net</presentationURL>
+</device>
+</root>

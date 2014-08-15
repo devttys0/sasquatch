@@ -1,0 +1,56 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<script language="javascript" type="text/javascript">
+<!-- hide script from old browsers
+function do_submit(){
+	document.forms[0].submit();
+}
+function wait1()
+{
+	setTimeout('do_submit()',2000);
+}
+function stop1()
+{
+document.forms[0].stop.value = "yes";
+return true;
+}
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff" onLoad="wait1();">
+<form name="formname" method="POST" action="ver_check.cgi"> 
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+<td colspan="2">
+	<h1><%1148%></H1>
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center"><b><%1149%></b></td>
+</tr>
+</tr>
+<tr>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="SUBMIT" name="Cancel" value=" <%94%> " onClick="return stop1();">
+	</td></tr>
+</table>
+<input type="hidden" name="stop" value="no">
+</form>
+<p></p>
+</body>
+</html>
+

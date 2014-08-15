@@ -1,0 +1,80 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!-- hide script from old browsers
+var showit = (document.layers) ? "show" : "visible";
+var hideit = (document.layers) ? "hide" : "hidden";
+var NS4 = (document.layers);
+
+function CloseWindow()
+{
+    top.window.opener=null;
+    top.window.close();
+}
+
+function setVisible(divID, setto)
+{
+	if (NS4)
+		document.layers[divID].visibility = setto;
+	else if (document.all)
+		document.all(divID).style.visibility = setto;
+	else if (document.getElementById)
+		document.getElementById(divID).style.visibility = setto;
+}
+
+function CheckBrowser()
+{
+    var ua = navigator.userAgent.toLowerCase();
+    var firefox=0;
+    var safari=0;
+    var chrome=0;
+    
+    if (ua.indexOf("firefox") != -1)
+        firefox=1;
+    if (ua.indexOf("chrome") != -1)
+        chrome=1;
+    if (ua.indexOf("safari") != -1)
+        safari=1;
+    
+    if ( (firefox == "1") || (chrome == "1") || (safari == "1") )
+        setVisible('closeButton', hideit);
+    else
+        setVisible('closeButton', showit);
+}
+
+
+
+//-->
+</script>
+<style type="text/css">
+H1 {FONT-WEIGHT: bold; FONT-SIZE: 24pt; BACKGROUND: white; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+P { FONT-SIZE: 10pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+</style>
+</head>
+<body onLoad="CheckBrowser();setInterval('self.window.focus()', 8000)" onBlur="focus()">
+<table BORDER="0" CELLSPACING="0" CELLPADDING="5" width="100%">
+ <tr>
+    <h1><%609%></h1>
+    <p><%1398%></p>
+ </tr>
+
+ <tr> 
+    <BR><BR><BR><BR><BR><BR>
+ </tr>  
+ <tr><td>
+ <div align="left" ID="closeButton" style="position:relative;top:0;left:0;visibility:hide;visibility:hidden;">   
+ <table BORDER="0" CELLSPACING="0" CELLPADDING="5" width="100%">
+
+ <tr>
+    <td align="center">
+    <input type="button" name="close" value="&nbsp; <%51%> &nbsp;" onClick="CloseWindow();"></td>
+ </tr> 
+ </table>
+</div>
+ </td></tr>
+</table>
+</body>
+</html>

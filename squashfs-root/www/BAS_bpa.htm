@@ -1,0 +1,331 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!-- 
+var DisableFixedDNS = false;
+var DisableFixedMAC = false;
+var MacAddress;
+var DodDisable = false;
+var DodIndex = <%168%>;
+
+function goTestApply()
+{
+	var winoptions = "width=640,height=480,menubar=yes,toolbar=yes,status=yes,location=yes,resizable=yes";
+	if(document.forms[0].runtest.value == "yes")
+		window.open('BAS_wtest_l.htm','test_win',winoptions);
+}
+
+function loadcheck()
+{
+	var cf = document.forms[0];
+	if(isIE()){
+		cf.bpa_username.size="24";
+		cf.bpa_passwd.size="24";
+}
+ MacAddress=document.formname.Spoofmac.value;
+	loadhelp('BAS_bpa');
+	setDNS();
+	setServer();
+	setMAC();
+}
+
+function setDNS()
+{
+	var cf = document.forms[0];
+	var dflag = cf.DNSAssign[0].checked;
+	setDisabled(dflag,cf.DAddr1,cf.DAddr2,cf.DAddr3,cf.DAddr4,cf.PDAddr1,cf.PDAddr2,cf.PDAddr3,cf.PDAddr4);
+	DisableFixedDNS = dflag;
+}
+function setMAC()
+{
+	var cf = document.forms[0];
+
+	if (cf.MACAssign[0].checked)
+	    cf.Spoofmac.value = cf.wan_hwaddr_def.value;
+	else if(cf.MACAssign[1].checked)
+	    cf.Spoofmac.value = cf.wan_hwaddr_pc.value;
+	else if (cf.MACAssign[2].checked)
+	    cf.Spoofmac.value = cf.wan_hwaddr2.value;
+
+	if (cf.MACAssign[2].checked)
+		cf.Spoofmac.disabled = false;
+	else
+		cf.Spoofmac.disabled = true;
+	DisableFixedMAC = cf.Spoofmac.disabled;
+}
+
+function setServer()
+{
+	var cf = document.forms[0];
+	var stype = cf.wan_proto.selectedIndex;
+ if(stype==0) //pptp
+ window.location.href="BAS_pptp.htm";
+ else if(stype==2) //pppoe
+ window.location.href="BAS_pppoe.htm";
+ else if(stype==3) //l2tp
+ window.location.href="BAS_l2tp.htm";
+}
+
+function setConnMode()
+{
+    var cf = document.forms[0];
+    var conn_mode = cf.bpa_dod.selectedIndex;
+
+    if(conn_mode == 1) // Dial on Demand
+        DodDisable = false;
+    else
+        DodDisable = true;
+    var msg = "";
+    if((conn_mode != 1) && !_isNumeric(cf.bpa_idletime.value))
+    {
+        cf.bpa_dod.selectedIndex = DodIndex;
+        if(cf.bpa_idletime.value.length<=0)
+            msg+= "<%115%>";
+        else if(!_isNumeric(cf.bpa_idletime.value))
+            msg+= "<%116%>";
+        if (msg.length > 1)
+        {
+            alert(msg);
+            return false;
+        }
+    }
+    else
+    {
+        DodIndex = cf.bpa_dod.selectedIndex;
+        setDisabled(DodDisable,cf.bpa_idletime);
+    }
+    return true;
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	
+	msg+= checkBlank(cf.bpa_username, "<%117%>");
+	if(cf.bpa_idletime.value.length<=0)
+	 msg+= "<%115%>";
+	else if(!_isNumeric(cf.bpa_idletime.value))
+	 msg+= "<%116%>";
+	msg+= checkBlank(cf.bpa_server, "<%169%>");
+
+	if(cf.DNSAssign[1].checked)
+	{
+		if(checkIP(cf.DAddr1,cf.DAddr2,cf.DAddr3,cf.DAddr4,254)||(parseInt(cf.DAddr4.value,10)==0))
+			msg+= "<%71%>";
+		else
+		{
+			cf.DAddr1.value = parseInt(cf.DAddr1.value,10);
+			cf.DAddr2.value = parseInt(cf.DAddr2.value,10);
+			cf.DAddr3.value = parseInt(cf.DAddr3.value,10);
+			cf.DAddr4.value = parseInt(cf.DAddr4.value,10);
+		}
+		if(cf.PDAddr1.value.length>0 || cf.PDAddr2.value.length>0 || cf.PDAddr3.value.length>0 || cf.PDAddr4.value.length>0)
+		{
+			if(checkIP(cf.PDAddr1,cf.PDAddr2,cf.PDAddr3,cf.PDAddr4,254)||(parseInt(cf.PDAddr4.value,10)==0))
+				msg+= "<%72%>";
+			else
+			{
+				cf.PDAddr1.value = parseInt(cf.PDAddr1.value,10);
+				cf.PDAddr2.value = parseInt(cf.PDAddr2.value,10);
+				cf.PDAddr3.value = parseInt(cf.PDAddr3.value,10);
+				cf.PDAddr4.value = parseInt(cf.PDAddr4.value,10);
+			}
+		}
+	}
+	
+	if( checkMacStr(cf.Spoofmac) || MacStrallf(cf.Spoofmac) )
+	    msg+= "<%0%>";
+		
+	if (msg.length > 1)
+	{
+		alert(msg);
+		return false;
+	}
+
+	cf.wan_dns1_pri.value = cf.DAddr1.value+'.'+cf.DAddr2.value+'.'+cf.DAddr3.value+'.'+cf.DAddr4.value;
+	cf.wan_dns1_sec.value = cf.PDAddr1.value+'.'+cf.PDAddr2.value+'.'+cf.PDAddr3.value+'.'+cf.PDAddr4.value;
+	cf.wan_hwaddr2.value = cf.Spoofmac.value;
+
+	return sumvalue(cf);
+}
+
+function loadSettings()
+{
+	var cf = document.forms[0];
+	var wan_dns_sel = cf.wan_dns_sel.value;
+	var wan_dns1_pri = cf.wan_dns1_pri.value.split(".");
+	var wan_dns1_sec = cf.wan_dns1_sec.value.split(".");
+	var wan_hwaddr_sel = cf.wan_hwaddr_sel.value;
+
+    // Get bpa_dod (nvram)
+    cf.bpa_dod.selectedIndex = <%168%>;
+    if (cf.bpa_dod.selectedIndex == 1)
+        DodDisable = false;
+    else
+        DodDisable = true;
+    setDisabled(DodDisable,cf.bpa_idletime);
+
+	cf.DNSAssign[wan_dns_sel].checked = true;
+        setDNS();
+	if (cf.wan_dns1_pri.value != "")
+	{
+	    cf.DAddr1.value = wan_dns1_pri[0];
+	    cf.DAddr2.value = wan_dns1_pri[1];
+	    cf.DAddr3.value = wan_dns1_pri[2];
+	    cf.DAddr4.value = wan_dns1_pri[3];
+	}
+
+	if (cf.wan_dns1_sec.value != "")
+	{
+	    cf.PDAddr1.value = wan_dns1_sec[0];
+	    cf.PDAddr2.value = wan_dns1_sec[1];
+	    cf.PDAddr3.value = wan_dns1_sec[2];
+	    cf.PDAddr4.value = wan_dns1_sec[3];
+	}
+
+    if (wan_hwaddr_sel == 0)
+        cf.Spoofmac.value = cf.wan_hwaddr_def.value;
+    else if (wan_hwaddr_sel == 2)
+        cf.Spoofmac.value = cf.wan_hwaddr2.value;
+	cf.MACAssign[wan_hwaddr_sel].checked = true;
+}
+function pw_onfocus()
+{
+    var cf = document.forms[0];
+    cf.bpa_passwd.value = "";
+    
+    document.getElementById("passwdEnterStatus").innerHTML="<input type=\"text\" name=\"bpa_passwd\" size=\"15\" style=\"width:180px\" maxlength=\"63\" value=\"\">";       
+    setTimeout("document.forms[0].bpa_passwd.focus();", 50);
+    return true;
+}
+
+//-->
+</script>
+</head>
+
+<body bgcolor="#ffffff" onload="loadSettings(); loadcheck();document.forms[0].elements[0].focus();goTestApply();">
+<form name="formname" method="POST" action="bpa.cgi" target="_parent"> 
+<table border="0" cellpadding="0" cellspacing="3" width="99%">
+<tr>
+ <td width="50%" nowrap><a href="javascript:loadhelp('BAS_bpa','isp')" tabindex="-1"><b><%121%></b></a></td>
+ <td width="50%" align="right">
+ <select name="wan_proto" onChange="setServer()">
+ <option><%122%></option>
+ <option selected><%170%></option>
+ <option><%123%></option>
+<%171%>
+    <option><%172%></option>
+<%173%>
+ </select></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td><a href="javascript:loadhelp('BAS_bpa','login')" tabindex="-1"><b><%127%></b></a></td>
+	<td align="right"><input type="text" name="bpa_username" size="15" maxlength="63" value="<%174%>"></td>
+</tr>
+
+<tr>
+	<td><a href="javascript:loadhelp('BAS_bpa','password')" tabindex="-1"><b><%129%></b></a></td>
+	<td align="right">
+	<div id="passwdEnterStatus" style ="visibility:visible">
+	<input type="password" name="bpa_passwd" size="15"  style="width:180px" maxlength="63" value="<%175%>" onfocus="pw_onfocus();">
+	</div>
+	</td>
+</tr>
+
+<tr>
+ <td nowrap><a href="javascript:loadhelp('BAS_bpa','server')" tabindex="-1"><b><%169%></b></a></td>
+ <td align="right"><input type="text" name="bpa_server" size="15" maxlength="128" value="<%176%>"></td>
+</tr>
+<tr>
+<td width="50%" nowrap><a href="javascript:loadhelp('BAS_bpa','conn_mode')" tabindex="-1"><b><%133%></b></a></td>
+<td width="50%" align="right">
+    <select name="bpa_dod" onChange="setConnMode()" size="1">
+        <option value=0><%134%></option>
+        <option value=1><%135%></option>
+        <option value=2><%136%></option>
+    </select></td>
+</tr>
+<tr>
+	<td nowrap><a href="javascript:loadhelp('BAS_bpa','idletime')" tabindex="-1"><%137%></a></td>
+	<td align="right"><input type="text" class="num" name="bpa_idletime" size="3" maxlength="3" value="<%177%>"></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" nowrap><a href="javascript:loadhelp('BAS_bpa','DNSaddress')" tabindex="-1"><b><%84%> </b></a></td>
+</tr>
+
+<tr>
+	<td colspan="2" nowrap><input type="radio" name="DNSAssign" value="0" onClick="setDNS()"><%85%></td>
+</tr>
+
+<tr>
+	<td colspan="2" nowrap><input type="radio" name="DNSAssign" value="1" onClick="setDNS()"><%86%></td>
+</tr>
+
+<tr>
+	<td nowrap><img src="spacer.gif" width="20" height="12" border="0"><%87%></td>
+	<td nowrap align="right" class="num"><input type="text" name="DAddr1" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr2" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr3" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="DAddr4" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()"></td>
+</tr>
+<tr>
+	<td nowrap><img src="spacer.gif" width="20" height="12" border="0"><a href="javascript:loadhelp('BAS_bpa','DNSaddress')" tabindex="-1"><%88%></a></td>
+	<td nowrap align="right" class="num"><input type="text" name="PDAddr1" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr2" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr3" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()">.<input type="text" name="PDAddr4" class="num" size="4" maxlength="3" value="" onFocus="if(DisableFixedDNS) this.blur()"></td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2"><a href="javascript:loadhelp('BAS_bpa','localaddress')" tabindex="-1"><b><%89%></b></a></td>
+</tr>
+<tr>
+	<td colspan="2"><input type="radio" name="MACAssign" value="0" onClick="setMAC()"><%90%></td>
+</tr>
+<tr>
+	<td colspan="2"><input type="radio" name="MACAssign" value="1" onClick="setMAC()"><%91%></td>
+</tr>
+<tr>
+	<td align="left" nowrap><input type="radio" name="MACAssign" value="2" onClick="setMAC()"><%92%></td>
+	<td align="right" class="num"><input type="text" class="num" name="Spoofmac" size="17" maxlength="17" onFocus="if(DisableFixedMAC) this.blur()"></td>
+</tr>	
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center"><div ID="buttons" onmouseover="loadhelp('BAS_bpa','buttons')">
+	<input type="SUBMIT" name="apply" value=<%93%> onClick="return checkData()">
+	<input type="BUTTON" name="Cancel" value=<%94%> onClick="reset();loadSettings();">
+	<input type="SUBMIT" name="Test" value=<%96%> onClick="return checkData()">
+	</div></td></tr>
+</table>
+  <input type="hidden" name="runtest" value="<%98%>">
+  <INPUT name=wan_dns_sel type=hidden value= "<%102%>">
+  <INPUT name=wan_dns1_pri type=hidden value= "<%103%>">
+  <INPUT name=wan_dns1_sec type=hidden value= "<%104%>">
+  <INPUT name=wan_hwaddr_sel type=hidden value= "<%105%>">
+<INPUT name=wan_hwaddr_def type=hidden value= "<%106%>">
+<INPUT name=wan_hwaddr2 type=hidden value= "<%107%>">
+<INPUT name=wan_hwaddr_pc type=hidden value= "<%108%>">
+</form>
+<p></p>
+</body>
+</html>

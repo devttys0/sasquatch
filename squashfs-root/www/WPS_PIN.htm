@@ -1,0 +1,97 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel=Stylesheet href=form.css>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function check_pin()
+{
+	var cf = document.forms[0];
+	var lpin = cf.PIN.value;
+	var accum = 0;
+
+	if (lpin.length != 4 && lpin.length != 8) {
+		alert("<%1461%>");
+		return false;
+	}
+	
+	if (parseInt(cf.PIN.value, 10) != cf.PIN.value) {
+		alert("<%1461%>");
+		return false;
+	}
+	
+	if (lpin.length == 8) {
+		lpin = parseFloat(cf.PIN.value);
+		accum += 3 * (parseInt(lpin / 10000000) % 10);
+		accum += 1 * (parseInt(lpin / 1000000) % 10);
+		accum += 3 * (parseInt(lpin / 100000) % 10);
+		accum += 1 * (parseInt(lpin / 10000) % 10);
+		accum += 3 * (parseInt(lpin / 1000) % 10);
+		accum += 1 * (parseInt(lpin / 100) % 10);
+		accum += 3 * (parseInt(lpin / 10) % 10);
+		accum += 1 * (parseInt(lpin / 1) % 10);
+
+		if (0 != (accum % 10)) {
+			alert("<%1462%>");
+			return false;
+		}
+	}
+
+	cf.Next.disabled = true;
+	cf.WPS_type[0].disabled = true;
+	cf.WPS_type[1].disabled = true;
+	//top.contents.location.href="MNU_menu_no_link.htm";
+	return true;
+}
+//-->
+</script>
+</head>
+
+<body bgcolor="#ffffff" onload="loadhelp('WPS');document.forms[0].elements[0].focus();">
+
+<div class=Section1>
+<form method=post action="wps_pin.cgi" onSubmit="if (!check_pin()) return false;">
+<table class=MsoNormalTable border=0 cellspacing=3 cellpadding=0 width="100%">
+<tr><td colspan=2><h1><%530%></h1></td></tr>
+
+<tr>
+<td colspan=3 background=liteblue.gif>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+</td>
+</tr>
+
+<tr></tr>
+<tr>
+<p class=MsoNormal>
+<td colspan=3><b><%1463%>:</b></td></p>
+</tr>
+
+<tr>
+<td colspan="3"><input type="radio" name="WPS_type" value="Push Button" onClick="location.href='WPS.htm'"><%1457%></td></tr>
+<tr>
+<td colspan="3"><input type="radio" name="WPS_type" value="PIN Number" checked><%1459%></td></tr>
+<tr>
+<td colspan="3"><p><%1464%></p></td></tr>
+<TR>
+<TD><p><%1465%>:</p></TD>
+<TD nowrap><INPUT TYPE="TEXT" NAME="PIN" SIZE="8" MAXLENGTH="8" VALUE="" align="left"></TD>
+<TD>
+<p class=MsoNormal align=center>
+<INPUT TYPE="submit" VALUE="<%912%>" NAME="Next">&nbsp;&nbsp;
+<o:p></o:p></p></TD>
+</TR>
+
+<tr>
+<td colspan="3" background=liteblue.gif>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+</td>
+</tr>
+
+<tr></tr>
+</table>
+</form>
+</div>
+</body>
+</html>

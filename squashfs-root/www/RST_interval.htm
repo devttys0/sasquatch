@@ -1,0 +1,73 @@
+<HTML>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+var defaultInterval = 5;
+ var interval = 5;
+
+function loadInterval()
+{
+ intervalId = setInterval("getStatisticPage()", interval * 1000);
+ intervalId2 = setInterval("setDefaultInterval()", 20);
+ }
+
+ function setDefaultInterval()
+ {
+ document.SetIntervalForm.interval.value = defaultInterval ;
+ clearInterval(intervalId2) ;
+ }
+
+
+ function resetInterval(newInterval)
+ {
+ interval = parseInt(newInterval,10);
+ if ( isNaN(interval) || interval < 5 || interval > 86400)
+ {
+ interval = defaultInterval
+ }
+ document.SetIntervalForm.interval.value = interval ;
+ clearInterval(intervalId) ;
+ intervalId = setInterval("getStatisticPage()", interval * 1000);
+ }
+
+
+ function stopInterval() 
+ {
+ clearInterval(intervalId) ;
+ document.SetIntervalForm.interval.value = "" ;
+ }
+
+ function getStatisticPage()
+ {
+ myTitle = "PNC Statistic " ;
+ parent.StatTable.location.href = "RST_stattbl.htm" ;
+ } 
+
+</script>
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFFF" onLoad="loadInterval();document.forms[0].elements[1].focus();">
+<FORM method="POST" NAME="SetIntervalForm" action="POST" onSubmit="resetInterval(document.SetIntervalForm.interval.value);return false;">
+<input type="hidden" name="Load" value="H">
+ <P>
+ <div align="CENTER">
+ <TABLE BORDER=0 WIDTH=510 HEIGHT=34 VALIGN=top>
+ <TR> 
+ <TD WIDTH=170 align="CENTER"><B><%789%> :</B></TD>
+<TD align="CENTER" nowrap><INPUT TYPE="TEXT" NAME="interval" SIZE="5" MAXLENGTH="5" VALUE=" "> <%790%></TD>
+<TD WIDTH=80> </TD>
+<TD WIDTH=80 ALIGN="center" VALIGN="middle"><INPUT TYPE="BUTTON" NAME="SetIntvl" VALUE="<%791%>" WIDTH="80" onClick="resetInterval(document.SetIntervalForm.interval.value)"></TD>
+<TD WIDTH=20> &nbsp; </TD>
+<td WIDTH=100 ALIGN="center" VALIGN="middle"><INPUT TYPE="BUTTON" NAME="stopIntvl" VALUE="  <%792%>  " WIDTH="80" onClick="return stopInterval()"></TD> 
+</TR>
+</TABLE>
+</div>
+
+
+<input type="hidden" name="Button" value="<%93%>">
+</FORM>
+</BODY>
+</HTML>

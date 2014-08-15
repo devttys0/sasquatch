@@ -1,0 +1,234 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+classes.num.all.fontFamily = "Courier";
+classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+<%1196%>
+function loadSettings()
+{
+	var cf = document.forms[0];
+
+	if(cf.WMM_value.value == "1")
+		cf.wmm_enable.checked = true;
+	else
+		cf.wmm_enable.checked = false;
+
+	if (cf.qos_enable.value == "1")
+		cf.qosEnable.checked = true;
+	else
+		cf.qosEnable.checked = false;
+
+	if (cf.qos_bw_enable.value == "1")
+	{
+		cf.bwEnable.checked = true;
+	}
+	else
+	{
+		cf.bwEnable.checked = false;
+	}
+	check_bw_sel();
+
+	var bw = cf.uplink_bw.value.split(" ");
+	cf.bandwidth.value = bw[0];
+	if (bw[1] == "kbps")
+		cf.rate.selectedIndex = 0;
+	else if (bw[1] == "Mbps")
+		cf.rate.selectedIndex = 1;
+
+	if (cf.repeater.value == "1") {
+		cf.qosEnable.disabled = true;
+		cf.bwEnable.disabled = true;
+		cf.bandwidth.disabled = true;
+		cf.rate.disabled = true;
+		cf.setup_qos_rule.disabled = true;
+
+		cf.bw_sel[0].disabled = true;
+		cf.bw_sel[1].disabled = true;
+		cf.check_bw.disabled = true;
+	}
+	if (cf.repeater_an.value == "1") {
+		cf.qosEnable.disabled = true;
+		cf.bwEnable.disabled = true;
+		cf.bandwidth.disabled = true;
+		cf.rate.disabled = true;
+		cf.setup_qos_rule.disabled = true;
+
+		cf.bw_sel[0].disabled = true;
+		cf.bw_sel[1].disabled = true;
+		cf.check_bw.disabled = true;
+	}
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+	var qos_up_bw_limit = "<%1197%>";
+	interval = parseInt(cf.bandwidth.value);
+	if ( isNaN(interval) || interval <= 0 ||
+		(cf.rate.selectedIndex == 0 && (interval < 64 || interval > 9999)) ||
+		(cf.rate.selectedIndex == 1 && interval > qos_up_bw_limit )||
+		cf.bandwidth.value.match(/[^0-9]/g) ||
+		cf.bandwidth.value.match(/^0/))
+	{
+		alert("<%1198%>");
+		return false;
+	}
+	return true;
+}
+
+function checkWanIp()
+{
+    return true;
+}
+
+function loadAlert()
+{
+    var cf = document.forms[0];
+    var fromcgi = "<%1199%>";
+    
+    if (fromcgi == "AlertOk")
+    {
+        alert("<%1200%>");
+    }
+}
+
+function update_bw_sel(index)
+{
+    var cf = document.forms[0];
+    
+    if (index == 1)
+    {
+        cf.bw_sel[0].checked = true;
+        cf.bw_sel[1].checked = false;
+        cf.check_bw.disabled = true;
+        cf.bw_set_sel.value = "1";
+    }
+    else
+    {
+        cf.bw_sel[0].checked = false;
+        cf.bw_sel[1].checked = true;
+        cf.check_bw.disabled = false;
+        cf.bw_set_sel.value = "2";
+    }
+    
+    return true;
+}
+
+function check_bw_sel()
+{
+    var cf = document.forms[0];
+    if(!cf.bwEnable.checked)
+    {
+        cf.bw_sel[0].disabled = true;
+        cf.bw_sel[1].disabled = true;
+        cf.check_bw.disabled = true;
+        
+    }
+    else
+    {
+        cf.bw_sel[0].disabled = false;
+        cf.bw_sel[1].disabled = false;
+        cf.bandwidth.disabled = false;
+        cf.rate.disabled = false;
+        if (cf.bw_set_sel.value == "2")
+            update_bw_sel(2);
+        else
+            update_bw_sel(1);
+    }
+}
+//-->
+</script> 
+</head>
+<body bgcolor="#ffffff" onload="loadSettings();loadAlert();loadhelp('QOS_main');">
+<form name="frmRules" method="POST" action="qos_main.cgi" onSubmit="return checkData();">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+<td colspan="2"><h1><%561%></h1></td>
+</tr>
+
+<tr>
+<td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2"><input type="checkbox" name="wmm_enable" value="1"><a href="javascript:loadhelp('QOS_main','wmm')" tabindex="-1"> <b><%1201%></b></a></td>
+</tr>
+
+<tr>
+<td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2"><input type="checkbox" name="qosEnable" value="1" checked><a href="javascript:loadhelp('QOS_main','qos')" tabindex="-1"> <b><%1202%></b></a></td>
+</tr>
+
+<tr>
+<td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2"><input type="checkbox" name="bwEnable" value="1" onclick="check_bw_sel()"><a href="javascript:loadhelp('QOS_main','qos')" tabindex="-1"> <b><%1203%></b></a></td>
+</tr>
+
+<tr>
+<td><img src="spacer.gif" width="40" height="12" border="0">
+<input type="radio" name="bw_sel" value="1" onclick="update_bw_sel(1)"><%1204%>&nbsp;<%1205%>
+<input type="text" name="bandwidth" size="6" maxlength="4" value="">
+<select name="rate" size=1>
+<option value="1000"><%1206%></option>
+<option value="1000000"><%1207%></option>
+</select>
+</td>
+</tr>
+<tr>
+<td><img src="spacer.gif" width="40" height="12" border="0">
+<input type="radio" name="bw_sel" value="2" onclick="update_bw_sel(2)"><%1208%>  <!><%1209%><!>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" name="check_bw" size="6" maxlength="4" value="<%860%>" onclick="return checkWanIp();">
+</td>
+</tr>
+<tr>
+<td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+<td colspan="2"></td>
+</tr>
+<tr>
+<td><b><%1210%></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" name="setup_qos_rule" value=" <%1211%> ">
+</td>
+</tr>
+
+<tr>
+<td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+<input type="submit" name="apply" value="<%93%>">
+<input type="button" name="cancel" value="<%94%>" onclick="loadSettings();"></td>
+</tr>
+<tr>
+<input type="hidden" name="select" value="-1">
+<input type="hidden" name="priority_sel" value="-1">
+<INPUT type="hidden" name=WMM_value value="<%1212%>">
+<input type="hidden" name="qos_enable" value="<%1213%>">
+<input type="hidden" name="qos_bw_enable" value="<%1214%>">
+<input type="hidden" name="uplink_bw" value="<%1215%>">
+<input type="hidden" name="repeater" value="<%509%>">
+<input type="hidden" name="repeater_an" value="<%510%>">
+<input type="hidden" name="bw_set_sel" value="<%1216%>">
+</tr>
+</table>
+
+</form>
+</body>
+</html>
+
+

@@ -1,0 +1,408 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function chgSel(index)
+{
+ document.forms[0].select.value = index;
+ return true;
+}
+function checkData()
+{
+	var cf = document.forms[0];
+	var msg = "";
+
+	var wan_proto = cf.wan_proto.value;
+	var pptp_wan_ipaddr = cf.pptp_wan_ipaddr.value.split(".");
+	var wan_ipaddr = cf.wan_ipaddr.value.split(".");
+	var wan_netmask = cf.wan_netmask.value.split(".");
+	var w_ipaddr = (wan_ipaddr[0] << 24) | (wan_ipaddr[1] << 16) | (wan_ipaddr[2] << 8)| (wan_ipaddr[3]);
+	var w_netmask = (wan_netmask[0]<< 24) | (wan_netmask[1]<< 16) | (wan_netmask[2]<< 8)| (wan_netmask[3]);
+	var l_ipaddr = (cf.sysLANIPAddr1.value << 24) | (cf.sysLANIPAddr2.value << 16) | (cf.sysLANIPAddr3.value << 8)| (cf.sysLANIPAddr4.value);
+	var l_netmask = (cf.sysLANSubnetMask1.value<< 24) | (cf.sysLANSubnetMask2.value<< 16) | (cf.sysLANSubnetMask3.value<< 8)| (cf.sysLANSubnetMask4.value);
+	var lan_netaddr_min = (l_ipaddr & l_netmask) + 1;
+	var lan_netaddr_max = ((l_ipaddr & l_netmask) | (~l_netmask)) - 1;
+
+	if (cf.device_name.value == "")
+		msg+= "<%481%>\n";
+
+	if (cf.device_name.value.match( /[^\x20-\x7E]/ ))
+	{
+		cf.device_name.focus();
+		msg+= "<%482%>\n";
+	}
+
+	if(checkIP(cf.sysLANSubnetMask1,cf.sysLANSubnetMask2,cf.sysLANSubnetMask3,cf.sysLANSubnetMask4,255)
+		||!isNetmask(cf.sysLANSubnetMask1, cf.sysLANSubnetMask2, cf.sysLANSubnetMask3, cf.sysLANSubnetMask4)
+		||(lan_netaddr_min > lan_netaddr_max))
+		msg+= "<%67%>";
+	if(checkIP(cf.sysLANIPAddr1,cf.sysLANIPAddr2,cf.sysLANIPAddr3,cf.sysLANIPAddr4,254)
+		||(parseInt(cf.sysLANIPAddr4.value,10)==0)||parseInt(cf.sysLANIPAddr1.value,10)>224
+		||(l_ipaddr < lan_netaddr_min)||(l_ipaddr > lan_netaddr_max))
+		msg+= "<%9%>";
+
+	var n1=parseInt(cf.sysPoolStartingAddr4.value,10);
+	var n2=parseInt(cf.sysPoolFinishAddr4.value,10);
+
+	if( isNaN(n1) || isNaN(n2)
+        || (n1<1||n1>254||n2<1||n2>254||n1>n2)
+        || ((n1 == n2) && (n1 == (l_ipaddr & 0xFF)))
+        || (n1 < (lan_netaddr_min & 0xFF)) || (n2 > (lan_netaddr_max & 0xFF))
+        || ((cf.sysPoolStartingAddr4.value & cf.sysLANSubnetMask4.value) != (cf.sysLANIPAddr4.value & cf.sysLANSubnetMask4.value))
+        || ((cf.sysPoolFinishAddr4.value & cf.sysLANSubnetMask4.value) != (cf.sysLANIPAddr4.value & cf.sysLANSubnetMask4.value)) )
+        msg+= "<%483%>";
+	if (msg.length > 1)
+	{
+		alert(msg);
+		return false;
+	}
+	else
+	{
+		if ((w_ipaddr != 0) && 
+			(((l_netmask & w_netmask ) & l_ipaddr) == ((l_netmask & w_netmask ) & w_ipaddr)))
+		{
+			alert("<%484%>");
+			return false;
+		}
+		
+		if (wan_proto == "pptp")
+		{
+			w_ipaddr = (pptp_wan_ipaddr[0] << 24) | (pptp_wan_ipaddr[1] << 16) | (pptp_wan_ipaddr[2] << 8)| (pptp_wan_ipaddr[3]);
+			w_netmask = l_netmask;
+		}
+
+		if ((w_ipaddr != 0) && 
+			(((l_netmask & w_netmask ) & l_ipaddr) == ((l_netmask & w_netmask ) & w_ipaddr)))
+		{
+			alert("<%484%>");
+			return false;
+		}
+
+		data = cf.pptp_serv_ipaddr.value.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+		if (data && (wan_proto == "pptp"))
+		{
+			pptp_serv_ipaddr = cf.pptp_serv_ipaddr.value.split(".");
+			w_ipaddr = (pptp_serv_ipaddr[0] << 24) | (pptp_serv_ipaddr[1] << 16) | (pptp_serv_ipaddr[2] << 8)| (pptp_serv_ipaddr[3]);
+			w_netmask = l_netmask;
+
+			if ((w_ipaddr != 0) && 
+				(((l_netmask & w_netmask ) & l_ipaddr) == ((l_netmask & w_netmask ) & w_ipaddr)))
+			{
+				alert("<%484%>");
+				return false;
+			}
+		}
+	}
+	cf.sysLANIPAddr1.value = parseInt(cf.sysLANIPAddr1.value,10);
+	cf.sysLANIPAddr2.value = parseInt(cf.sysLANIPAddr2.value,10);
+	cf.sysLANIPAddr3.value = parseInt(cf.sysLANIPAddr3.value,10);
+	cf.sysLANIPAddr4.value = parseInt(cf.sysLANIPAddr4.value,10);
+	cf.sysLANSubnetMask1.value = parseInt(cf.sysLANSubnetMask1.value,10);
+	cf.sysLANSubnetMask2.value = parseInt(cf.sysLANSubnetMask2.value,10);
+	cf.sysLANSubnetMask3.value = parseInt(cf.sysLANSubnetMask3.value,10);
+	cf.sysLANSubnetMask4.value = parseInt(cf.sysLANSubnetMask4.value,10);
+	cf.sysPoolStartingAddr4.value = parseInt(cf.sysPoolStartingAddr4.value,10);
+	cf.sysPoolFinishAddr4.value = parseInt(cf.sysPoolFinishAddr4.value,10);
+	cf.lan_ipaddr.value = cf.sysLANIPAddr1.value+'.'+cf.sysLANIPAddr2.value+'.'+cf.sysLANIPAddr3.value+'.'+cf.sysLANIPAddr4.value;
+	cf.lan_netmask.value = cf.sysLANSubnetMask1.value+'.'+cf.sysLANSubnetMask2.value+'.'+cf.sysLANSubnetMask3.value+'.'+cf.sysLANSubnetMask4.value;
+	cf.dhcp_start.value = cf.sysLANIPAddr1.value+'.'+cf.sysLANIPAddr2.value+'.'+cf.sysLANIPAddr3.value+'.'+cf.sysPoolStartingAddr4.value;
+	cf.dhcp_end.value = cf.sysLANIPAddr1.value+'.'+cf.sysLANIPAddr2.value+'.'+cf.sysLANIPAddr3.value+'.'+cf.sysPoolFinishAddr4.value;
+	if (cf.dhcp_server.checked)
+    {
+        var old_start = cf.dhcp_start_old.value.split(".");
+        var old_end   = cf.dhcp_end_old.value.split(".");       
+        
+        cf.lan_proto.value = "dhcp";
+    }
+	else
+    {
+        cf.lan_proto.value = "static";
+        alert("<%485%>");
+    }
+	checkRip();
+	return true;
+}
+
+function loadSettings()
+{
+	var cf = document.forms[0];
+	var lan_ipaddr = cf.lan_ipaddr.value.split(".");
+	var lan_netmask = cf.lan_netmask.value.split(".");
+	var dhcp_start = cf.dhcp_start.value.split(".");
+	var dhcp_end = cf.dhcp_end.value.split(".");
+	var lan_proto = cf.lan_proto.value;
+	var rip_enable = cf.rip_enable.value;
+	var rip_multicast = cf.rip_multicast.value;
+	var rip_version = cf.rip_version.value;
+
+	cf.sysLANIPAddr1.value = lan_ipaddr[0];
+	cf.sysLANIPAddr2.value = lan_ipaddr[1];
+	cf.sysLANIPAddr3.value = lan_ipaddr[2];
+	cf.sysLANIPAddr4.value = lan_ipaddr[3];
+	cf.sysLANSubnetMask1.value = lan_netmask[0];
+	cf.sysLANSubnetMask2.value = lan_netmask[1];
+	cf.sysLANSubnetMask3.value = lan_netmask[2];
+	cf.sysLANSubnetMask4.value = lan_netmask[3];
+
+	cf.rip_direction.selectedIndex = <%486%> - 1;
+	if (rip_enable == "0")
+		cf.sysRIPVersion.selectedIndex = 0;
+	else
+	if (rip_version == "1")
+		cf.sysRIPVersion.selectedIndex = 1;
+	else
+	if (rip_version == "2")
+	{
+		if (rip_multicast == "0")
+			cf.sysRIPVersion.selectedIndex = 2;
+		else
+			cf.sysRIPVersion.selectedIndex = 3;
+	}
+
+	if (lan_proto == "dhcp")
+		cf.dhcp_server.checked = true;
+	else
+		cf.dhcp_server.checked = false;
+	cf.sysPoolStartingAddr1.value = dhcp_start[0];
+	cf.sysPoolStartingAddr2.value = dhcp_start[1];
+	cf.sysPoolStartingAddr3.value = dhcp_start[2];
+	cf.sysPoolStartingAddr4.value = dhcp_start[3];
+	cf.sysPoolFinishAddr1.value = dhcp_end[0];
+	cf.sysPoolFinishAddr2.value = dhcp_end[1];
+	cf.sysPoolFinishAddr3.value = dhcp_end[2];
+	cf.sysPoolFinishAddr4.value = dhcp_end[3];
+
+	if (cf.repeater.value == "1" || cf.repeater_an.value == "1") {
+		cf.rip_direction.disabled = true;
+		cf.sysRIPVersion.disabled = true;
+		cf.dhcp_server.disabled = true;
+		cf.sysPoolStartingAddr1.disabled = true;
+		cf.sysPoolStartingAddr2.disabled = true;
+		cf.sysPoolStartingAddr3.disabled = true;
+		cf.sysPoolStartingAddr4.disabled = true;
+		cf.sysPoolFinishAddr1.disabled = true;
+		cf.sysPoolFinishAddr2.disabled = true;
+		cf.sysPoolFinishAddr3.disabled = true;
+		cf.sysPoolFinishAddr4.disabled = true;
+		cf.Add.disabled = true;
+		cf.Edit.disabled = true;
+		cf.Delete.disabled = true;
+	}
+}
+
+function checkRip()
+{
+	var cf = document.forms[0];
+
+	if (cf.sysRIPVersion.selectedIndex == 0)
+	{
+		cf.rip_enable.value = "0";
+	}
+	else
+	if (cf.sysRIPVersion.selectedIndex == 1)
+	{
+		cf.rip_enable.value = "1";
+		cf.rip_version.value = "1";
+	}
+	else
+	if (cf.sysRIPVersion.selectedIndex == 2)
+	{
+		cf.rip_enable.value = "1";
+		cf.rip_version.value = "2";
+		cf.rip_multicast.value = "0";
+	}
+	else
+	if (cf.sysRIPVersion.selectedIndex == 3)
+	{
+		cf.rip_enable.value = "1";
+		cf.rip_version.value = "2";
+		cf.rip_multicast.value = "1";
+	}
+}
+    
+function dhcp_update(index)
+{
+    var cf = document.forms[0];
+    switch (index) {
+        case 1:
+            cf.sysPoolStartingAddr1.value=cf.sysLANIPAddr1.value;
+            cf.sysPoolFinishAddr1.value=cf.sysLANIPAddr1.value;
+            break;
+        case 2:
+            cf.sysPoolStartingAddr2.value=cf.sysLANIPAddr2.value;
+            cf.sysPoolFinishAddr2.value=cf.sysLANIPAddr2.value;
+            break;
+        case 3:
+            cf.sysPoolStartingAddr3.value=cf.sysLANIPAddr3.value;
+            cf.sysPoolFinishAddr3.value=cf.sysLANIPAddr3.value;
+            break;
+        case 4:
+            cf.sysPoolStartingAddr3.value=cf.sysLANIPAddr3.value;
+            cf.sysPoolFinishAddr3.value=cf.sysLANIPAddr3.value;
+            break;
+    }
+}
+//-->
+</script> 
+</head>
+<body bgcolor="#ffffff" onload="loadSettings();loadhelp('LAN_lan');document.forms[0].elements[0].focus();">
+<form name="frmLan" method="POST" action="lan.cgi">
+	<table border="0" cellpadding="0" cellspacing="3" width="100%">
+		<tr>
+			<td colspan="2">
+				<h1><%487%></h1> 
+		</td>
+	</tr>
+
+<tr> <!-- RULE -->
+<td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+  <td nowrap><a href="javascript:loadhelp('LAN_lan','dev_name')" tabindex="-1"><b><%273%></b></a></td>
+  <td width="60%" align="right"><INPUT TYPE="text" MAXLENGTH="12" SIZE="24" NAME="device_name" value="<%488%>"></td>
+</tr>
+    
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td nowrap colspan="2"><p><b><a href="javascript:loadhelp('LAN_lan','tcp')" tabindex="-1"><%489%> </a></b></p></td>
+	</tr>
+<tr>
+<td nowrap><%81%></td>
+<td nowrap align="right" class="num">
+    <input type="text" name="sysLANIPAddr1" class="num" size="4" maxlength="3" onChange="dhcp_update(1)">.
+    <input type="text" name="sysLANIPAddr2" class="num" size="4" maxlength="3" onChange="dhcp_update(2)">.
+    <input type="text" name="sysLANIPAddr3" class="num" size="4" maxlength="3" onChange="dhcp_update(3)">.
+    <input type="text" name="sysLANIPAddr4" class="num" size="4" maxlength="3" onChange="dhcp_update(4)"></td>
+</tr>
+<tr>
+<td nowrap><%82%></td>
+<td nowrap align="right" class="num">
+    <input type="text" name="sysLANSubnetMask1" class="num" size="4" maxlength="3" >.
+    <input type="text" name="sysLANSubnetMask2" class="num" size="4" maxlength="3" >.
+    <input type="text" name="sysLANSubnetMask3" class="num" size="4" maxlength="3" >.
+    <input type="text" name="sysLANSubnetMask4" class="num" size="4" maxlength="3" ></td>
+</tr>
+<tr>
+<td nowrap><%490%></td>
+<td align="right">
+    <select name="rip_direction" size="1">
+	<!-- <option value=0>None</option> -->
+        <option value=1><%491%></option>
+        <option value=2><%492%></option>
+        <option value=3><%493%></option>
+    </select></td>
+</tr>
+<tr>
+<td nowrap><%494%></td>
+<td align="right">
+    <select name="sysRIPVersion" size="1">
+	<option><%142%></option>
+	<option><%495%></option>
+	<option><%496%></option>
+	<option><%497%></option>
+    </select></td>
+</tr>
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" nowrap><input type="checkbox" name="dhcp_server" value="dhcp_server"><a href="javascript:loadhelp('LAN_lan','dhcp')" tabindex="-1"><b> <%498%></b> </a> 
+	</td>
+</tr>
+
+<tr>
+<td nowrap><%499%></td>
+<td nowrap align="right" class="num">
+	<input type="text" name="sysPoolStartingAddr1" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolStartingAddr2" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolStartingAddr3" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolStartingAddr4" class="num" size="4" maxlength="3" ></td>
+</tr>
+<tr>
+<td nowrap><%500%></td>
+<td nowrap align="right" class="num">
+	<input type="text" name="sysPoolFinishAddr1" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolFinishAddr2" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolFinishAddr3" class="num" size="4" maxlength="3" disabled="true">.
+	<input type="text" name="sysPoolFinishAddr4" class="num" size="4" maxlength="3" ></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td nowrap colspan="2"><a href="javascript:loadhelp('LAN_lan','reserved')" tabindex="-1"><b><%501%></b></a></td>
+</tr>
+
+<tr>
+<td colspan="2">
+	<table border="1" cellpadding="2" cellspacing="0" width="100%">
+	<tr>
+		<td nowrap align="center" width="6%"><span class="thead"> &nbsp;</span></td>
+		<td nowrap align="center" width="6%"><span class="thead"># </span></td>
+		<td nowrap align="center"><span class="thead"><%81%></span></td>
+		<td nowrap align="center"><span class="thead"><%273%></span></td>
+		<td nowrap align="center"><span class="thead"><%274%></span></td>
+	</tr>
+	<%502%>
+	</table>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+	<input type="Submit" name="Add" value=" <%217%> ">
+	<input type="Submit" name="Edit" value=" <%218%> ">
+	<input type="Submit" name="Delete" value="<%219%>">
+	<input type="hidden" name="select" value="-1">
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center">
+	<input type="SUBMIT" name="action" value="<%93%>" onClick="return checkData()">
+	<input type="BUTTON" name="Cancel" value="<%94%>" onClick="loadSettings();"></td>
+</tr>
+</table>
+  <INPUT name=lan_ipaddr type=hidden value= "<%109%>">
+  <INPUT name=lan_netmask type=hidden value= "<%110%>">
+  <INPUT name=rip_enable type=hidden value= "<%503%>">
+  <INPUT name=rip_multicast type=hidden value= "<%504%>">
+  <INPUT name=rip_version type=hidden value= "<%505%>">
+  <INPUT name=lan_proto type=hidden value= "<%506%>">
+  <INPUT name=dhcp_start type=hidden value= "<%507%>">
+  <INPUT name=dhcp_end type=hidden value= "<%508%>">
+  <INPUT name=dhcp_start_old type=hidden value= "<%507%>">
+  <INPUT name=dhcp_end_old type=hidden value= "<%508%>">
+  <INPUT name=pptp_wan_ipaddr type=hidden value= "<%163%>">
+  <INPUT name=pptp_serv_ipaddr type=hidden value= "<%164%>">
+  <INPUT name=wan_proto type=hidden value= "<%47%>">
+  <INPUT name=wan_ipaddr type=hidden value= "<%99%>">
+  <INPUT name=wan_netmask type=hidden value= "<%100%>">
+  <input type="hidden" name="repeater" value="<%509%>">
+  <input type="hidden" name="repeater_an" value="<%510%>">
+</form>
+<p>
+</p>
+</body>
+</html>
+
+
+

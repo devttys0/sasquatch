@@ -1,0 +1,115 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function ShowResult() {
+	openDataSubWin('DNS_ddns_st.htm','alwaysRaised,dependent,resizable,scrollbars,width=450,height=150,left=200,top=200');
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	if(cf.sysDNSActive.checked)
+	{
+	 msg+= checkBlank(cf.sysDNSHost, "<%280%>");
+	 msg+= checkBlank(cf.sysDNSUser, "<%117%>");
+	 msg+= checkBlank(cf.sysDNSPassword, "<%129%>");
+	}
+
+    if (cf.sysDNSHost.value.match( /[^\x20-\x7E]/ ))
+    {
+		alert("<%281%>");
+		return false;
+	}
+
+    if (cf.sysDNSUser.value.match( /[^\x20-\x7E]/ ))
+    {
+		alert("<%282%>");
+		return false;
+	}
+	
+    if (cf.sysDNSPassword.value.match( /[^\x20-\x7E]/ ))
+    {
+		alert("<%283%>");
+		return false;
+	}
+	
+	if (msg.length > 1)
+	{
+		alert(msg);
+		return false;
+	}
+	return true;
+}
+
+function loadSettings()
+{
+	var cf = document.forms[0];
+	var ddnsEnable = "<%284%>";
+	if (ddnsEnable == "1")
+	    cf.sysDNSActive.checked = true;
+	else
+	    cf.sysDNSActive.checked = false;
+}
+
+//-->
+</script> 
+</head>
+<body bgcolor="#ffffff" onload="loadSettings();loadhelp('DNS_ddns');document.forms[0].elements[0].focus();" onUnload="closeWin(datSubWinVar);" >
+<form method="POST" action="ddns.cgi">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+	<td colspan="2"><h1><%285%></h1></td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2">
+	<input type="checkbox" name="sysDNSActive" value="dnsEnable"> <a href="javascript:loadhelp('DNS_ddns','setup')" tabindex="-1"><b><%286%></b> </a> 
+	</td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+	<td width="50%" align="left" nowrap>
+	<a href="javascript:loadhelp('DNS_ddns','provider')" tabindex="-1"><b><%287%></b></a> 
+	</td>
+	<td width="50%" align="right">
+	<select name="sysDNSProviderlist" size="1"><option selected>www.DynDNS.org</option></select></td>
+</tr>
+<tr>
+	<td width="50%" align="left" nowrap><%280%></td>
+ <td width="50%" align="right"><input type="text" name="sysDNSHost" value = "<%288%>" size="32" maxlength="255"></td>
+</tr>
+<tr>
+	<td width="50%" align="left"><%117%></td>
+	<td width="50%" align="right"><input type="text" name="sysDNSUser" value = "<%289%>" size="32" maxlength="60"></td>
+</tr>
+<tr>
+	<td width="50%" align="left"><%129%></td>
+	<td width="50%" align="right"><input type="password" name="sysDNSPassword" value = "<%290%>" size="32" maxlength="60"></td>
+</tr>
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center">
+	<input type="SUBMIT" name="cfAlert_Apply" value="<%93%>" onClick="return checkData()">
+        <input type="BUTTOn" name="Cancel" value="<%94%>" onClick="reset();loadSettings();"> 
+	<input type="button" name="Button" value="<%291%>" onClick="ShowResult()"></td>
+</tr>
+</table>
+</form>
+<p>
+</p>
+</body>
+</html>
+

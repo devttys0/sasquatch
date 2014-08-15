@@ -1,0 +1,164 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function chgSel_df(index)
+{
+	var cf = document.forms[0];
+	cf.df_sel.value = index;
+	cf.custom_sel.value = -1;
+}
+function chgSel(index)
+{
+	var cf = document.forms[0];
+	cf.custom_sel.value = index;
+	cf.df_sel.value = -1;
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+	var timeout = cf.fwpt_timeout.value;
+	if (cf.fwpt_timeout.value.length == 0 || !_isNumeric(timeout) || timeout <= 0 ||
+		cf.fwpt_timeout.value.match ( /^0/ ))
+	{
+		alert("<%1113%>");
+		return false;
+	}
+	else
+	{
+		cf.fwpt_timeout.value = parseInt(cf.fwpt_timeout.value,10);
+	}
+	return true;
+}
+function doTypeChange(newIndex)
+{
+	var cf = document.forms[0];
+	if (newIndex == 0)
+		location.href = "FW_forward.htm";
+	else if (newIndex == 1)
+		location.href = "FW_pt.htm";
+}
+
+function srvAction(index)
+{
+    var cf = document.forms[0];
+    var count = cf.policyCount.value;
+    cf.Add.value = "";
+    cf.Edit.value = "";
+    cf.Delete.value = "";
+    cf.Apply.value = "";
+    switch (index) {
+        case 1:
+            if (count == 20)
+            {
+                alert("<%1114%>");
+                return false;
+            }
+            cf.Add.value = "Add";
+            break;
+        case 2:
+            cf.Edit.value = "Edit";
+            break;
+        case 3:
+            cf.Delete.value = "Delete";
+            break;
+        default:
+            break;
+    }
+    cf.submit();
+}
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="loadhelp('FW_pt');">
+<form name="formname" method="POST" action="fwpt.cgi" onSubmit="return checkData();">
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+	<td colspan="2" align='left'><h1><%333%></h1></td>
+</tr>
+
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<p><tabindex="-1"><b><%334%></b></a></p></td>
+</tr>
+<tr>
+<td colspan="2"><input type="radio" name="serv_type" value="pf" onClick="doTypeChange(0)"><%335%></td>
+</tr>
+<tr>
+<td colspan="2"><input type="radio" checked name="serv_type" value="pt" onClick="doTypeChange(1)"><%336%></td>
+</tr>
+
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr><td nowrap width="46%"><input type="checkbox" name="fwpt_enable" value="1" <%1115%>><B><tabindex=-1><%1116%></a></B></td>
+<td nowrap width="54%"></td></tr>
+<tr></tr>
+<tr>
+<td nowrap width="46%"><B><a href="javascript:loadhelp('FW_pt','pt_timeout')" tabindex=-1><%1117%></a></B><%872%></td>
+<td nowrap width="54%" align="right"><input type="text" class="num" name="fwpt_timeout" size="5" maxlength="4" value="<%1118%>" onFocus="this.select();" ></td>
+</tr>
+
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+ <td colspan="2"><b><tabindex=-1><%1119%></a></b></td>
+</tr>
+
+<tr>
+<td colspan="2">
+<table border ="1" cellpadding ="0" cellspacing ="0" width="100%">
+<TR>
+	<td nowrap width="3%" align="center"><span class="thead">&nbsp;</span></td>
+	<td nowrap width="3%" align="center"><span class="thead">#</span></td>
+	<td nowrap align="center"><span class="thead"><%143%></span></td>
+	<td nowrap align="center"><span class="thead"><%338%></span></td>
+	<td nowrap align="center"><span class="thead"><%213%></span></td>
+	<td nowrap align="center"><span class="thead"><%1120%></span></td>
+	<td nowrap align="center"><span class="thead"><%1121%></span></td></tr>
+</TR> 
+	<%1122%>
+</table>
+</td>
+</tr>
+
+<tr><td colspan="2" align="center" height="35" valign="bottom">
+<input type="button" name="srvAdd" value="<%1123%>" onclick="srvAction(1);">
+<input type="button" name="srvEdit" value="  <%344%>  " onclick="srvAction(2);">
+<input type="button" name="srvDelete" value="<%345%>" onclick="srvAction(3);">
+</td></tr>
+
+<tr><!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<input type="submit" name="srvApply" value="  <%93%>  ">
+<input type="reset" name="cancel" value="<%94%>">
+</td>
+</tr>
+</TABLE> 
+<input type="hidden" name="df_sel" value="-1">
+<input type="hidden" name="custom_sel" value="-1">
+<input type=hidden name=Add value="">
+<input type=hidden name=Edit value="">
+<input type=hidden name=Delete value="">
+<input type=hidden name=Apply value="Apply">
+<input type=hidden name=policyCount value="<%1124%>">
+</form>
+</body>
+</html>
+
+

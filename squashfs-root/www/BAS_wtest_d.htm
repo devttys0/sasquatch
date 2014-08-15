@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>NETGEAR Router <%11%></title>
+<META HTTP-EQUIV="Refresh" CONTENT="2">
+<%10%>
+<link rel="stylesheet" href="form.css">
+<script language=JavaScript type="text/javascript">
+<!--
+function changepage()
+{
+	var cf = document.forms[0];
+	if (cf.testOK.value == "true")
+		window.setTimeout("window.location.replace('http://www.netgear.com/success/<%48%>')",2000);
+	else
+		window.setTimeout("window.location.replace('BAS_wtest_d.htm')",2500);        
+}
+//-->
+</script>
+</head>
+
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text=black onLoad="changepage()">
+<form method="post" action="wtest_d.cgi">
+<div align="center">
+<br>
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+	<td colspan="2" align="center"><b><%49%></b></td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2" align="left">
+ <%50%>
+ </td></tr>
+
+ <tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+ 
+ <tr>
+ <td colspan="2" align="center"><BR>
+ <input type=button name="close" value=<%51%> onclick="self.close()"></td>
+</tr>
+</table>
+ 
+</div>
+
+<input type="hidden" name="testOK" value="<%52%><%53%>">
+
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,262 @@
+<html>
+<head>
+<%10%>
+<link rel="stylesheet" href="form.css">
+<title>NETGEAR Router <%11%></title>
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+var isIE = document.all;
+var disable = false;
+var serv_array=[<%221%>];
+function init_data()
+{
+ var cf = document.forms[0];
+ //which_mode 0:means add a service 1:means edit a service
+ cf.apply.value = (pi(cf.which_mode.value) == 1)?"<%222%>":"<%217%>";
+ chg_by_service(1);
+ filterIPtype();
+}
+function chg_by_service(is_load)
+{
+ var cf = document.forms[0];
+ var s = cf.service_type.selectedIndex;
+ var len = cf.service_type.options.length;
+ if(s<0)
+ {
+ s = cf.service_type.selectedIndex = 0;
+ }
+ disable = (pi(serv_array[s][4])==1)?true:false;
+ cf.protocol.selectedIndex = pi(serv_array[s][0]);
+ cf.portstart.value = serv_array[s][1];
+ cf.portend.value = serv_array[s][2];
+ cf.userdefined.value = serv_array[s][3];
+ if(isIE)
+ {
+ cf.protocol.disabled = disable; 
+ cf.portstart.disabled = disable;
+ cf.portend.disabled = disable;
+ cf.userdefined.disabled = disable;
+ }
+}
+function iptypeSel(F)
+{
+ var i;
+ for(i=0;i<F.iptype.length;i++)
+ {
+ if(F.iptype[i].checked)
+ return i;
+ }
+}
+function filterIPtype()
+{
+ var cf = document.forms[0];
+ var sel = iptypeSel(cf);
+ 
+ if(sel==0)
+ {
+ cf.f_pcip1.focus();
+ }
+ else if(sel==1)
+ {
+ cf.f_startip1.focus();
+ }
+ else if(sel==2)
+ {
+ cf.apply.focus();
+ }
+}
+function valid(obj1,v)
+{
+ if(document.forms[0].iptype[pi(v)].checked==false)
+ {
+ obj1.blur();
+ }
+}
+function check_data()
+{
+ var cf = document.forms[0];
+ var sel = iptypeSel(cf);
+ var txt,i,c;
+ if(cf.portstart.value==""||cf.portend.value=="")
+   return alertR("<%223%>");
+ txt=cf.portstart.value;
+ for(i=0;i<txt.length;i++)
+ {
+   c=txt.charAt(i);
+   if("0123456789".indexOf(c,0)<0)
+     return alertR("<%224%>");
+ }
+ txt=cf.portend.value;
+ for(i=0;i<txt.length;i++)
+ {
+   c=txt.charAt(i);
+   if("0123456789".indexOf(c,0)<0)
+     return alertR("<%225%>");
+ }
+ if(parseInt(cf.portstart.value,10)<1||parseInt(cf.portstart.value,10)>65535)
+   return alertR("<%224%>");
+ if(parseInt(cf.portend.value,10)<1||parseInt(cf.portend.value,10)>65535)
+   return alertR("<%225%>");
+ if(parseInt(cf.portend.value,10)<parseInt(cf.portstart.value,10))
+   return alertR("<%226%>");
+ txt=cf.userdefined.value;
+ if(txt==""||txt.match( /[^\x20-\x7E]/ ))
+   return alertR("<%227%>");
+
+ cf.portstart.value = parseInt(cf.portstart.value,10);
+ cf.portend.value = parseInt(cf.portend.value,10);
+
+ var str_lan_ip = "<%109%>";
+ var str_lan_netmask = "<%110%>";
+ var lan_ip = str_lan_ip.split(".");
+ var lan_netmask = str_lan_netmask.split(".");
+ var lan_ipaddr = (lan_ip[0] << 24) | (lan_ip[1] << 16) | (lan_ip[2] << 8)| (lan_ip[3]);
+ var lan_netmaskaddr = (lan_netmask[0] << 24) | (lan_netmask[1] << 16) | (lan_netmask[2] << 8)| (lan_netmask[3]);
+ var pcip_addr = (cf.f_pcip1.value << 24) | (cf.f_pcip2.value << 16) | (cf.f_pcip3.value << 8)| cf.f_pcip4.value;
+ var start_ipaddr = (cf.f_startip1.value << 24) | (cf.f_startip2.value << 16) | (cf.f_startip3.value << 8)| cf.f_startip4.value;
+ var end_ipaddr = (cf.f_endip1.value << 24) | (cf.f_endip2.value << 16) | (cf.f_endip3.value << 8)| cf.f_endip4.value;
+ if((sel==0)&&((checkIP(cf.f_pcip1,cf.f_pcip2,cf.f_pcip3,cf.f_pcip4,254)||parseInt(cf.f_pcip4.value,10)==0)
+            ||((pcip_addr & lan_netmaskaddr) != (lan_ipaddr & lan_netmaskaddr) )))
+ 	return alertR(msg_invalid_ip);
+ else if(sel==0)
+ {
+ 	cf.f_pcip1.value = parseInt(cf.f_pcip1.value,10);
+	cf.f_pcip2.value = parseInt(cf.f_pcip2.value,10);
+	cf.f_pcip3.value = parseInt(cf.f_pcip3.value,10);
+	cf.f_pcip4.value = parseInt(cf.f_pcip4.value,10);
+ }
+ if((sel==1)&&(checkIP(cf.f_startip1,cf.f_startip2,cf.f_startip3,cf.f_startip4,254)||checkIP(cf.f_endip1,cf.f_endip2,cf.f_endip3,cf.f_endip4,254)||(parseInt(cf.f_startip4.value,10)==0)
+            ||((start_ipaddr & lan_netmaskaddr) != (lan_ipaddr & lan_netmaskaddr))||((end_ipaddr & lan_netmaskaddr) != (lan_ipaddr & lan_netmaskaddr))))
+	return alertR(msg_invalid_ip);
+ else if(sel==1)
+ {
+ 	cf.f_startip1.value = parseInt(cf.f_startip1.value,10);
+	cf.f_startip2.value = parseInt(cf.f_startip2.value,10);
+	cf.f_startip3.value = parseInt(cf.f_startip3.value,10);
+	cf.f_startip4.value = parseInt(cf.f_startip4.value,10);
+ }
+ if((sel==1)&&(cp_ip(cf.f_endip1,cf.f_endip2,cf.f_endip3,cf.f_endip4,cf.f_startip1,cf.f_startip2,cf.f_startip3,cf.f_startip4)==false))
+	return alertR("<%228%>");
+ else if(sel==1)
+ {
+ 	cf.f_endip1.value = parseInt(cf.f_endip1.value,10);
+	cf.f_endip2.value = parseInt(cf.f_endip2.value,10);
+	cf.f_endip3.value = parseInt(cf.f_endip3.value,10);
+	cf.f_endip4.value = parseInt(cf.f_endip4.value,10);
+ }
+ return true;
+}
+//-->
+</script> 	
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="init_data();loadhelp('BKS_service_add')">
+<%229%>			
+	<form name="formname" method="POST" action="fw_serv_edit.cgi">
+<%230%>			
+<%231%>			
+	<form name="formname" method="POST" action="pppoe2_fw_serv_edit.cgi">
+<%232%>			
+		<div align="center">
+			<center>
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+		<tr>
+			<td colspan="2">
+				<h1><%233%></h1>
+			</td>
+		</tr>
+		
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+</table>
+<table border ="0" cellpadding ="0" cellspacing ="0" width="100%">
+<tr>
+ <td width="50%"><%213%></td>
+						
+ <td width="50%"> 
+ <select NAME="service_type" size="1" onchange="chg_by_service(0);">
+ <%251%></select></td>
+</tr>
+<tr>
+ <td width="50%"><%235%></td>
+ <td width="50%"> 
+ <select name="protocol" size="1" onfocus="if(disable) this.blur();"><option selected><%236%></option><option><%237%></option><option><%238%></option></select>
+	</td>
+</tr>
+<tr>
+ <td width="50%"><%239%></td>
+ <td width="50%"> 
+ <input type="text" name="portstart" size="7" maxlength="5" value="" onfocus="if(disable) this.blur();">(1~65535)
+	</td>
+</tr>
+<tr>
+ <td width="50%"><%240%></td>
+ <td width="50%"> 
+ <input type="text" name="portend" size="7" maxlength="5" value="" onfocus="if(disable) this.blur();">(1~65535)
+	</td>
+</tr>
+<tr>
+ <td width="50%" nowrap><%241%>&nbsp;</td>
+ <td width="50%"> 
+ <input type="text" name="userdefined" size="20" maxlength="30" value="" onfocus="if(disable) this.blur();">
+ </td>
+</tr>
+</table>
+<table border ="0" cellpadding ="0" cellspacing ="0" width="100%">
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+<tr>
+	<td colspan="2"><a href="javascript:loadhelp('BKS_service_add','ip')" tabindex="-1"><b><%242%> :</b></td>
+</tr>
+</table>
+<table border ="0" cellpadding ="0" cellspacing ="0" width="100%">
+<tr>
+ <td width="50%" align="left" valign="top" nowrap> 
+ <input type="radio" <%252%> name="iptype" value="single" onclick="filterIPtype()"><%243%> :</td>
+	<td width="50%" align="left" nowrap>					
+			<input type="text" class="Num" name="f_pcip1" size="4" maxlength="3" value="<%253%>" onfocus="valid(this,0);">.
+			<input type="text" class="Num" name="f_pcip2" size="4" maxlength="3" value="<%254%>" onfocus="valid(this,0);">.
+			<input type="text" class="Num" name="f_pcip3" size="4" maxlength="3" value="<%255%>" onfocus="valid(this,0);">.
+			<input type="text" class="Num" name="f_pcip4" size="4" maxlength="3" value="<%256%>" onfocus="valid(this,0);"></td>
+</tr>		
+<tr>
+	<td width="50%" align="left" nowrap valign="top"><br>
+			<input type="radio" <%257%> name="iptype" value="range_addr" onclick="filterIPtype()"><%247%>:</td>
+	<td width="50%" align="left" nowrap valign="top"><BR>
+			<input type="text" class="Num" name="f_startip1" size="4" maxlength="3" value="<%258%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_startip2" size="4" maxlength="3" value="<%259%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_startip3" size="4" maxlength="3" value="<%260%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_startip4" size="4" maxlength="3" value="<%261%>" onfocus="valid(this,1);"></td>
+</tr>
+<tr>
+	<td width="50%" align="right"><%248%>&nbsp;</td>
+	<td width="50%" align="left" nowrap>
+			<input type="text" class="Num" name="f_endip1" size="4" maxlength="3" value="<%262%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_endip2" size="4" maxlength="3" value="<%263%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_endip3" size="4" maxlength="3" value="<%264%>" onfocus="valid(this,1);">.
+			<input type="text" class="Num" name="f_endip4" size="4" maxlength="3" value="<%265%>" onfocus="valid(this,1);"></td>
+</tr>
+<tr>
+	<td colspan="2"><input type="radio" <%266%> name="iptype" value="all" onclick="filterIPtype()"><%249%></td>
+</tr>
+
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td>
+</tr>
+</table>
+<input type="submit" name="apply" value=" <%217%> " onclick="return check_data();">
+<input type="button" name="cancel" value=<%94%> onClick="location.href='BKS_service.htm'">
+<input type="hidden" name="which_mode" value="1">
+			</center>
+		</div>
+	</form>
+</body>
+</html>
+

@@ -1,0 +1,83 @@
+<html>
+<head>
+<%10%>
+
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<script language="javascript" type="text/javascript">
+<!-- hide script from old browsers
+function loadhelp(fname,anchname) {
+
+if ((loadhelp.arguments.length == 1 ) || (anchname == "" ))
+	top.helpframe.location.href=fname+"_h.htm";
+else
+	top.helpframe.location.href=fname+"_h.htm#" + anchname;
+}
+function setVerCheck()
+{
+	var cf = document.forms[0];
+	if (cf.disable.checked)
+		cf.ver_check_enable.value = 0;
+	else
+		cf.ver_check_enable.value = 1;
+}
+function goTestApply()
+{
+	var cf = document.forms[0];
+	var winoptions = "width=640,height=480,menubar=yes,toolbar=yes,status=yes,location=yes,resizable=yes";;
+	if(cf.runtest.value == "yes")
+	{
+		if (cf.wan_proto.value == "pppoe" || cf.wan_proto.value == "pptp" || cf.wan_proto.value == "l2tp")
+			window.open('BAS_wtest_l.htm','test_win',winoptions);
+		else
+			window.open('BAS_wtest_d.htm','test_win',winoptions);
+	}
+}
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff" onLoad="loadhelp('VER_sel','');document.forms[0].Yes.focus();goTestApply();">
+<form name="formname" method="POST" action="ver_sel.cgi"> 
+<table border="0" cellpadding="0" cellspacing="3" width="100%">
+<tr>
+<td colspan="2">
+	<h1><%1148%></H1>
+</td>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+
+<tr>
+	<td colspan="2"><b><%1162%></b></td>
+</tr>
+<tr></tr>
+<tr>
+	<td colspan="2"><b><%1163%></b></td>
+</tr>
+<tr></tr>
+<tr>
+	<td colspan="2"><input type="checkbox" name="disable" value="1" onClick="setVerCheck();"><%606%></td></tr>
+<tr>
+</tr>
+<tr>
+</tr>
+
+<tr> <!-- RULE -->
+ <td colspan="2" background="liteblue.gif" height="12"> &nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+		<input type="SUBMIT" name="Yes" value=" <%43%> ">
+		<input type="SUBMIT" name="No" value="  <%44%>  ">
+	</td></tr>
+</table>
+<input type="hidden" name="ver_check_enable" value="1">
+<input type="hidden" name="runtest" value="<%98%>">
+<INPUT name=wan_proto type=hidden value= "<%47%>">
+</form>
+<p></p>
+</body>
+</html>
+

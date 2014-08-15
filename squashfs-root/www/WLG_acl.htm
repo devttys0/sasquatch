@@ -1,0 +1,104 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title> 
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function loadhelp(fname,anchname)
+{
+    if ((loadhelp.arguments.length == 1 ) || (anchname == "" ))
+        top.helpframe.location.href=fname+"_h"+".htm";
+    else
+        top.helpframe.location.href=fname+"_h"+".htm#" + anchname;
+}
+
+function init_data()
+{
+ document.forms[0].macaddr.value =""
+}
+function valid_add()
+{
+ if(document.forms[0].MacSelect && parseInt(document.forms[0].MacSelect.length)==64)
+ {
+   alert("<%1071%>");
+   return false;
+ }
+ return true;
+}
+function valid_edit(type)
+//type:0 edit 1: delete
+{
+ var cf = document.forms[0];
+ if(cf.macaddr.value.length == 0)//not select
+ {
+ if(type == 0)
+ alert("<%1072%>");
+ else if(type == 1)
+ alert("<%1073%>"); 
+ return false;
+ }
+ return true;
+}
+function selmac(v)
+{
+ document.forms[0].macaddr.value = v;
+}
+function seldev(v)
+{
+ document.forms[0].devicename.value = v;
+}
+function showWpsAlert()
+{
+    var cf = document.forms[0];
+    if(cf.show_wps_alert.value == "1")
+        alert("<%955%>");
+}
+//-->
+</SCRIPT>
+
+</HEAD>
+<BODY bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="init_data();loadhelp('WLG_acl');showWpsAlert();">
+<FORM action="wlan_acl.cgi" method="post" name="formname">
+  <table border="0" cellpadding="0" cellspacing="3" width="100%">
+    <TR>
+      <TD align="left" nowrap><h1><%1067%></h1></TD></TR>
+    <tr> <!-- RULE -->
+      <td background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <TR>
+      <TD align="left" nowrap><input type="checkbox" name="accessLimit" value="1" <%1074%> ><a href="javascript:loadhelp('WLG_acl','control')" tabindex="-1"><b><%1075%></b></a></td></tr>
+    <tr> <!-- RULE -->
+      <td background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td align="center">
+        <!--access table //-->
+        <table border="1" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td nowrap width="10%" align="center"><span class="thead">&nbsp;</span></td>
+            <td nowrap width="45%" align="center"><span class="thead"><%273%></span></td>
+            <td nowrap width="45%" align="center"><span class="thead"><%274%></span></td></tr>
+          <%1076%></table>
+        <!--access table //--></td></tr>
+    <TR>
+      <TD nowrap align=center>
+        <input type="submit" name="add" value=" <%217%> " onclick="return(valid_add());"> 
+        <input type="submit" name="edit" value="<%218%>" onclick="return(valid_edit(0));"> 
+        <input type="submit" name="delete" value="<%219%>" onclick="return(valid_edit(1));"></td></tr> 
+    <tr> <!-- RULE -->
+      <td background="liteblue.gif" height="12">&nbsp; </td></tr>
+    <tr>
+      <td align="center"> 
+        <input type="submit" name="apply" value="<%93%>">
+        <input type="button" name="cancel" value="<%94%>" onClick="location.href='<%557%>'"></TD></TR></TABLE>
+  <input type="hidden" name="macaddr" value="">
+  <input type="hidden" name="devicename" value="">
+  <input type="hidden" name="show_wps_alert" value="<%1026%>">
+</form>
+</BODY>
+</HTML>

@@ -1,0 +1,277 @@
+<html>
+<head>
+<%10%>
+<title>NETGEAR Router <%11%></title>
+<link rel="stylesheet" href="form.css">
+<STYLE TYPE="text/javascript">
+	classes.num.all.fontFamily = "Courier";
+	classes.num.all.fontSize = "10pt" ;
+</style>
+<%28%>
+<script language="javascript" type="text/javascript">
+<!--
+function checkRemoteMG()
+{
+	var cf = document.forms[0];
+
+	if(cf.remote_mg_enable.checked)
+		cf.http_rmenable.value = 1;
+	else
+		cf.http_rmenable.value = 0;
+
+	if(cf.rm_access[1].checked) /* range of IP */
+	{
+		if (checkIP(cf.start_ip_1, cf.start_ip_2, cf.start_ip_3, cf.start_ip_4, 254))
+		{
+			alert("<%386%>");
+			return false;
+		}
+		else if (checkIP(cf.fin_ip_1, cf.fin_ip_2, cf.fin_ip_3, cf.fin_ip_4, 254))
+		{
+			alert("<%387%>");
+			return false;
+		}
+		else if (cp_ip(cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4))
+		{
+			alert("<%388%>");
+			return false;
+		}
+		else
+		{
+			cf.start_ip_1.value = parseInt(cf.start_ip_1.value,10);
+			cf.start_ip_2.value = parseInt(cf.start_ip_2.value,10);
+			cf.start_ip_3.value = parseInt(cf.start_ip_3.value,10);
+			cf.start_ip_4.value = parseInt(cf.start_ip_4.value,10);
+			cf.fin_ip_1.value = parseInt(cf.fin_ip_1.value,10);
+			cf.fin_ip_2.value = parseInt(cf.fin_ip_2.value,10);
+			cf.fin_ip_3.value = parseInt(cf.fin_ip_3.value,10);
+			cf.fin_ip_4.value = parseInt(cf.fin_ip_4.value,10);
+			cf.http_rmstartip.value = cf.start_ip_1.value+'.'+cf.start_ip_2.value+'.'+cf.start_ip_3.value+'.'+cf.start_ip_4.value;
+			cf.http_rmendip.value = cf.fin_ip_1.value+'.'+cf.fin_ip_2.value+'.'+cf.fin_ip_3.value+'.'+cf.fin_ip_4.value;
+		}
+	}
+	else if(cf.rm_access[0].checked) /* a specific IP */
+	{
+		var local_ip = cf.local_ip_1.value+'.'+cf.local_ip_2.value+'.'+cf.local_ip_3.value+'.'+cf.local_ip_4.value;
+		if (checkIP(cf.local_ip_1, cf.local_ip_2, cf.local_ip_3, cf.local_ip_4, 254)||(parseInt(cf.local_ip_4.value,10) ==0)
+			|| (cf.http_wanipaddr.value == local_ip))
+		{
+			alert("<%9%>");
+			return false;
+		}
+		else
+		{
+			cf.local_ip_1.value = parseInt(cf.local_ip_1.value,10);
+			cf.local_ip_2.value = parseInt(cf.local_ip_2.value,10);
+			cf.local_ip_3.value = parseInt(cf.local_ip_3.value,10);
+			cf.local_ip_4.value = parseInt(cf.local_ip_4.value,10);
+			cf.http_rmstartip.value = local_ip;
+			cf.http_rmendip.value = cf.http_rmstartip.value;
+		}
+	}
+	else /* everyone */
+	{
+		cf.http_rmstartip.value = "0.0.0.0";
+		cf.http_rmendip.value = "255.255.255.255";
+	}
+	if(isNaN(cf.http_rmport.value) || !_isNumeric(cf.http_rmport.value)||
+	   parseInt(cf.http_rmport.value,10) < 1024 ||
+	   parseInt(cf.http_rmport.value,10) > 65535 ||
+	   cf.http_rmport.value.indexOf(".") != -1)
+	{
+	    alert("<%389%>");
+	    cf.http_rmport.focus();
+	    return false;
+	}
+	else
+		cf.http_rmport.value = parseInt(cf.http_rmport.value,10);
+	return true;
+}
+
+function init()
+{
+    var cf = document.forms[0];
+    var dflag; 
+
+	if (cf.http_rmenable.value == 1)
+		cf.remote_mg_enable.checked = true;
+
+	if ((cf.http_rmstartip.value == "0.0.0.0") && (cf.http_rmendip.value == "255.255.255.255")) /* everyone */
+	{
+		cf.rm_access[2].checked = true;		
+		dflag = cf.rm_access[2].checked;
+		setDisabled(dflag,cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4);
+        setDisabled(dflag,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4);
+        setDisabled(dflag,cf.local_ip_1,cf.local_ip_2,cf.local_ip_3,cf.local_ip_4);
+	}
+	else if (cf.http_rmstartip.value == cf.http_rmendip.value) /* a specific IP */
+	{
+		var startip = cf.http_rmstartip.value.split(".");
+
+		cf.rm_access[0].checked = true;		
+		dflag = cf.rm_access[0].checked;
+		setDisabled(dflag,cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4);
+        setDisabled(dflag,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4);
+        
+		cf.local_ip_1.value = startip[0];
+		cf.local_ip_2.value = startip[1];
+		cf.local_ip_3.value = startip[2];
+    	cf.local_ip_4.value = startip[3];
+	}
+	else /* range of IP */
+	{
+		var startip = cf.http_rmstartip.value.split(".");
+		var endip = cf.http_rmendip.value.split(".");
+
+		cf.rm_access[1].checked = true;
+		dflag = cf.rm_access[1].checked;
+		setDisabled(dflag,cf.local_ip_1,cf.local_ip_2,cf.local_ip_3,cf.local_ip_4);
+		
+    	cf.start_ip_1.value = startip[0];
+    	cf.start_ip_2.value = startip[1];
+    	cf.start_ip_3.value = startip[2];
+    	cf.start_ip_4.value = startip[3];
+    	cf.fin_ip_1.value = endip[0];
+    	cf.fin_ip_2.value = endip[1];
+    	cf.fin_ip_3.value = endip[2];
+    	cf.fin_ip_4.value = endip[3];
+	}
+}
+
+function clearData1()
+{
+	var cf = document.forms[0];
+	
+    var dflag = cf.rm_access[2].checked;
+    setDisabled(dflag,cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4);
+    setDisabled(dflag,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4);
+    setDisabled(dflag,cf.local_ip_1,cf.local_ip_2,cf.local_ip_3,cf.local_ip_4);
+    
+	cf.start_ip_1.value = "";
+	cf.start_ip_2.value = "";
+	cf.start_ip_3.value = "";
+	cf.start_ip_4.value = "";
+	cf.fin_ip_1.value = "";
+	cf.fin_ip_2.value = "";
+	cf.fin_ip_3.value = "";
+   	cf.fin_ip_4.value = "";
+	cf.local_ip_1.value = "";
+	cf.local_ip_2.value = "";
+	cf.local_ip_3.value = "";
+	cf.local_ip_4.value = "";
+}
+
+function clearData2()
+{
+	var cf = document.forms[0];
+	
+	var dflag = cf.rm_access[1].checked;
+    setDisabled(dflag,cf.local_ip_1,cf.local_ip_2,cf.local_ip_3,cf.local_ip_4);
+    dflag = false;
+    setDisabled(dflag,cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4);
+    setDisabled(dflag,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4);
+
+	cf.local_ip_1.value = "";
+	cf.local_ip_2.value = "";
+	cf.local_ip_3.value = "";
+	cf.local_ip_4.value = "";
+}
+
+function clearData3()
+{
+	var cf = document.forms[0];
+	
+    var dflag = cf.rm_access[0].checked;
+    setDisabled(dflag,cf.start_ip_1,cf.start_ip_2,cf.start_ip_3,cf.start_ip_4);
+    setDisabled(dflag,cf.fin_ip_1,cf.fin_ip_2,cf.fin_ip_3,cf.fin_ip_4);
+    dflag = false;
+    setDisabled(dflag,cf.local_ip_1,cf.local_ip_2,cf.local_ip_3,cf.local_ip_4);
+    
+	cf.start_ip_1.value = "";
+	cf.start_ip_2.value = "";
+	cf.start_ip_3.value = "";
+	cf.start_ip_4.value = "";
+	cf.fin_ip_1.value = "";
+	cf.fin_ip_2.value = "";
+	cf.fin_ip_3.value = "";
+   	cf.fin_ip_4.value = "";
+}
+
+//-->
+</script>
+</head>
+<body bgcolor="#ffffff" onload="loadhelp('FW_remote');init();document.forms[0].elements[0].focus();">
+<form name="remotemg" action="fwRemote.cgi" method="post">
+	<table border="0" cellpadding="0" cellspacing="3" width="100%">
+		<tr>
+			<td colspan="2">
+				<h1><%390%></h1></td></tr>
+        <tr>
+            <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+        <tr>
+            <td nowrap colspan="2">
+                <input type="checkbox"  name="remote_mg_enable" value="remote_mg"><a href="javascript:loadhelp('FW_remote','turnon')" tabindex="-1"><b><%391%></b></a></td></tr>
+        <tr>
+            <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+        <tr>
+            <td nowrap colspan="2"><a href="javascript:loadhelp('FW_remote','address')" tabindex="-1"><b><%392%>:</b></a></td></tr>
+        <tr>
+            <td nowrap colspan="2"><%393%></td></tr>
+        <tr>
+            <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+        <tr>
+            <td valign="top" colspan="2"><A href="javascript:loadhelp('FW_remote','access')" tabindex="-1"><B><%394%>:</b></a></td></tr>
+        <tr>
+            <td nowrap width="50%">
+                <input type="radio" name="rm_access" value="ip_single" onClick="clearData3()"> <%395%>:</td>
+            <td nowrap width="50%" align="right" class="num">
+                <input type="text" class="num" size="4" maxlength="3" name="local_ip_1" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="local_ip_2" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="local_ip_3" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="local_ip_4" value=""></td></tr>
+        <tr>
+            <td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td nowrap>
+                <input type="radio" name="rm_access" value="ip_range" onClick="clearData2()"> <%247%>:</td>
+            <td nowrap align="right"><%396%> <span class="num">
+                <input type="text" class="num" size="4" maxlength="3" name="start_ip_1" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="start_ip_2" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="start_ip_3" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="start_ip_4" value=""></span></td></tr>
+        <tr>
+            <td nowrap>&nbsp;</td>
+            <td nowrap align="right"> <%397%> <span class="num">
+                <input type="text" class="num" size="4" maxlength="3" name="fin_ip_1" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="fin_ip_2" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="fin_ip_3" value="">.
+                <input type="text" class="num" size="4" maxlength="3" name="fin_ip_4" value=""></span></td></tr>
+        <tr>
+            <td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td nowrap colspan="2">
+                <input type="radio"  checked name="rm_access" value="all" onClick="clearData1()"> <%398%></td></tr>
+        <tr>
+            <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+        <tr>
+            <td nowrap><a href="javascript:loadhelp('FW_remote','port')" tabindex="-1"><b><%399%>:</b></a></td>
+            <td nowrap align="right">
+                <input type="text" class="num" name="http_rmport" value="<%400%>" size=6 maxlength=5></td></tr>
+        <tr>
+            <td colspan="2" background="liteblue.gif" height="12">&nbsp; </td></tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="apply" value="<%93%>" onclick="if(!checkRemoteMG()) return false;">
+                <input type="button" name="Cancel" value="<%94%>" onclick="location.reload()"></td></tr>
+    </table>
+    <INPUT name=http_rmenable type=hidden value= "<%401%>">
+    <INPUT name=http_rmstartip type=hidden value= "<%402%>">
+    <INPUT name=http_rmendip type=hidden value= "<%403%>">
+    <INPUT name=http_wanipaddr type=hidden value= "<%404%>">
+</form>
+<p>
+</p>
+</body>
+</html>
+
+
