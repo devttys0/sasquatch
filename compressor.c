@@ -147,6 +147,7 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
 
     if(comp->uncompress)
     {
+        if(!compression_type_printed) ERROR("Trying to decompress with %s...\n", comp->name);
         retval = comp->uncompress(dest, src, size, block_size, error);
     }
 
@@ -160,7 +161,7 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
             comp = compressor[i];
             if(comp->id != current_compressor_id && comp->uncompress)
             {
-                TRACE("Trying to decompress with %s...\n", comp->name);
+                if(!compression_type_printed) ERROR("Trying to decompress with %s...\n", comp->name);
                 retval = comp->uncompress(dest, src, size, block_size, error);
                 if(retval > 0)
                 {

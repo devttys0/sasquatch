@@ -192,9 +192,10 @@ again:
 
 		res = compressor_uncompress(comp, buffer->data, data, size,
 			block_size, &error);
-		if(res == -1)
-			BAD_ERROR("%s uncompress failed with error code %d\n",
-				comp->name, error);
+        // CJH: Decompression errors are displayed elsewhere
+		//if(res == -1)
+		//	BAD_ERROR("%s uncompress failed with error code %d\n",
+		//		comp->name, error);
 	} else if(compressed_buffer)
 		memcpy(buffer->data, compressed_buffer->data, size);
 	else {

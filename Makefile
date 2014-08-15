@@ -79,6 +79,7 @@ LZMA_DIR = $(LZMA_BASE_DIR)/lzma465
 # CJH: Added these too...
 LZMA_BRCM_DIR = $(LZMA_BASE_DIR)/brcm-lzma
 LZMA_SQLZMA_DIR = $(LZMA_BASE_DIR)/sqlzma/C/Compress/Lzma
+LZMA_WRT_DIR = $(LZMA_BASE_DIR)/lzmawrt/C/7zip/Compress/LZMA_Lib
 
 ######## Specifying default compression ########
 #
@@ -112,8 +113,7 @@ XATTR_DEFAULT = 1
 #        End of BUILD options section         #
 ###############################################
 
-# CJH: Added LZMA/sqlzma
-INCLUDEDIR = -I. -ILZMA/sqlzma
+INCLUDEDIR = -I.
 INSTALL_DIR = /usr/local/bin
 
 MKSQUASHFS_OBJS = mksquashfs.o read_fs.o action.o swap.o pseudo.o compressor.o \
@@ -139,11 +139,12 @@ COMPRESSORS += gzip
 endif
 
 ifeq ($(LZMA_SUPPORT),1)
-# CJH: Added -lunlzma
-LIBS += -L$(LZMA_SQLZMA_DIR) -lunlzma
+# CJH: Added -lunlzma, -llzmawrt
+LIBS += -L$(LZMA_SQLZMA_DIR) -L$(LZMA_WRT_DIR) -lunlzma -llzmawrt
 LZMA_OBJS = $(LZMA_DIR)/C/Alloc.o $(LZMA_DIR)/C/LzFind.o \
 	$(LZMA_DIR)/C/LzmaDec.o $(LZMA_DIR)/C/LzmaEnc.o $(LZMA_DIR)/C/LzmaLib.o
-INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_BRCM_DIR) -I$(LZMA_SQLZMA_DIR)
+# CJH: Added LZMA variant directories
+INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_BRCM_DIR) -I$(LZMA_SQLZMA_DIR) -ILZMA/sqlzma -I$(LZMA_WRT_DIR)
 CFLAGS += -DLZMA_SUPPORT
 MKSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
 UNSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
@@ -278,8 +279,8 @@ caches-queues-lists.o: caches-queues-lists.c error.h caches-queues-lists.h
 
 gzip_wrapper.o: gzip_wrapper.c squashfs_fs.h gzip_wrapper.h compressor.h
 
-# CJH: Added brcm-lzma and sqlzma
-lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h brcm-lzma sqlzma
+# CJH: Added brcm-lzma, sqlzma, lzmawrt
+lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h brcm-lzma sqlzma lzmawrt
 
 lzma_xz_wrapper.o: lzma_xz_wrapper.c compressor.h squashfs_fs.h
 
@@ -312,17 +313,20 @@ unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h
 
 unsquashfs_info.o: unsquashfs.h squashfs_fs.h
 
-# CJH: Added brcm-lzma, sqlzma
-.PHONY: brcm-lzma sqlzma
+# CJH: Added brcm-lzma, sqlzma, lzmawrt
+.PHONY: brcm-lzma sqlzma lzmawrt
 brcm-lzma:
 	make -C $(LZMA_BRCM_DIR)
 sqlzma:
 	cd $(LZMA_SQLZMA_DIR) && make -f sqlzma.mk
+lzmawrt:
+	make -C $(LZMA_WRT_DIR)
 
 # CJH: Added brcm-lzma, sqlzma
 .PHONY: clean
 clean:
 	-rm -f *.o mksquashfs unsquashfs sasquatch
+	make -C $(LZMA_WRT_DIR) clean
 	make -C $(LZMA_BRCM_DIR) clean
 	cd $(LZMA_SQLZMA_DIR) && make -f sqlzma.mk clean
 
