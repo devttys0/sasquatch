@@ -209,6 +209,8 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
 
     for(i=0; (i<LZMA_VARIANTS_COUNT && retval < 1); i++)
     {
+        ERROR("Trying LZMA variant #%d\n", lzma_variants[i]);
+
         switch(lzma_variants[i])
         {
             case LZMA_STANDARD:
@@ -224,7 +226,7 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
 
         if(retval > 0 && detected_lzma_variant == -1)
         {
-            ERROR("Detected LZMA variation #%d\n", lzma_variants[i]);
+            ERROR("Detected LZMA variant #%d\n", lzma_variants[i]);
             detected_lzma_variant = lzma_variants[i];
         }
     }

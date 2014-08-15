@@ -131,6 +131,7 @@ int sqlzma_un(struct sqlzma_un *un, struct sized_buf *src,
 		err = 0;
 
  out:
+/* CJH: Don't print warnings
 	if (unlikely(err)) {
 #ifdef __KERNEL__
 		WARN_ON_ONCE(1);
@@ -148,6 +149,7 @@ int sqlzma_un(struct sqlzma_un *un, struct sized_buf *src,
 		fprintf(stderr, "%s: %.*s\n", __func__, sizeof(a), a);
 #endif
 	}
+*/
 	return err;
 }
 
