@@ -330,7 +330,17 @@ extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
 		new NCompress::NLZMA::CDecoder;
 	CMyComPtr<ICompressCoder> decoder = decoderSpec;
 
-    // CJH: This is how DD-WRT does it, but this fails badly on non-DDWRT images	
+    /*
+     * CJH: DD-WRT encodes the LZMA properties into the beginning of each compressed block.
+     *      Sanity check these values to prevent errors in the LZMA library.
+     */
+    if((unsigned int) source[1] > 4 ||
+       (unsigned int) source[2] > 4 ||
+       (unsigned int) source[0] > 8)
+    {
+        return Z_DATA_ERROR;
+    }
+
 	if (decoderSpec->SetDecoderPropertiesRaw(source[1], 
 		source[2], source[0], (1 << 23)) != S_OK) return Z_DATA_ERROR;
 	

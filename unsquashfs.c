@@ -725,7 +725,10 @@ int read_block(int fd, long long start, long long *next, int expected,
 	 * is of the expected size
 	 */
 	if(expected && expected != res)
+    {
+        ERROR("Decompressed size did not match the expected size! [%d != %d]\n", res, expected);
 		return 0;
+    }
 	else
 		return res;
 
