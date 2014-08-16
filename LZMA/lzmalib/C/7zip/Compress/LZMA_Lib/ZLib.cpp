@@ -31,6 +31,11 @@
 #define ZLIB_LP 0
 #define ZLIB_PB 2
 
+// CJH: Taken from E2100 squashfs implementation
+#define ZLIB_LC_E2100 0
+#define ZLIB_LP_E2100 0
+#define ZLIB_PB_E2100 2
+
 #ifdef WIN32
 #include <initguid.h>
 #else
@@ -271,7 +276,7 @@ extern "C" int lzmalib_uncompress OF((Bytef *dest,   uLongf *destLen,
 	
 	if (decoder->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
 	{
-		return Z_DATA_ERROR;
+        return Z_DATA_ERROR;
 	}
 	
 	outStreamSpec->Seek(0, STREAM_SEEK_END, &fileSize);
@@ -280,6 +285,35 @@ extern "C" int lzmalib_uncompress OF((Bytef *dest,   uLongf *destLen,
 	return Z_OK;
 }
 
+// CJH: A decompressor used by some Linksys SquashFS images
+extern "C" int lzmalinksys_uncompress OF((Bytef *dest,   uLongf *destLen,
+                                   const Bytef *source, uLong sourceLen))
+{
+	CInMemoryStream *inStreamSpec = new CInMemoryStream(source, sourceLen);
+	CMyComPtr<ISequentialInStream> inStream = inStreamSpec;
+	
+	COutMemoryStream *outStreamSpec = new COutMemoryStream(dest, *destLen);
+	CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
+	
+	NCompress::NLZMA::CDecoder *decoderSpec = 
+		new NCompress::NLZMA::CDecoder;
+	CMyComPtr<ICompressCoder> decoder = decoderSpec;
+	
+	if (decoderSpec->SetDecoderPropertiesRaw(ZLIB_LC_E2100, 
+		ZLIB_LP_E2100, ZLIB_PB_E2100, (1 << 23)) != S_OK) return Z_DATA_ERROR;
+	
+	UInt64 fileSize = *destLen;
+	
+	if (decoder->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
+	{
+        return Z_DATA_ERROR;
+	}
+	
+	outStreamSpec->Seek(0, STREAM_SEEK_END, &fileSize);
+	*destLen = fileSize;
+	
+	return Z_OK;
+}
 
 // CJH: A decompressor for LZMA DD-WRT SquashFS images
 extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,

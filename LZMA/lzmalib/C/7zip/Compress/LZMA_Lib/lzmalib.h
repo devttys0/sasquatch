@@ -6,5 +6,6 @@
 int lzmalib_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
 int lzmawrt_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
 int lzma7z_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
+int lzmalinksys_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
 
 #endif
