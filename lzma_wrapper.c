@@ -174,8 +174,9 @@ struct lzma_props
     int lp;
     int pb;
     int offset;
+    int detected;
 };
-struct lzma_props properties = { .lc=4, .lp=4, .pb=4, .offset=0 };
+struct lzma_props properties = { 0 };
 static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int lc, lp, pb, i;
@@ -184,25 +185,28 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
 
     expected_outsize = outsize;
 
-    retval = lzmaspec_uncompress((Bytef *) dest, 
-                                 (uLongf *) &outsize, 
-                                 (const Bytef *) src, 
-                                 (uLong) size,
-                                 properties.lc,
-                                 properties.lp,
-                                 properties.pb,
-                                 properties.offset);
-    
-    if(retval == 0)
+    if(properties.detected)
     {
-        return outsize;
+        retval = lzmaspec_uncompress((Bytef *) dest, 
+                                     (uLongf *) &outsize, 
+                                     (const Bytef *) src, 
+                                     (uLong) size,
+                                     properties.lc,
+                                     properties.lp,
+                                     properties.pb,
+                                     properties.offset);
+    
+        if(retval == 0)
+        {
+            return outsize;
+        }
     }
 
     for(lc=0; lc<=4; lc++)
     {
         for(lp=0; lp<=4; lp++)
         {
-            for(pb=0; pb<=4; pb++)
+            for(pb=0; pb<=8; pb++)
             {
                 for(i=0; i<4; i++)
                 {
@@ -222,8 +226,9 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                         properties.lp = lp;
                         properties.pb = pb;
                         properties.offset = offsets[i];
-
-                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
+                        properties.detected = 1;
+                        
+                        ERROR("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
                                                                                                properties.lp,
                                                                                                properties.pb,
                                                                                                properties.offset);
