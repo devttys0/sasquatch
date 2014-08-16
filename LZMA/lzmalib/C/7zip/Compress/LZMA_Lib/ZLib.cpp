@@ -312,3 +312,37 @@ extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
 	
 	return Z_OK;
 }
+
+// CJH: A decompressor for "squashfs7z" images
+extern "C" int lzma7z_uncompress OF((Bytef *dest,   uLongf *destLen,
+                                   const Bytef *source, uLong sourceLen))
+{
+    // CJH: This variation encodes the properties values + size into the first nine bytes
+	CInMemoryStream *inStreamSpec = new CInMemoryStream(source+9, sourceLen-9);
+	CMyComPtr<ISequentialInStream> inStream = inStreamSpec;
+	
+	COutMemoryStream *outStreamSpec = new COutMemoryStream(dest, *destLen);
+	CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
+	
+	NCompress::NLZMA::CDecoder *decoderSpec = 
+		new NCompress::NLZMA::CDecoder;
+	CMyComPtr<ICompressCoder> decoder = decoderSpec;
+
+    // CJH: This variation uses SetDecoderProperties2
+	//if (decoderSpec->SetDecoderPropertiesRaw(source[1], 
+	//	source[2], source[0], (1 << 23)) != S_OK) return Z_DATA_ERROR;
+    if (decoderSpec->SetDecoderProperties2(source+4, 5) != S_OK)
+                return Z_DATA_ERROR;
+
+	UInt64 fileSize = *destLen;
+	
+	if (decoder->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
+	{
+		return Z_DATA_ERROR;
+	}
+	
+	outStreamSpec->Seek(0, STREAM_SEEK_END, &fileSize);
+	*destLen = fileSize;
+	
+	return Z_OK;
+}

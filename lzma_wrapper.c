@@ -41,8 +41,9 @@
 #define LZMA_7Z             2
 #define LZMA_SQLZMA         3
 #define LZMA_LIB            4
-#define LZMA_WRT            5   // CJH: This should always be tried last, it seems very buggy (segfaults, infinite loops)
-#define LZMA_VARIANTS_COUNT LZMA_WRT
+#define LZMA_LIB_7Z         5
+#define LZMA_LIB_WRT        6   // CJH: This should always be tried last, it seems very buggy (segfaults, infinite loops)
+#define LZMA_VARIANTS_COUNT LZMA_LIB_WRT
 
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
@@ -233,6 +234,26 @@ int lzma_lib_uncompress(void *dest, void *src, int size, int outsize, int *error
     return retval;
 }
 
+// CJH: lzmalib 7z varient decompressor
+int lzma_lib_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int retval = -1;
+
+    if((retval = lzma7z_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
+    {
+        *error = retval;
+        retval = -1;
+        TRACE("lzmalib7z_uncompress failed with error code %d\n", *error);
+    }
+    else
+    {
+        TRACE("lzmalib7z_uncompress succeeded: [%d] [%d]\n", retval, outsize);
+        retval = outsize;
+    }
+    
+    return retval;
+}
+
 // CJH: A decompression wrapper for the various LZMA versions
 int detected_lzma_variant = -1;
 static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
@@ -270,11 +291,14 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
             case LZMA_SQLZMA:
                 retval = sqlzma_uncompress(dest, src, size, outsize, error);
                 break;
-            case LZMA_WRT:
+            case LZMA_LIB_WRT:
                 retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
                 break;
             case LZMA_LIB:
                 retval = lzma_lib_uncompress(dest, src, size, outsize, error);
+                break;
+            case LZMA_LIB_7Z:
+                retval = lzma_lib_7z_uncompress(dest, src, size, outsize, error);
                 break;
         }
 
