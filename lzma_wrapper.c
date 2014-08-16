@@ -29,24 +29,18 @@
 
 // CJH: Added these includes
 #include <stdio.h>
-#include <string.h>
 #include "error.h"
+#include "7z.h"
 #include "lzmalib.h"
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
 // CJH: LZMA variant list
 #define LZMA_STANDARD       1
-#define LZMA_LIB_WRT        2
-#define LZMA_LIB_ADAPTIVE   3
-/*
-#define LZMA_7Z             3
-#define LZMA_SQLZMA         4
-#define LZMA_LIB            5
-#define LZMA_LIB_7Z         6
-#define LZMA_LIB_LINKSYS    2
-*/
-#define LZMA_VARIANTS_COUNT 3
+#define LZMA_7Z             2
+#define LZMA_WRT            3   
+#define LZMA_ADAPTIVE       4
+#define LZMA_VARIANTS_COUNT LZMA_ADAPTIVE
 
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
@@ -135,131 +129,112 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
 	}
 }
 
+// CJH: lzma_7z variant decompressor
+int lzma_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int retval = -1;
+
+    if((retval = decompress_lzma_7z((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
+    {
+        *error = retval;
+        TRACE("decompress_lzma_7z failed with error code %d\n", *error);
+        return -1;
+    }
+    else
+    {
+        TRACE("decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
+        return outsize;
+    }
+}
+
 // CJH: lzmawrt varient decompressor
 extern int ddwrt_squash_image;
 int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
-    // This decompressor is specific to DD-WRT and is rather fragile. Only use it if a DD-WRT image has been detected.
-    if(ddwrt_squash_image || 1 == 1)
+    if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
     {
-        if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
-        {
-            *error = retval;
-            retval = -1;
-            TRACE("lzmawrt_uncompress failed with error code %d\n", *error);
-        }
-        else
-        {
-            TRACE("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
-            retval = outsize;
-        }
+        *error = retval;
+        retval = -1;
+        TRACE("lzmawrt_uncompress failed with error code %d\n", *error);
+    }
+    else
+    {
+        TRACE("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
+        retval = outsize;
     }
 
     return retval;
 }
 
-/*
- * CJH: An adaptive LZMA decompressor.
- * TODO: This function can't reliably tell if it's successful or not; this logic needs to be placed
- *       higher up in the call chain.
- */
 struct lzma_props
 {
     int lc;
     int lp;
     int pb;
     int offset;
-    int detected;
 };
-struct lzma_props properties = { 0 };
+struct lzma_props properties = { .lc=4, .lp=4, .pb=4, .offset=0 };
 static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int lc, lp, pb, i;
-    char *outbuf = NULL;
     int offsets[4] = {0, 4, 5, 9};
     int retval = -1, expected_outsize = 0;
 
     expected_outsize = outsize;
 
-    if(!properties.detected && expected_outsize != SQUASHFS_METADATA_SIZE)
+    retval = lzmaspec_uncompress((Bytef *) dest, 
+                                 (uLongf *) &outsize, 
+                                 (const Bytef *) src, 
+                                 (uLong) size,
+                                 properties.lc,
+                                 properties.lp,
+                                 properties.pb,
+                                 properties.offset);
+    
+    if(retval == 0)
     {
-        ERROR("Attempting to auto-detect LZMA compression settings for data of size %d\n", expected_outsize);
+        return outsize;
+    }
 
-        outbuf = malloc(expected_outsize*2);
-        if(outbuf)
+    for(lc=0; lc<=4; lc++)
+    {
+        for(lp=0; lp<=4; lp++)
         {
-            for(lc=0; lc<=8 && !properties.detected; lc++)
+            for(pb=0; pb<=4; pb++)
             {
-                for(lp=0; lp<=4 && !properties.detected; lp++)
+                for(i=0; i<4; i++)
                 {
-                    for(pb=0; pb<=4 && !properties.detected; pb++)
+                    outsize = expected_outsize;
+                    retval = lzmaspec_uncompress((Bytef *) dest, 
+                                                 (uLongf *) &outsize, 
+                                                 (const Bytef *) src, 
+                                                 (uLong) size,
+                                                 lc,
+                                                 lp,
+                                                 pb,
+                                                 offsets[i]);
+
+                    if(retval == 0)
                     {
-                        for(i=0; i<4 && !properties.detected; i++)
-                        {
-                            outsize = expected_outsize*2;
-                            retval = lzmaspec_uncompress((Bytef *) outbuf, 
-                                                         (uLongf *) &outsize, 
-                                                         (const Bytef *) src, 
-                                                         (uLong) size,
-                                                         lc,
-                                                         lp,
-                                                         pb,
-                                                         offsets[i]);
+                        properties.lc = lc;
+                        properties.lp = lp;
+                        properties.pb = pb;
+                        properties.offset = offsets[i];
 
-                            if(retval == 0 && expected_outsize == outsize)
-                            {
-                                properties.lc = lc;
-                                properties.lp = lp;
-                                properties.pb = pb;
-                                properties.offset = offsets[i];
-                                properties.detected = 1;
-
-                                ERROR("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
-                                                                                                       properties.lp,
-                                                                                                       properties.pb,
-                                                                                                       properties.offset);
-                            }
-                        }
+                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
+                                                                                               properties.lp,
+                                                                                               properties.pb,
+                                                                                               properties.offset);
+                        return outsize;
                     }
                 }
             }
         }
-        else
-        {
-            perror("malloc");
-            return -1;
-        }
     }
 
-    if(properties.lc == 0 &&
-       properties.lp == 0 &&
-       properties.pb == 0)
-    {
-        ERROR("Adaptive FAIL\n");
-    }
-    else
-    {
-        retval = lzmaspec_uncompress((Bytef *) dest, 
-                                     (uLongf *) &outsize, 
-                                     (const Bytef *) src, 
-                                     (uLong) size,
-                                     properties.lc,
-                                     properties.lp,
-                                     properties.pb,
-                                     properties.offset);
-    
-        if(retval == 0)
-        {
-            return outsize;
-        }
-        else
-        {
-            *error = retval;
-        }
-    }
-
+    *error = retval;
     return -1;
 }
 
@@ -294,32 +269,18 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
             case LZMA_STANDARD:
                 retval = standard_lzma_uncompress(dest, src, size, outsize, error);
                 break;
-            case LZMA_LIB_WRT:
-                retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
-                break;
-            /*
             case LZMA_7Z:
                 retval = lzma_7z_uncompress(dest, src, size, outsize, error);
                 break;
-            case LZMA_SQLZMA:
-                retval = sqlzma_uncompress(dest, src, size, outsize, error);
+            case LZMA_WRT:
+                retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
                 break;
-            case LZMA_LIB:
-                retval = lzma_lib_uncompress(dest, src, size, outsize, error);
-                break;
-            case LZMA_LIB_LINKSYS:
-                retval = lzma_lib_linksys_uncompress(dest, src, size, outsize, error);
-                break;
-            case LZMA_LIB_7Z:
-                retval = lzma_lib_7z_uncompress(dest, src, size, outsize, error);
-                break;
-            */
-            case LZMA_LIB_ADAPTIVE:
+            case LZMA_ADAPTIVE:
                 retval = lzma_adaptive_uncompress(dest, src, size, outsize, error);
                 break;
         }
 
-        if(retval > 0 && detected_lzma_variant == -1)
+        if(retval > 0 && detected_lzma_variant != lzma_variants[i])
         {
             detected_lzma_variant = lzma_variants[i];
             ERROR("Detected LZMA variant #%d\n", detected_lzma_variant);

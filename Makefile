@@ -76,7 +76,8 @@ LZMA_SUPPORT = 1
 # CJH: Added LZMA_BASE_DIR
 LZMA_BASE_DIR = ./LZMA
 LZMA_DIR = $(LZMA_BASE_DIR)/lzma465
-# CJH: Added this too
+# CJH: Added these too...
+LZMA_BRCM_DIR = $(LZMA_BASE_DIR)/brcm-lzma
 LZMA_LIB_DIR = $(LZMA_BASE_DIR)/lzmalib/C/7zip/Compress/LZMA_Lib
 
 ######## Specifying default compression ########
@@ -137,16 +138,18 @@ COMPRESSORS += gzip
 endif
 
 ifeq ($(LZMA_SUPPORT),1)
-# CJH: Added -lunlzma, -llzmalib
+# CJH: Added -llzmalib
 LIBS += -L$(LZMA_LIB_DIR) -llzmalib 
 LZMA_OBJS = $(LZMA_DIR)/C/Alloc.o $(LZMA_DIR)/C/LzFind.o \
 	$(LZMA_DIR)/C/LzmaDec.o $(LZMA_DIR)/C/LzmaEnc.o $(LZMA_DIR)/C/LzmaLib.o
-# CJH: Added LZMA_LIB_DIR
-INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_LIB_DIR)
+# CJH: Added LZMA variant directories
+INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_BRCM_DIR) -I$(LZMA_LIB_DIR)
 CFLAGS += -DLZMA_SUPPORT
 MKSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
 UNSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
 COMPRESSORS += lzma
+# CJH: Added LZMA_EXTRA_OBJS
+LZMA_EXTRA_OBJS = $(LZMA_BRCM_DIR)/*.o
 endif
 
 ifeq ($(LZMA_XZ_SUPPORT),1)
@@ -233,8 +236,9 @@ endif
 # CJH: Made sasquatch the default target
 all: sasquatch 
 
+# CJH: Added LZMA_EXTRA_OBJS
 mksquashfs: $(MKSQUASHFS_OBJS)
-	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(MKSQUASHFS_OBJS) $(LIBS) -o $@
+	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(LZMA_EXTRA_OBJS) $(MKSQUASHFS_OBJS) $(LIBS) -o $@
 
 mksquashfs.o: Makefile mksquashfs.c squashfs_fs.h squashfs_swap.h mksquashfs.h \
 	sort.h pseudo.h compressor.h xattr.h action.h error.h progressbar.h \
@@ -274,8 +278,8 @@ caches-queues-lists.o: caches-queues-lists.c error.h caches-queues-lists.h
 
 gzip_wrapper.o: gzip_wrapper.c squashfs_fs.h gzip_wrapper.h compressor.h
 
-# CJH: Added lzmalib
-lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h lzmalib
+# CJH: Added brcm-lzma, sqlzma, lzmalib
+lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h brcm-lzma sqlzma lzmalib
 
 lzma_xz_wrapper.o: lzma_xz_wrapper.c compressor.h squashfs_fs.h
 
@@ -285,12 +289,13 @@ lz4_wrapper.o: lz4_wrapper.c squashfs_fs.h lz4_wrapper.h compressor.h
 
 xz_wrapper.o: xz_wrapper.c squashfs_fs.h xz_wrapper.h compressor.h
 
+# CJH: Added LZMA_EXTRA_OBJS
 unsquashfs: $(UNSQUASHFS_OBJS)
-	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
+	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LZMA_EXTRA_OBJS) $(LIBS) -o $@
 
 # CJH: Added sasquatch target
 sasquatch: $(UNSQUASHFS_OBJS)
-	$(CXX) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
+	$(CXX) $(LDFLAGS) $(EXTRA_LDFLAGS) $(LZMA_EXTRA_OBJS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
 
 unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
 	squashfs_compat.h xattr.h read_fs.h compressor.h
@@ -308,16 +313,19 @@ unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h
 
 unsquashfs_info.o: unsquashfs.h squashfs_fs.h
 
-# CJH: Added lzmalib
-.PHONY: lzmalib
+# CJH: Added brcm-lzma, lzmalib
+.PHONY: brcm-lzma sqlzma
+brcm-lzma:
+	make -C $(LZMA_BRCM_DIR)
 lzmalib:
 	make -C $(LZMA_LIB_DIR)
 
-# CJH: Added lzmalib
+# CJH: Added brcm-lzma, lzmalib
 .PHONY: clean
 clean:
 	-rm -f *.o mksquashfs unsquashfs sasquatch
 	make -C $(LZMA_LIB_DIR) clean
+	make -C $(LZMA_BRCM_DIR) clean
 
 .PHONY: install
 install: mksquashfs unsquashfs
