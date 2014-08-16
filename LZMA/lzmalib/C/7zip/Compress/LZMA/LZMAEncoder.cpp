@@ -1136,7 +1136,7 @@ HRESULT CEncoder::GetOptimumFast(UInt32 position, UInt32 &backRes, UInt32 &lenRe
   if (repLens[repMaxIndex] >= 2)
   {
     if (repLens[repMaxIndex] + 1 >= lenMain || 
-        repLens[repMaxIndex] + 2 >= lenMain && (backMain > (1<<12)))
+        (repLens[repMaxIndex] + 2 >= lenMain && (backMain > (1<<12))))
     {
       backRes = repMaxIndex;
       lenRes = repLens[repMaxIndex];

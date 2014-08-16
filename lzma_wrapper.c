@@ -29,9 +29,8 @@
 
 // CJH: Added these includes
 #include <stdio.h>
+#include <string.h>
 #include "error.h"
-#include "7z.h"
-#include "sqlzma.h"
 #include "lzmalib.h"
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
@@ -136,63 +135,6 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
 	}
 }
 
-// CJH: lzma_7z variant decompressor
-int lzma_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int retval = -1;
-
-    if((retval = decompress_lzma_7z((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
-    {
-        *error = retval;
-        TRACE("decompress_lzma_7z failed with error code %d\n", *error);
-        return -1;
-    }
-    else
-    {
-        TRACE("decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
-        return outsize;
-    }
-}
-
-// CJH: sqlzma variant decompressor
-struct sqlzma_un un = { 0 };
-int sqlzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int retval = -1;
-
-    if(!un.un_lzma)
-    {
-        un.un_lzma = 1;
-        if(sqlzma_init(&un, un.un_lzma, 0) != 0)
-        {
-            ERROR("sqlzma_init failed!\n");
-            un.un_lzma = 0;
-        }
-    }
-
-    if(un.un_lzma)
-    {
-        enum {Src, Dst};
-        struct sized_buf sbuf[] = {
-                    {.buf = (void *)src, .sz = size},
-                    {.buf = (void *)dest, .sz = outsize}
-        };
-        
-        if((retval = sqlzma_un(&un, sbuf+Src, sbuf+Dst)) != 0)
-        {
-            *error = retval;
-            TRACE("sqlzma_un failed with error code %d\n", *error);
-        }
-        else
-        {
-            TRACE("sqlzma_un succeeded in decompressing %d bytes!\n", (int) un.un_reslen);
-            return un.un_reslen;
-        }
-    }
-
-    return -1;
-}
-
 // CJH: lzmawrt varient decompressor
 extern int ddwrt_squash_image;
 int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
@@ -215,66 +157,6 @@ int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error
         }
     }
 
-    return retval;
-}
-
-// CJH: lzmalib varient decompressor
-int lzma_lib_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int retval = -1;
-
-    if((retval = lzmalib_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
-    {
-        *error = retval;
-        retval = -1;
-        TRACE("lzmalib_uncompress failed with error code %d\n", *error);
-    }
-    else
-    {
-        TRACE("lzmalib_uncompress succeeded: [%d] [%d]\n", retval, outsize);
-        retval = outsize;
-    }
-    
-    return retval;
-}
-
-// CJH: lzmalib 7z varient decompressor
-int lzma_lib_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int retval = -1;
-
-    if((retval = lzma7z_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
-    {
-        *error = retval;
-        retval = -1;
-        TRACE("lzmalib7z_uncompress failed with error code %d\n", *error);
-    }
-    else
-    {
-        TRACE("lzmalib7z_uncompress succeeded: [%d] [%d]\n", retval, outsize);
-        retval = outsize;
-    }
-    
-    return retval;
-}
-
-// CJH: lzmalib linksys varient decompressor
-int lzma_lib_linksys_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int retval = -1;
-
-    if((retval = lzmalinksys_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
-    {
-        *error = retval;
-        retval = -1;
-        TRACE("lzmalinksys_uncompress failed with error code %d\n", *error);
-    }
-    else
-    {
-        TRACE("lzmalinksys_uncompress succeeded: [%d] [%d]\n", retval, outsize);
-        retval = outsize;
-    }
-    
     return retval;
 }
 
