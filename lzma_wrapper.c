@@ -43,8 +43,9 @@
 #define LZMA_LIB            4
 #define LZMA_LIB_7Z         5
 #define LZMA_LIB_LINKSYS    6
-#define LZMA_LIB_WRT        7   // CJH: This should always be tried last, it seems very buggy (segfaults, infinite loops)
-#define LZMA_VARIANTS_COUNT LZMA_LIB_WRT
+#define LZMA_LIB_ADAPTIVE   7
+//#define LZMA_LIB_WRT        8   // CJH: This should always be tried last, it seems very buggy (segfaults, infinite loops)
+#define LZMA_VARIANTS_COUNT 7
 
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
@@ -275,6 +276,77 @@ int lzma_lib_linksys_uncompress(void *dest, void *src, int size, int outsize, in
     return retval;
 }
 
+// CJH: An adaptive LZMA decompressor
+struct lzma_props
+{
+    int lc;
+    int lp;
+    int pb;
+    int offset;
+};
+struct lzma_props properties = { .lc=4, .lp=4, .pb=4, .offset=0 };
+static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize, int *error)
+{
+    int lc, lp, pb, i;
+    int offsets[4] = {0, 4, 5, 9};
+    int retval = -1, expected_outsize = 0;
+
+    expected_outsize = outsize;
+
+    retval = lzmaspec_uncompress((Bytef *) dest, 
+                                 (uLongf *) &outsize, 
+                                 (const Bytef *) src, 
+                                 (uLong) size,
+                                 properties.lc,
+                                 properties.lp,
+                                 properties.pb,
+                                 properties.offset);
+    
+    if(retval == 0)
+    {
+        return outsize;
+    }
+
+    for(lc=0; lc<=4; lc++)
+    {
+        for(lp=0; lp<=4; lp++)
+        {
+            for(pb=0; pb<=4; pb++)
+            {
+                for(i=0; i<4; i++)
+                {
+                    outsize = expected_outsize;
+                    retval = lzmaspec_uncompress((Bytef *) dest, 
+                                                 (uLongf *) &outsize, 
+                                                 (const Bytef *) src, 
+                                                 (uLong) size,
+                                                 lc,
+                                                 lp,
+                                                 pb,
+                                                 offsets[i]);
+
+                    if(retval == 0)
+                    {
+                        properties.lc = lc;
+                        properties.lp = lp;
+                        properties.pb = pb;
+                        properties.offset = offsets[i];
+
+                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
+                                                                                               properties.lp,
+                                                                                               properties.pb,
+                                                                                               properties.offset);
+                        return outsize;
+                    }
+                }
+            }
+        }
+    }
+
+    *error = retval;
+    return -1;
+}
+
 // CJH: A decompression wrapper for the various LZMA versions
 int detected_lzma_variant = -1;
 static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
@@ -288,7 +360,7 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
         i++;
     }
 
-    for(k=LZMA_STANDARD; i<LZMA_VARIANTS_COUNT; i++,k++)
+    for(k=1; i<LZMA_VARIANTS_COUNT; i++,k++)
     {
         if(k == detected_lzma_variant)
         {
@@ -312,17 +384,22 @@ static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *er
             case LZMA_SQLZMA:
                 retval = sqlzma_uncompress(dest, src, size, outsize, error);
                 break;
+            /*
             case LZMA_LIB_WRT:
                 retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
                 break;
+            */
             case LZMA_LIB:
                 retval = lzma_lib_uncompress(dest, src, size, outsize, error);
+                break;
+            case LZMA_LIB_LINKSYS:
+                retval = lzma_lib_linksys_uncompress(dest, src, size, outsize, error);
                 break;
             case LZMA_LIB_7Z:
                 retval = lzma_lib_7z_uncompress(dest, src, size, outsize, error);
                 break;
-            case LZMA_LIB_LINKSYS:
-                retval = lzma_lib_linksys_uncompress(dest, src, size, outsize, error);
+            case LZMA_LIB_ADAPTIVE:
+                retval = lzma_adaptive_uncompress(dest, src, size, outsize, error);
                 break;
         }
 

@@ -380,3 +380,33 @@ extern "C" int lzma7z_uncompress OF((Bytef *dest,   uLongf *destLen,
 	
 	return Z_OK;
 }
+
+// CJH: A decompressor used for brute forcing commonly modified LZMA fields
+extern "C" int lzmaspec_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen, int lc, int lp, int pb, int offset))
+{
+	CInMemoryStream *inStreamSpec = new CInMemoryStream(source+offset, sourceLen-offset);
+	CMyComPtr<ISequentialInStream> inStream = inStreamSpec;
+	
+	COutMemoryStream *outStreamSpec = new COutMemoryStream(dest, *destLen);
+	CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
+	
+	NCompress::NLZMA::CDecoder *decoderSpec = 
+		new NCompress::NLZMA::CDecoder;
+	CMyComPtr<ICompressCoder> decoder = decoderSpec;
+	
+	if (decoderSpec->SetDecoderPropertiesRaw(lc, 
+		lp, pb, (1 << 23)) != S_OK) return Z_DATA_ERROR;
+	
+	UInt64 fileSize = *destLen;
+	
+	if (decoder->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
+	{
+        return Z_DATA_ERROR;
+	}
+	
+	outStreamSpec->Seek(0, STREAM_SEEK_END, &fileSize);
+	*destLen = fileSize;
+	
+	return Z_OK;
+}
+
