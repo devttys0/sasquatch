@@ -2844,7 +2844,9 @@ options:
 				"regular expressions\n");
 			ERROR("\t\t\t\trather than use the default shell "
 				"wildcard\n\t\t\t\texpansion (globbing)\n");
-            // CJH: Added -comp, -be, -le, -major, -minor and lzma options help output
+            // CJH: Added -comp, -be, -le, -major, -minor, -trace and lzma options help output
+            ERROR("\n");
+            ERROR("\t-trace\t\t\tEnable verbose trace output\n");
             ERROR("\t-lc <value>\t\tSet the lzma-adaptive lc parameter [0-4]\n");
             ERROR("\t-lp <value>\t\tSet the lzma-adaptive lp parameter [0-4]\n");
             ERROR("\t-pb <value>\t\tSet the lzma-adaptive pb parameter [0-8]\n");
