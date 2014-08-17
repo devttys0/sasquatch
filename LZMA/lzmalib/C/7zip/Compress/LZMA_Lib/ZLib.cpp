@@ -25,6 +25,7 @@
  * default values for encoder/decoder used by wrapper
  */
 
+#include <stdio.h>
 #include <zlib.h>
 
 #define ZLIB_LC 3
@@ -373,12 +374,9 @@ extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
      * CJH: DD-WRT encodes the LZMA properties into the beginning of each compressed block.
      *      Sanity check these values to prevent errors in the LZMA library.
      */
-    if((unsigned int) source[1] == 0 &&
-       (unsigned int) source[2] == 0 &&
-       (unsigned int) source[0] == 0)
-    {
-        return Z_DATA_ERROR;
-    }
+     //printf("WRT properties: %d %d %d\n", (unsigned int) source[1],
+     //                                     (unsigned int) source[2],
+     //                                     (unsigned int) source[0]);
     if((unsigned int) source[1] > 4 ||
        (unsigned int) source[2] > 4 ||
        (unsigned int) source[0] > 4 ||

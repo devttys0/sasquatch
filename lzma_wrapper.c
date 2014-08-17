@@ -174,14 +174,6 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
 {
     int lc, lp, pb, i, offset;
     int retval = -1, expected_outsize = 0;
-    /*
-     * Sometimes the LZMA data doesn't start at the beginning of src.
-     * This can be due to a variety of reasons, usually because the
-     * LZMA vendor implementation encoded the compression properties
-     * into the first few bytes. These are the only offsets observed
-     * in the wild and ordered by prevalence.
-     */
-    int offsets[4] = {0, 4, 9, 5};
 
     expected_outsize = outsize;
 
@@ -206,15 +198,23 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
     /*
      * Go through all possible combinations of lp, lc, pb and common LZMA data offsets.
      * Take the first valid decompression we can get.
+     *
+     * Sometimes the LZMA data doesn't start at the beginning of src.
+     * This can be due to a variety of reasons, usually because the
+     * LZMA vendor implementation encoded the compression properties
+     * into the first few bytes.
      */
-    for(i=0; i<4; i++)
+    for(i=0; i<9; i++)
     {
-        /*
-         * This is redundant if an override value is specified, but it
-         * is a quick and easy way to let the user specify arbitrary offsets.
-         */
-        if(override.offset.set) offset = override.offset.value;
-        else offset = offsets[i];
+        if(override.offset.set)
+        {
+            offset = override.offset.value;
+            if(i > 0) break;
+        }
+        else
+        {
+            offset = i;
+        }
 
         for(lc=0; lc<=4; lc++)
         {
@@ -260,14 +260,14 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                         properties.lc = lc;
                         properties.lp = lp;
                         properties.pb = pb;
-                        properties.offset = offsets[i];
+                        properties.offset = offset;
                         properties.detected = 1;
                         
-                        ERROR("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d], ", properties.lc,
+                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d], ", properties.lc,
                                                                                                properties.lp,
                                                                                                properties.pb,
                                                                                                properties.offset);
-                        ERROR("decompressed %d/%d bytes\n", outsize, expected_outsize);
+                        TRACE("decompressed %d/%d bytes\n", outsize, expected_outsize);
                         return outsize;
                     }
                 }

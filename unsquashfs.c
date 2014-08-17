@@ -2611,7 +2611,6 @@ int main(int argc, char *argv[])
 		umask(0);
 	
 	for(i = 1; i < argc; i++) {
-        printf("ARGV: '%s'\n", argv[i]);
 		if(*argv[i] != '-')
 			break;
 		if(strcmp(argv[i], "-version") == 0 ||

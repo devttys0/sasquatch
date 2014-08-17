@@ -80,10 +80,10 @@ static struct compressor unknown_comp_ops = {
 struct compressor *compressor[] = {
 	&gzip_comp_ops,
 	&lzma_comp_ops,
-    // CJH: Added additional LZMA decompressors.
+    // CJH: Added additional LZMA decompressors. Order is intentional.
+    &lzma_adaptive_comp_ops,
     &lzma_brcm_comp_ops,
     &lzma_wrt_comp_ops,
-    &lzma_adaptive_comp_ops,
 	&lzo_comp_ops,
 	&lz4_comp_ops,
 	&xz_comp_ops,
