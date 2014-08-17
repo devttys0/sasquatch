@@ -80,6 +80,14 @@ int user_xattrs = FALSE;
 // CJH: Used by lzma_wrapper.c if a DD-WRT magic signature is detected
 int ddwrt_squash_image = FALSE;
 
+// CJH: Override structure
+struct override_table
+{
+    int s_major;
+    int s_minor;
+};
+struct override_table override = { .s_major=0, .s_minor=0 };
+
 int lookup_type[] = {
 	0,
 	S_IFDIR,
@@ -1848,7 +1856,10 @@ int read_super(char *source)
 	if(sBlk_4.s_magic == SQUASHFS_MAGIC && sBlk_4.s_major == 4 &&
 			sBlk_4.s_minor == 0) {
      */
-     if(sBlk_4.s_major == 4 && sBlk_4.s_minor == 0) {
+
+     // CJH: Added s_major override
+     if((sBlk_4.s_major == 4 && sBlk_4.s_minor == 0) ||
+        (override.s_major == 4)) {
 		s_ops.squashfs_opendir = squashfs_opendir_4;
 		s_ops.read_fragment = read_fragment_4;
 		s_ops.read_fragment_table = read_fragment_table_4;
@@ -1924,14 +1935,17 @@ int read_super(char *source)
 	sBlk.s.xattr_id_table_start = SQUASHFS_INVALID_BLK;
 
 	/* Check the MAJOR & MINOR versions */
-	if(sBlk.s.s_major == 1 || sBlk.s.s_major == 2) {
+    // CJH: Added s_major override
+	if((sBlk.s.s_major == 1 || sBlk.s.s_major == 2) ||
+       (override.s_major == 1 || override.s_major == 2)) {
 		sBlk.s.bytes_used = sBlk_3.bytes_used_2;
 		sBlk.uid_start = sBlk_3.uid_start_2;
 		sBlk.guid_start = sBlk_3.guid_start_2;
 		sBlk.s.inode_table_start = sBlk_3.inode_table_start_2;
 		sBlk.s.directory_table_start = sBlk_3.directory_table_start_2;
 		
-		if(sBlk.s.s_major == 1) {
+        // CJH: Added s_major override
+		if(sBlk.s.s_major == 1 || override.s_major == 1) {
 			sBlk.s.block_size = sBlk_3.block_size_1;
 			sBlk.s.fragment_table_start = sBlk.uid_start;
 			s_ops.squashfs_opendir = squashfs_opendir_1;
@@ -1949,7 +1963,8 @@ int read_super(char *source)
 			s_ops.read_inode = read_inode_2;
 			s_ops.read_uids_guids = read_uids_guids_1;
 		}
-	} else if(sBlk.s.s_major == 3) {
+    // CJH: Added s_major override
+	} else if(sBlk.s.s_major == 3 || override.s_major == 3) {
 		s_ops.squashfs_opendir = squashfs_opendir_3;
 		s_ops.read_fragment = read_fragment_3;
 		s_ops.read_fragment_table = read_fragment_table_3;
@@ -2857,7 +2872,8 @@ options:
 		EXIT_UNSQUASH("failed to uid/gid table\n");
 
 	if(s_ops.read_fragment_table(&directory_table_end) == FALSE)
-		EXIT_UNSQUASH("failed to read fragment table\n");
+        ERROR("failed to read fragment table, trying to continue anyway...\n");
+		//EXIT_UNSQUASH("failed to read fragment table\n");
 
 	if(read_inode_table(sBlk.s.inode_table_start,
 				sBlk.s.directory_table_start) == FALSE)

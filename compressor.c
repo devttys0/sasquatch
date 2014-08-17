@@ -68,6 +68,9 @@ static struct compressor xz_comp_ops = {
 extern struct compressor xz_comp_ops;
 #endif
 
+extern struct compressor lzma_brcm_comp_ops;
+extern struct compressor lzma_wrt_comp_ops;
+extern struct compressor lzma_adaptive_comp_ops;
 
 static struct compressor unknown_comp_ops = {
 	0, "unknown"
@@ -77,6 +80,10 @@ static struct compressor unknown_comp_ops = {
 struct compressor *compressor[] = {
 	&gzip_comp_ops,
 	&lzma_comp_ops,
+    // CJH: Added additional LZMA decompressors
+    &lzma_brcm_comp_ops,
+    &lzma_wrt_comp_ops,
+    &lzma_adaptive_comp_ops,
 	&lzo_comp_ops,
 	&lz4_comp_ops,
 	&xz_comp_ops,
@@ -140,32 +147,41 @@ void display_compressor_usage(char *def_comp)
 }
 
 // CJH: calls the currently selected decompressor, unless that fails, then tries the other decompressors
-int compression_type_printed = 0;
+int detected_compressor_id = 0;
 int compressor_uncompress(struct compressor *comp, void *dest, void *src, int size, int block_size, int *error)
 {
-    int i = 0, retval = -1, current_compressor_id = -1;
+    int i = 0, retval = -1, default_compressor_id = -1;
 
-    if(comp->uncompress)
+    if(detected_compressor_id)
     {
-        if(!compression_type_printed) ERROR("Trying to decompress with %s...\n", comp->name);
+        retval = compressor[detected_compressor_id]->uncompress(dest, src, size, block_size, error);
+    }
+
+    if(retval < 1 && comp->uncompress)
+    {
         retval = comp->uncompress(dest, src, size, block_size, error);
     }
 
     if(retval < 1)
     {
-        current_compressor_id = comp->id;
-        TRACE("%s decompressor failed! [%d %d]\n", comp->name, retval, *error);
+        default_compressor_id = comp->id;
+        TRACE("Default %s decompressor failed! [%d %d]\n", comp->name, retval, *error);
 
         for(i=0; compressor[i]->id; i++)
         {
             comp = compressor[i];
-            if(comp->id != current_compressor_id && comp->uncompress)
+            
+            if(comp->id != default_compressor_id && 
+               comp->id != detected_compressor_id && 
+               comp->uncompress)
             {
-                if(!compression_type_printed) ERROR("Trying to decompress with %s...\n", comp->name);
+                ERROR("Trying to decompress with %s...\n", comp->name);
                 retval = comp->uncompress(dest, src, size, block_size, error);
                 if(retval > 0)
                 {
-                    TRACE("%s decompressor succeeded!\n", comp->name);
+                    //TRACE("%s decompressor succeeded!\n", comp->name);
+                    ERROR("Detected %s compression\n", comp->name);
+                    detected_compressor_id = i;
                     break;
                 }
                 else
@@ -176,11 +192,6 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
         }
     }
 
-    if(retval > 0 && !compression_type_printed)
-    {
-        ERROR("Detected %s compression\n", comp->name);
-        compression_type_printed = 1;
-    }
     return retval;
 }
 

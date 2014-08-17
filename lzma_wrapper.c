@@ -35,13 +35,6 @@
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
-// CJH: LZMA variant list
-#define LZMA_STANDARD       1
-#define LZMA_7Z             2
-#define LZMA_WRT            3   
-#define LZMA_ADAPTIVE       4
-#define LZMA_VARIANTS_COUNT LZMA_ADAPTIVE
-
 static int lzma_compress(void *strm, void *dest, void *src, int size, int block_size,
 		int *error)
 {
@@ -91,8 +84,8 @@ static int lzma_compress(void *strm, void *dest, void *src, int size, int block_
 	return outlen + LZMA_HEADER_SIZE;
 }
 
-// CJH: s/lzma_uncompress/standard_lzma_uncompress/
-static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize,
+// CJH: s/lzma_uncompress/lzma_standard_uncompress/
+static int lzma_standard_uncompress(void *dest, void *src, int size, int outsize,
 	int *error)
 {
 	unsigned char *s = src;
@@ -112,7 +105,7 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
         */
         outlen = outsize;
         inlen = size - LZMA_PROPS_SIZE;
-        TRACE("standard_lzma_uncompress: lzma data block does not appear to contain a valid size field\n");
+        TRACE("lzma_standard_uncompress: lzma data block does not appear to contain a valid size field\n");
 
 	    res = LzmaUncompress(dest, &outlen, src + LZMA_PROPS_SIZE, &inlen, src, LZMA_PROPS_SIZE);
 	}
@@ -129,27 +122,26 @@ static int standard_lzma_uncompress(void *dest, void *src, int size, int outsize
 	}
 }
 
-// CJH: lzma_7z variant decompressor
-int lzma_7z_uncompress(void *dest, void *src, int size, int outsize, int *error)
+// CJH: lzma_brcm variant decompressor
+static int lzma_brcm_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
-    if((retval = decompress_lzma_7z((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
+    if((retval = decompress_lzma_brcm((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
     {
         *error = retval;
-        TRACE("decompress_lzma_7z failed with error code %d\n", *error);
+        TRACE("decompress_lzma_brcm failed with error code %d\n", *error);
         return -1;
     }
     else
     {
-        TRACE("decompress_lzma_7z succeeded in decompressing %d bytes!\n", outsize);
+        TRACE("decompress_lzma_brcm succeeded in decompressing %d bytes!\n", outsize);
         return outsize;
     }
 }
 
 // CJH: lzmawrt varient decompressor
-extern int ddwrt_squash_image;
-int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
+static int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
@@ -243,66 +235,47 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
     return -1;
 }
 
-// CJH: A decompression wrapper for the various LZMA versions
-int detected_lzma_variant = -1;
-static int lzma_uncompress(void *dest, void *src, int size, int outsize, int *error)
-{
-    int i = 0, k = 0, retval = -1;
-    int lzma_variants[LZMA_VARIANTS_COUNT] = { 0 };
-
-    if(detected_lzma_variant != -1)
-    {
-        lzma_variants[i] = detected_lzma_variant;
-        i++;
-    }
-
-    for(k=1; i<LZMA_VARIANTS_COUNT; i++,k++)
-    {
-        if(k == detected_lzma_variant)
-        {
-            k++;
-        }
-        lzma_variants[i] = k;
-    }
-
-    for(i=0; (i<LZMA_VARIANTS_COUNT && retval < 1); i++)
-    {
-        if(detected_lzma_variant == -1) ERROR("Trying LZMA variant #%d\n", lzma_variants[i]);
-
-        switch(lzma_variants[i])
-        {
-            case LZMA_STANDARD:
-                retval = standard_lzma_uncompress(dest, src, size, outsize, error);
-                break;
-            case LZMA_7Z:
-                retval = lzma_7z_uncompress(dest, src, size, outsize, error);
-                break;
-            case LZMA_WRT:
-                retval = lzma_wrt_uncompress(dest, src, size, outsize, error);
-                break;
-            case LZMA_ADAPTIVE:
-                retval = lzma_adaptive_uncompress(dest, src, size, outsize, error);
-                break;
-        }
-
-        if(retval > 0 && detected_lzma_variant != lzma_variants[i])
-        {
-            detected_lzma_variant = lzma_variants[i];
-            ERROR("Detected LZMA variant #%d\n", detected_lzma_variant);
-        }
-    }
-    
-    return retval;
-}
-
 struct compressor lzma_comp_ops = {
 	.init = NULL,
 	.compress = lzma_compress,
-	.uncompress = lzma_uncompress,
+	.uncompress = lzma_standard_uncompress,
 	.options = NULL,
 	.usage = NULL,
 	.id = LZMA_COMPRESSION,
 	.name = "lzma",
+	.supported = 1
+};
+
+struct compressor lzma_brcm_comp_ops = {
+	.init = NULL,
+	.compress = lzma_compress,
+	.uncompress = lzma_brcm_uncompress,
+	.options = NULL,
+	.usage = NULL,
+	.id = LZMA_BRCM_COMPRESSION,
+	.name = "lzma-brcm",
+	.supported = 1
+};
+
+struct compressor lzma_adaptive_comp_ops = {
+	.init = NULL,
+	.compress = lzma_compress,
+	.uncompress = lzma_adaptive_uncompress,
+	.options = NULL,
+	.usage = NULL,
+	.id = LZMA_ADAPTIVE_COMPRESSION,
+	.name = "lzma-adaptive",
+	.supported = 1
+};
+
+struct compressor lzma_wrt_comp_ops = {
+	.init = NULL,
+	.compress = lzma_compress,
+	.uncompress = lzma_wrt_uncompress,
+	.options = NULL,
+	.usage = NULL,
+	.id = LZMA_WRT_COMPRESSION,
+	.name = "lzma-ddwrt",
 	.supported = 1
 };
 

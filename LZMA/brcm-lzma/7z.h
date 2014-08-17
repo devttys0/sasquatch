@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-int decompress_lzma_7z(unsigned char* in_data, unsigned in_size, unsigned char* out_data, unsigned out_size);
+int decompress_lzma_brcm(unsigned char* in_data, unsigned in_size, unsigned char* out_data, unsigned out_size);
 
 #if defined __cplusplus
 }

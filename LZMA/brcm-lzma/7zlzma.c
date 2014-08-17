@@ -10,10 +10,10 @@
 static LzmaDecoder   cc;
 ISequentialInStream  in_stream;
 ISequentialOutStream out_stream;
-int decompress_lzma_7z( unsigned char* in_data, 
-                        unsigned in_size, 
-                        unsigned char* out_data, 
-                        unsigned out_size) {
+int decompress_lzma_brcm( unsigned char* in_data, 
+                          unsigned in_size, 
+                          unsigned char* out_data, 
+                          unsigned out_size) {
 //		LzmaDecoder cc;
         int RC;
 	UINT64 in_size_l  = in_size;
