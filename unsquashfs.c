@@ -38,6 +38,9 @@
 #include <limits.h>
 #include <ctype.h>
 
+// CJH: Added these includes
+#include <endian.h>
+
 struct cache *fragment_cache, *data_cache;
 struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
 pthread_t *thread, *inflator_thread;
@@ -50,7 +53,8 @@ struct super_block sBlk;
 squashfs_operations s_ops;
 // CJH: Initialize to NULL
 struct compressor *comp = NULL;
-
+// CJH: Add override struct
+struct override_table override = { 0 };
 // CJH: Initialize swap to -1
 int bytes = 0, swap = -1, file_count = 0, dir_count = 0, sym_count = 0,
 	dev_count = 0, fifo_count = 0;
@@ -77,16 +81,6 @@ unsigned int cur_blocks = 0;
 int inode_number = 1;
 int no_xattrs = XATTR_DEF;
 int user_xattrs = FALSE;
-// CJH: Used by lzma_wrapper.c if a DD-WRT magic signature is detected
-int ddwrt_squash_image = FALSE;
-
-// CJH: Override structure
-struct override_table
-{
-    int s_major;
-    int s_minor;
-};
-struct override_table override = { .s_major=0, .s_minor=0 };
 
 int lookup_type[] = {
 	0,
@@ -1828,12 +1822,7 @@ int read_super(char *source)
     }
     
     // CJH: Warn if SquashFS magic doesn't look correct
-    if(generic.s_magic == SQUASHFS_DDWRT_MAGIC || generic.s_magic == SQUASHFS_DDWRT_MAGIC_SWAP)
-    {
-        ERROR("Detected DD-WRT SquashFS signature\n");
-        ddwrt_squash_image = TRUE;
-    }
-    else if(generic.s_magic != SQUASHFS_MAGIC && generic.s_magic != SQUASHFS_MAGIC_SWAP)
+    if(generic.s_magic != SQUASHFS_MAGIC && generic.s_magic != SQUASHFS_MAGIC_SWAP)
     {
         ERROR("Non-standard SquashFS Magic: %.4s\n", (char *) &generic.s_magic);
     }
@@ -2705,7 +2694,7 @@ int main(int argc, char *argv[])
 		} else if(strcmp(argv[i], "-regex") == 0 ||
 				strcmp(argv[i], "-r") == 0)
 			use_regex = TRUE;
-        // CJH: Added -comp and -endian options
+        // CJH: Added -comp, -be, -le, -major, -minor options
         else if(strcmp(argv[i], "-c") == 0 ||
                 strcmp(argv[i], "-comp") == 0) {
             if(++i == argc) {
@@ -2714,10 +2703,64 @@ int main(int argc, char *argv[])
                 exit(1);
             }
             comp = lookup_compressor(argv[i]);
-        } else if(strcmp(argv[i], "-e") == 0 ||
-                  strcmp(argv[i], "-endian") == 0) {
+        } else if(strcmp(argv[1], "-major") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -major missing version option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.s_major = atoi(argv[i]);
+        } else if(strcmp(argv[1], "-minor") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -minor missing version option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.s_minor = atoi(argv[i]);
+        } else if(strcmp(argv[1], "-lc") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -lc missing value option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.lc.value = atoi(argv[i]);
+            override.lc.set = TRUE;
+        } else if(strcmp(argv[1], "-lp") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -lp missing value option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.lp.value = atoi(argv[i]);
+            override.lp.set = TRUE;
+        } else if(strcmp(argv[1], "-pb") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -pb missing value option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.pb.value = atoi(argv[i]);
+            override.pb.set = TRUE;
+        } else if(strcmp(argv[1], "-lzma-offset") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -lzma-offset missing value option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.offset.value = atoi(argv[i]);
+            override.offset.set = TRUE;
+        } else if(strcmp(argv[i], "-be") == 0)
+#if BYTE_ORDER == BIG_ENDIAN
+            swap = 0;
+#else
             swap = 1;
-        }
+#endif
+        else if(strcmp(argv[i], "-le") == 0)
+#if BYTE_ORDER == LITTLE_ENDIAN
+            swap = 0;
+#else
+            swap = 1;
+#endif
 		else
 			goto options;
 	}
@@ -2781,9 +2824,18 @@ options:
 				"regular expressions\n");
 			ERROR("\t\t\t\trather than use the default shell "
 				"wildcard\n\t\t\t\texpansion (globbing)\n");
-            // CJH: Added -comp and -endian help output
-            ERROR("\t-e[ndian]\t\tforce an endian swap\n");
-			ERROR("\t-c[omp] <decompressor>  specify the "
+            // CJH: Added -comp, -be, -le, -major, -minor and lzma options help output
+            ERROR("\t-lc <value>\t\tSet the lzma-adaptive lc parameter [0-4]\n");
+            ERROR("\t-lp <value>\t\tSet the lzma-adaptive lp parameter [0-4]\n");
+            ERROR("\t-pb <value>\t\tSet the lzma-adaptive pb parameter [0-8]\n");
+            ERROR("\t-lzma-offset <value>\tSet the lzma-adaptive LZMA data offset\n");
+            ERROR("\t-major <version>\tManually set the SquashFS major "
+                "version number\n");
+            ERROR("\t-minor <version>\tManually set the SquashFS minor "
+                "version number\n");
+            ERROR("\t-be\t\t\tTreat the filesystem as big endian\n");
+            ERROR("\t-le\t\t\tTreat the filesystem as little endian\n");
+			ERROR("\t-c[omp] <decompressor>\tSpecify the "
 				"decompressor to use\n");
 			ERROR("\nDecompressors available:\n");
 			display_compressors("", "");
@@ -2872,8 +2924,7 @@ options:
 		EXIT_UNSQUASH("failed to uid/gid table\n");
 
 	if(s_ops.read_fragment_table(&directory_table_end) == FALSE)
-        ERROR("failed to read fragment table, trying to continue anyway...\n");
-		//EXIT_UNSQUASH("failed to read fragment table\n");
+		EXIT_UNSQUASH("failed to read fragment table\n");
 
 	if(read_inode_table(sBlk.s.inode_table_start,
 				sBlk.s.directory_table_start) == FALSE)

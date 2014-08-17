@@ -31,10 +31,6 @@
 #define SQUASHFS_MAGIC_SWAP		0x68737173
 #define SQUASHFS_START			0
 
-// CJH: Added for identifying DD-WRT images
-#define SQUASHFS_DDWRT_MAGIC        0x74717368
-#define SQUASHFS_DDWRT_MAGIC_SWAP   0x68737174
-
 /* size of metadata (inode and directory) blocks */
 #define SQUASHFS_METADATA_SIZE		8192
 #define SQUASHFS_METADATA_LOG		13
@@ -282,10 +278,9 @@ typedef long long		squashfs_inode;
 #define XZ_COMPRESSION		4
 #define LZ4_COMPRESSION		5
 // CJH: Added #defines for additional decompressors
-#define LZMA_BRCM_COMPRESSION       6
-#define LZMA_WRT_COMPRESSION        7
-#define LZMA_ADAPTIVE_COMPRESSION   8
-#define LZMA_AUTO_COMPRESSION       9
+#define LZMA_WRT_COMPRESSION        6
+#define LZMA_ADAPTIVE_COMPRESSION   7
+#define LZMA_BRCM_COMPRESSION       8
 
 // CJH: A generic super block structure used for auto-detecting endianess
 #include <stdint.h>
@@ -507,6 +502,22 @@ struct squashfs_xattr_table {
 	long long		xattr_table_start;
 	unsigned int		xattr_ids;
 	unsigned int		unused;
+};
+
+// CJH: Override structures (see usage)
+struct lzma_override_property
+{
+    int set;
+    int value;
+};
+struct override_table
+{
+    int s_major;
+    int s_minor;
+    struct lzma_override_property lc;
+    struct lzma_override_property lp;
+    struct lzma_override_property pb;
+    struct lzma_override_property offset;
 };
 
 #endif

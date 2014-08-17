@@ -169,14 +169,23 @@ struct lzma_props
     int detected;
 };
 struct lzma_props properties = { 0 };
+extern struct override_table override;
 static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
-    int lc, lp, pb, i;
-    int offsets[4] = {0, 4, 5, 9};
+    int lc, lp, pb, i, offset;
     int retval = -1, expected_outsize = 0;
+    /*
+     * Sometimes the LZMA data doesn't start at the beginning of src.
+     * This can be due to a variety of reasons, usually because the
+     * LZMA vendor implementation encoded the compression properties
+     * into the first few bytes. These are the only offsets observed
+     * in the wild and ordered by prevalence.
+     */
+    int offsets[4] = {0, 4, 9, 5};
 
     expected_outsize = outsize;
 
+    // Properties already detected? Do it.
     if(properties.detected)
     {
         retval = lzmaspec_uncompress((Bytef *) dest, 
@@ -194,14 +203,31 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
         }
     }
 
-    for(lc=0; lc<=4; lc++)
+    /*
+     * Go through all possible combinations of lp, lc, pb and common LZMA data offsets.
+     * Take the first valid decompression we can get.
+     */
+    for(i=0; i<4; i++)
     {
-        for(lp=0; lp<=4; lp++)
+        /*
+         * This is redundant if an override value is specified, but it
+         * is a quick and easy way to let the user specify arbitrary offsets.
+         */
+        if(override.offset.set) offset = override.offset.value;
+        else offset = offsets[i];
+
+        for(lc=0; lc<=4; lc++)
         {
-            for(pb=0; pb<=8; pb++)
+            if(override.lc.set && override.lc.value != lc) continue;
+
+            for(lp=0; lp<=4; lp++)
             {
-                for(i=0; i<4; i++)
+                if(override.lp.set && override.lp.value != lp) continue;
+
+                for(pb=0; pb<=8; pb++)
                 {
+                    if(override.pb.set && override.pb.value != pb) continue;
+
                     outsize = expected_outsize;
                     retval = lzmaspec_uncompress((Bytef *) dest, 
                                                  (uLongf *) &outsize, 
@@ -210,9 +236,26 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                                                  lc,
                                                  lp,
                                                  pb,
-                                                 offsets[i]);
+                                                 offset);
 
-                    if(retval == 0)
+                    /*
+                     * If the decompression was successful, and if the expected decompressed
+                     * size matches the expected decompressed size, then these decompression
+                     * settings are likely valid.
+                     *
+                     * Note that for some data blocks, the code doesn't know the exact size
+                     * beforehand, and simply sets the expected size to some known maximum
+                     * value (SQUASHFS_FILE_SIZE, SQUASHFS_METADATA_SIZE, etc). The first
+                     * things to be decompressed however are the fragment/inode/directory tables,
+                     * and those have known sizes, making this a reasonably predictable way
+                     * of recovering the LZMA compression options so long as the same options
+                     * are used for all decompressed blocks (DD-WRT, for example, uses different
+                     * options for each compressed block, but I've never seen it anywhere else).
+                     */
+                    if(retval == 0 &&
+                       (expected_outsize == SQUASHFS_METADATA_SIZE ||
+                        expected_outsize == SQUASHFS_FILE_SIZE ||
+                        expected_outsize == outsize))
                     {
                         properties.lc = lc;
                         properties.lp = lp;
@@ -220,10 +263,11 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                         properties.offset = offsets[i];
                         properties.detected = 1;
                         
-                        ERROR("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d]\n", properties.lc,
+                        ERROR("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d], ", properties.lc,
                                                                                                properties.lp,
                                                                                                properties.pb,
                                                                                                properties.offset);
+                        ERROR("decompressed %d/%d bytes\n", outsize, expected_outsize);
                         return outsize;
                     }
                 }
