@@ -80,16 +80,10 @@ static struct compressor unknown_comp_ops = {
 struct compressor *compressor[] = {
 	&gzip_comp_ops,
 	&lzma_comp_ops,
-    /*
-     * CJH: Added additional LZMA decompressors.
-     *      Try DD-WRT first, as adaptive will only
-     *      work for the first block on DD-WRT images.
-     *      Try brcm last of all the lzma's since it
-     *      has segfaulted on me before...
-     */
+    // CJH: Added additional LZMA decompressors.
+    &lzma_brcm_comp_ops,
     &lzma_wrt_comp_ops,
     &lzma_adaptive_comp_ops,
-    &lzma_brcm_comp_ops,
 	&lzo_comp_ops,
 	&lz4_comp_ops,
 	&xz_comp_ops,

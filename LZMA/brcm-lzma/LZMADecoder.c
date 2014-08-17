@@ -379,6 +379,24 @@ HRESULT LzmaDecoderReadCoderProperties(LzmaDecoder *lzmaDecoder)
   aLiteralPosStateBits  = aRemainder % 5;
   aNumPosStateBits      = aRemainder / 5;
 
+  // CJH: Debug.
+  //printf("aLiteralContextBits (lc): %d\n", aLiteralContextBits);
+  //printf("aLiteralPosStateBits (lp): %d\n", aLiteralPosStateBits);
+  //printf("aNumPosStateBits (pb): %d\n", aNumPosStateBits);
+
+  // CJH: Validate LZMA properties before continuing
+  if(!aLiteralContextBits && !aLiteralPosStateBits && !aNumPosStateBits)
+  {
+      return -1;
+  }
+  if(aLiteralContextBits > 4 ||
+     aLiteralPosStateBits > 4 ||
+     aNumPosStateBits > 4 ||
+     (aLiteralContextBits + aLiteralPosStateBits) > 4)
+  {
+      return -1;
+  }
+
   RETURN_IF_NOT_S_OK(InStreamRead(&aDictionarySize, 
                                   sizeof(aDictionarySize), 
                                   &aProcessesedSize));

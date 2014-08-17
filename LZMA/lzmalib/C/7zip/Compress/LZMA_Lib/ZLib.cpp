@@ -373,9 +373,16 @@ extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
      * CJH: DD-WRT encodes the LZMA properties into the beginning of each compressed block.
      *      Sanity check these values to prevent errors in the LZMA library.
      */
+    if((unsigned int) source[1] == 0 &&
+       (unsigned int) source[2] == 0 &&
+       (unsigned int) source[0] == 0)
+    {
+        return Z_DATA_ERROR;
+    }
     if((unsigned int) source[1] > 4 ||
        (unsigned int) source[2] > 4 ||
-       (unsigned int) source[0] > 8)
+       (unsigned int) source[0] > 4 ||
+       ((unsigned int) source[1] + (unsigned int) source[2]) > 4)
     {
         return Z_DATA_ERROR;
     }
