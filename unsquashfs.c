@@ -39,7 +39,7 @@
 #include <ctype.h>
 
 // CJH: Added these includes
-#include <endian.h>
+//#include <endian.h>
 
 struct cache *fragment_cache, *data_cache;
 struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
@@ -1633,7 +1633,7 @@ void dir_scan(char *parent_name, unsigned int start_block, unsigned int offset,
 	dir_count ++;
 }
 
-
+// CJH: s/TRACE/printf/g
 void squashfs_stat(char *source)
 {
 	time_t mkfs_time = (time_t) sBlk.s.mkfs_time;
@@ -1651,9 +1651,10 @@ void squashfs_stat(char *source)
 
 	printf("Creation or last append time %s", mkfs_str ? mkfs_str :
 		"failed to get time\n");
-	printf("Filesystem size %.2f Kbytes (%.2f Mbytes)\n",
-		sBlk.s.bytes_used / 1024.0, sBlk.s.bytes_used /
-		(1024.0 * 1024.0));
+    // CJH: Added bytes output
+	printf("Filesystem size %.2f Kbytes (%.2f Mbytes) (%lld [0x%llX] bytes)\n",
+		(sBlk.s.bytes_used / 1024.0), (sBlk.s.bytes_used / (1024.0 * 1024.0)), 
+        sBlk.s.bytes_used, sBlk.s.bytes_used);
 
 	if(sBlk.s.s_major == 4) {
 		printf("Compression %s\n", comp->name);
@@ -1725,25 +1726,25 @@ void squashfs_stat(char *source)
 		printf("Number of gids %d\n", sBlk.no_guids);
 	}
 
-	TRACE("sBlk.s.inode_table_start 0x%llx\n", sBlk.s.inode_table_start);
-	TRACE("sBlk.s.directory_table_start 0x%llx\n",
+	printf("sBlk.s.inode_table_start 0x%llx\n", sBlk.s.inode_table_start);
+	printf("sBlk.s.directory_table_start 0x%llx\n",
 		sBlk.s.directory_table_start);
 
 	if(sBlk.s.s_major > 1)
-		TRACE("sBlk.s.fragment_table_start 0x%llx\n\n",
+		printf("sBlk.s.fragment_table_start 0x%llx\n",
 			sBlk.s.fragment_table_start);
 
 	if(sBlk.s.s_major > 2)
-		TRACE("sBlk.s.lookup_table_start 0x%llx\n\n",
+		printf("sBlk.s.lookup_table_start 0x%llx\n",
 			sBlk.s.lookup_table_start);
 
 	if(sBlk.s.s_major == 4) {
-		TRACE("sBlk.s.id_table_start 0x%llx\n", sBlk.s.id_table_start);
-		TRACE("sBlk.s.xattr_id_table_start 0x%llx\n",
+		printf("sBlk.s.id_table_start 0x%llx\n", sBlk.s.id_table_start);
+		printf("sBlk.s.xattr_id_table_start 0x%llx\n",
 			sBlk.s.xattr_id_table_start);
 	} else {
-		TRACE("sBlk.uid_start 0x%llx\n", sBlk.uid_start);
-		TRACE("sBlk.guid_start 0x%llx\n", sBlk.guid_start);
+		printf("sBlk.uid_start 0x%llx\n", sBlk.uid_start);
+		printf("sBlk.guid_start 0x%llx\n", sBlk.guid_start);
 	}
 }
 
@@ -1756,9 +1757,11 @@ int check_compression(struct compressor *comp)
 	if(!comp->supported) {
 		ERROR("Filesystem uses %s compression, this is "
 			"unsupported by this version\n", comp->name);
-		ERROR("Decompressors available:\n");
-		display_compressors("", "");
-		return 0;
+        // CJH: Try to continue anyway
+		//ERROR("Decompressors available:\n");
+		//display_compressors("", "");
+		//return 0;
+        return 1;
 	}
 
 	/*
@@ -1849,6 +1852,13 @@ int read_super(char *source)
      // CJH: Added s_major override
      if((sBlk_4.s_major == 4 && sBlk_4.s_minor == 0) ||
         (override.s_major == 4)) {
+
+        // CJH: Update super struct with override values
+        if(override.s_major)
+            sBlk_4.s_major = override.s_major;
+        if(override.s_minor)
+            sBlk_4.s_minor = override.s_minor;
+
 		s_ops.squashfs_opendir = squashfs_opendir_4;
 		s_ops.read_fragment = read_fragment_4;
 		s_ops.read_fragment_table = read_fragment_table_4;
@@ -1923,10 +1933,15 @@ int read_super(char *source)
 	sBlk.guid_start = sBlk_3.guid_start;
 	sBlk.s.xattr_id_table_start = SQUASHFS_INVALID_BLK;
 
+    // CJH: Update super struct with override values
+    if(override.s_major)
+        sBlk.s.s_major = override.s_major;
+    if(override.s_minor)
+        sBlk.s.s_minor = override.s_minor;
+
 	/* Check the MAJOR & MINOR versions */
     // CJH: Added s_major override
-	if((sBlk.s.s_major == 1 || sBlk.s.s_major == 2) ||
-       (override.s_major == 1 || override.s_major == 2)) {
+	if((sBlk.s.s_major == 1 || sBlk.s.s_major == 2)) {
 		sBlk.s.bytes_used = sBlk_3.bytes_used_2;
 		sBlk.uid_start = sBlk_3.uid_start_2;
 		sBlk.guid_start = sBlk_3.guid_start_2;
@@ -1934,7 +1949,7 @@ int read_super(char *source)
 		sBlk.s.directory_table_start = sBlk_3.directory_table_start_2;
 		
         // CJH: Added s_major override
-		if(sBlk.s.s_major == 1 || override.s_major == 1) {
+		if(sBlk.s.s_major == 1) {
 			sBlk.s.block_size = sBlk_3.block_size_1;
 			sBlk.s.fragment_table_start = sBlk.uid_start;
 			s_ops.squashfs_opendir = squashfs_opendir_1;
@@ -1952,8 +1967,7 @@ int read_super(char *source)
 			s_ops.read_inode = read_inode_2;
 			s_ops.read_uids_guids = read_uids_guids_1;
 		}
-    // CJH: Added s_major override
-	} else if(sBlk.s.s_major == 3 || override.s_major == 3) {
+	} else if(sBlk.s.s_major == 3) {
 		s_ops.squashfs_opendir = squashfs_opendir_3;
 		s_ops.read_fragment = read_fragment_3;
 		s_ops.read_fragment_table = read_fragment_table_3;
@@ -2588,12 +2602,16 @@ int main(int argc, char *argv[])
 	int fragment_buffer_size = FRAGMENT_BUFFER_DEFAULT;
 	int data_buffer_size = DATA_BUFFER_DEFAULT;
 
+    // CJH: Initialize verbosity to FALSE
+    verbose = FALSE;
+
 	pthread_mutex_init(&screen_mutex, NULL);
 	root_process = geteuid() == 0;
 	if(root_process)
 		umask(0);
 	
 	for(i = 1; i < argc; i++) {
+        printf("ARGV: '%s'\n", argv[i]);
 		if(*argv[i] != '-')
 			break;
 		if(strcmp(argv[i], "-version") == 0 ||
@@ -2703,21 +2721,21 @@ int main(int argc, char *argv[])
                 exit(1);
             }
             comp = lookup_compressor(argv[i]);
-        } else if(strcmp(argv[1], "-major") == 0) {
+        } else if(strcmp(argv[i], "-major") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -major missing version option\n",
                     argv[0]);
                 exit(1);
             }
             override.s_major = atoi(argv[i]);
-        } else if(strcmp(argv[1], "-minor") == 0) {
+        } else if(strcmp(argv[i], "-minor") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -minor missing version option\n",
                     argv[0]);
                 exit(1);
             }
             override.s_minor = atoi(argv[i]);
-        } else if(strcmp(argv[1], "-lc") == 0) {
+        } else if(strcmp(argv[i], "-lc") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -lc missing value option\n",
                     argv[0]);
@@ -2725,7 +2743,7 @@ int main(int argc, char *argv[])
             }
             override.lc.value = atoi(argv[i]);
             override.lc.set = TRUE;
-        } else if(strcmp(argv[1], "-lp") == 0) {
+        } else if(strcmp(argv[i], "-lp") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -lp missing value option\n",
                     argv[0]);
@@ -2733,7 +2751,7 @@ int main(int argc, char *argv[])
             }
             override.lp.value = atoi(argv[i]);
             override.lp.set = TRUE;
-        } else if(strcmp(argv[1], "-pb") == 0) {
+        } else if(strcmp(argv[i], "-pb") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -pb missing value option\n",
                     argv[0]);
@@ -2741,7 +2759,7 @@ int main(int argc, char *argv[])
             }
             override.pb.value = atoi(argv[i]);
             override.pb.set = TRUE;
-        } else if(strcmp(argv[1], "-lzma-offset") == 0) {
+        } else if(strcmp(argv[i], "-lzma-offset") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -lzma-offset missing value option\n",
                     argv[0]);
@@ -2750,17 +2768,19 @@ int main(int argc, char *argv[])
             override.offset.value = atoi(argv[i]);
             override.offset.set = TRUE;
         } else if(strcmp(argv[i], "-be") == 0)
-#if BYTE_ORDER == BIG_ENDIAN
+#if __BYTE_ORDER == __BIG_ENDIAN
             swap = 0;
 #else
             swap = 1;
 #endif
         else if(strcmp(argv[i], "-le") == 0)
-#if BYTE_ORDER == LITTLE_ENDIAN
+#if __BYTE_ORDER == __LITTLE_ENDIAN
             swap = 0;
 #else
             swap = 1;
 #endif
+        else if(strcmp(argv[i], "-trace") == 0)
+            verbose = TRUE;
 		else
 			goto options;
 	}

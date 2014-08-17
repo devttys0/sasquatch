@@ -30,14 +30,18 @@ extern void prep_exit();
 extern void progressbar_error(char *fmt, ...);
 extern void progressbar_info(char *fmt, ...);
 
-#ifdef SQUASHFS_TRACE
+// CJH: Updated so that TRACE prints if -verbose is specified on the command line
+int verbose;
+//#ifdef SQUASHFS_TRACE
 #define TRACE(s, args...) \
 		do { \
-			progressbar_info("squashfs: "s, ## args);\
+			if(verbose) progressbar_info("squashfs: "s, ## args);\
 		} while(0)
+/*
 #else
 #define TRACE(s, args...)
 #endif
+*/
 
 #define INFO(s, args...) \
 		do {\
