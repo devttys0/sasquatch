@@ -323,7 +323,7 @@ lzmalib:
 # CJH: Added brcm-lzma, lzmalib
 .PHONY: clean
 clean:
-	-rm -f *.o mksquashfs unsquashfs sasquatch
+	-rm -f *.o $(LZMA_OBJS) mksquashfs unsquashfs sasquatch
 	make -C $(LZMA_LIB_DIR) clean
 	make -C $(LZMA_BRCM_DIR) clean
 
