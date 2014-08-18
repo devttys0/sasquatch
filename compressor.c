@@ -160,6 +160,11 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
     if(retval < 1 && comp->uncompress)
     {
         retval = comp->uncompress(dest, src, size, block_size, error);
+        if(retval > 0 && !detected_compressor_id)
+        {
+            ERROR("Decompressing with default %s compressor\n", comp->name);
+            detected_compressor_id = lookup_compressor(comp->name)->id;
+        }
     }
 
     if(retval < 1)

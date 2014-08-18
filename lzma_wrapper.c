@@ -29,6 +29,8 @@
 
 // CJH: Added these includes
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "error.h"
 #include "7z.h"
 #include "lzmalib.h"
@@ -160,6 +162,11 @@ static int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int
     return retval;
 }
 
+// CJH: An adaptive LZMA decompressor
+#define LZMA_MAX_LC     4
+#define LZMA_MAX_LP     4
+#define LZMA_MAX_PB     4
+#define LZMA_MAX_OFFSET 10 // CJH: Experimentally determined. Maybe more?
 struct lzma_props
 {
     int lc;
@@ -173,6 +180,7 @@ extern struct override_table override;
 static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int lc, lp, pb, i, offset;
+    unsigned char *tmp_buf = NULL;
     int retval = -1, expected_outsize = 0;
 
     expected_outsize = outsize;
@@ -196,6 +204,18 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
     }
 
     /*
+     * Providing a larger than required buffer is important when brute-forcing the LZMA options;
+     * if the data decompresses to something larger than expected, then the selected options are
+     * incorrect, so we must provide enough room in the destination buffer to detect this.
+     */
+    tmp_buf = malloc(expected_outsize * 2);
+    if(!tmp_buf)
+    {
+        perror("malloc");
+        return -1;
+    }
+
+    /*
      * Go through all possible combinations of lp, lc, pb and common LZMA data offsets.
      * Take the first valid decompression we can get.
      *
@@ -204,11 +224,13 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
      * LZMA vendor implementation encoded the compression properties
      * into the first few bytes.
      */
-    for(i=0; i<9; i++)
+    for(i=0; i<=LZMA_MAX_OFFSET; i++)
     {
+        // override.offset overrides the current offset
         if(override.offset.set)
         {
             offset = override.offset.value;
+            // If an override value was specified, just do the loop once
             if(i > 0) break;
         }
         else
@@ -216,20 +238,21 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
             offset = i;
         }
 
-        for(lc=0; lc<=4; lc++)
+        for(lc=0; lc<=LZMA_MAX_LC; lc++)
         {
             if(override.lc.set && override.lc.value != lc) continue;
 
-            for(lp=0; lp<=4; lp++)
+            for(lp=0; lp<=LZMA_MAX_LP; lp++)
             {
                 if(override.lp.set && override.lp.value != lp) continue;
 
-                for(pb=0; pb<=8; pb++)
+                for(pb=0; pb<=LZMA_MAX_PB; pb++)
                 {
                     if(override.pb.set && override.pb.value != pb) continue;
 
-                    outsize = expected_outsize;
-                    retval = lzmaspec_uncompress((Bytef *) dest, 
+                    // tmp_buf was malloc'd as expected_outsize*2
+                    outsize = expected_outsize * 2;
+                    retval = lzmaspec_uncompress((Bytef *) tmp_buf, 
                                                  (uLongf *) &outsize, 
                                                  (const Bytef *) src, 
                                                  (uLong) size,
@@ -253,6 +276,7 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                      * options for each compressed block, but I've never seen it anywhere else).
                      */
                     if(retval == 0 &&
+                       expected_outsize >= outsize &&
                        (expected_outsize == SQUASHFS_METADATA_SIZE ||
                         expected_outsize == SQUASHFS_FILE_SIZE ||
                         expected_outsize == outsize))
@@ -262,12 +286,15 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                         properties.pb = pb;
                         properties.offset = offset;
                         properties.detected = 1;
-                        
+                        memcpy(dest, tmp_buf, outsize);
+
                         TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d], ", properties.lc,
                                                                                                properties.lp,
                                                                                                properties.pb,
                                                                                                properties.offset);
                         TRACE("decompressed %d/%d bytes\n", outsize, expected_outsize);
+
+                        free(tmp_buf);
                         return outsize;
                     }
                 }
@@ -275,6 +302,7 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
         }
     }
 
+    if(tmp_buf) free(tmp_buf);
     *error = retval;
     return -1;
 }
