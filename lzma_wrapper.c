@@ -125,20 +125,20 @@ static int lzma_standard_uncompress(void *dest, void *src, int size, int outsize
 	}
 }
 
-// CJH: lzma_brcm variant decompressor
-static int lzma_brcm_uncompress(void *dest, void *src, int size, int outsize, int *error)
+// CJH: lzma_alt variant decompressor
+static int lzma_alt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
 
-    if((retval = decompress_lzma_brcm((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
+    if((retval = decompress_lzma_alt((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
     {
         *error = retval;
-        TRACE("decompress_lzma_brcm failed with error code %d\n", *error);
+        TRACE("decompress_lzma_alt failed with error code %d\n", *error);
         return -1;
     }
     else
     {
-        TRACE("decompress_lzma_brcm succeeded in decompressing %d bytes!\n", outsize);
+        TRACE("decompress_lzma_alt succeeded in decompressing %d bytes!\n", outsize);
         return outsize;
     }
 }
@@ -319,14 +319,14 @@ struct compressor lzma_comp_ops = {
 	.supported = 1
 };
 
-struct compressor lzma_brcm_comp_ops = {
+struct compressor lzma_alt_comp_ops = {
 	.init = NULL,
 	.compress = lzma_compress,
-	.uncompress = lzma_brcm_uncompress,
+	.uncompress = lzma_alt_uncompress,
 	.options = NULL,
 	.usage = NULL,
 	.id = LZMA_BRCM_COMPRESSION,
-	.name = "lzma-brcm",
+	.name = "lzma-alt",
 	.supported = 1
 };
 

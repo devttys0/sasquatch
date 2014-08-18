@@ -68,7 +68,7 @@ static struct compressor xz_comp_ops = {
 extern struct compressor xz_comp_ops;
 #endif
 
-extern struct compressor lzma_brcm_comp_ops;
+extern struct compressor lzma_alt_comp_ops;
 extern struct compressor lzma_wrt_comp_ops;
 extern struct compressor lzma_adaptive_comp_ops;
 
@@ -82,7 +82,7 @@ struct compressor *compressor[] = {
 	&lzma_comp_ops,
     // CJH: Added additional LZMA decompressors. Order is intentional.
     &lzma_adaptive_comp_ops,
-    &lzma_brcm_comp_ops,
+    &lzma_alt_comp_ops,
     &lzma_wrt_comp_ops,
 	&lzo_comp_ops,
 	&lz4_comp_ops,
