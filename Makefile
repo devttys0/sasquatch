@@ -77,8 +77,8 @@ LZMA_SUPPORT = 1
 LZMA_BASE_DIR = ./LZMA
 LZMA_DIR = $(LZMA_BASE_DIR)/lzma465
 # CJH: Added these too...
-LZMA_BRCM_DIR = $(LZMA_BASE_DIR)/brcm-lzma
-LZMA_LIB_DIR = $(LZMA_BASE_DIR)/lzmalib/C/7zip/Compress/LZMA_Lib
+LZMA_ALT_DIR = $(LZMA_BASE_DIR)/lzmalt
+LZMA_ADAPT_DIR = $(LZMA_BASE_DIR)/lzmadaptive/C/7zip/Compress/LZMA_Lib
 
 ######## Specifying default compression ########
 #
@@ -139,17 +139,17 @@ endif
 
 ifeq ($(LZMA_SUPPORT),1)
 # CJH: Added -llzmalib
-LIBS += -L$(LZMA_LIB_DIR) -llzmalib 
+LIBS += -L$(LZMA_ADAPT_DIR) -llzmalib 
 LZMA_OBJS = $(LZMA_DIR)/C/Alloc.o $(LZMA_DIR)/C/LzFind.o \
 	$(LZMA_DIR)/C/LzmaDec.o $(LZMA_DIR)/C/LzmaEnc.o $(LZMA_DIR)/C/LzmaLib.o
 # CJH: Added LZMA variant directories
-INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_BRCM_DIR) -I$(LZMA_LIB_DIR)
+INCLUDEDIR += -I$(LZMA_DIR)/C -I$(LZMA_ALT_DIR) -I$(LZMA_ADAPT_DIR)
 CFLAGS += -DLZMA_SUPPORT
 MKSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
 UNSQUASHFS_OBJS += lzma_wrapper.o $(LZMA_OBJS)
 COMPRESSORS += lzma
 # CJH: Added LZMA_EXTRA_OBJS
-LZMA_EXTRA_OBJS = $(LZMA_BRCM_DIR)/*.o
+LZMA_EXTRA_OBJS = $(LZMA_ALT_DIR)/*.o
 endif
 
 ifeq ($(LZMA_XZ_SUPPORT),1)
@@ -278,8 +278,8 @@ caches-queues-lists.o: caches-queues-lists.c error.h caches-queues-lists.h
 
 gzip_wrapper.o: gzip_wrapper.c squashfs_fs.h gzip_wrapper.h compressor.h
 
-# CJH: Added brcm-lzma, sqlzma, lzmalib
-lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h brcm-lzma sqlzma lzmalib
+# CJH: Added lzmalt, lzmadaptive
+lzma_wrapper.o: lzma_wrapper.c compressor.h squashfs_fs.h lzmalt lzmadaptive
 
 lzma_xz_wrapper.o: lzma_xz_wrapper.c compressor.h squashfs_fs.h
 
@@ -313,19 +313,19 @@ unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h
 
 unsquashfs_info.o: unsquashfs.h squashfs_fs.h
 
-# CJH: Added brcm-lzma, lzmalib
-.PHONY: brcm-lzma sqlzma
-brcm-lzma:
-	make -C $(LZMA_BRCM_DIR)
-lzmalib:
-	make -C $(LZMA_LIB_DIR)
+# CJH: Added lzmalt, lzmadaptive
+.PHONY: lzmalt lzmadaptive
+lzmalt:
+	make -C $(LZMA_ALT_DIR)
+lzmadaptive:
+	make -C $(LZMA_ADAPT_DIR)
 
-# CJH: Added brcm-lzma, lzmalib
+# CJH: Added lzmalt, lzmadaptive
 .PHONY: clean
 clean:
 	-rm -f *.o $(LZMA_OBJS) mksquashfs unsquashfs sasquatch
-	make -C $(LZMA_LIB_DIR) clean
-	make -C $(LZMA_BRCM_DIR) clean
+	make -C $(LZMA_ADAPT_DIR) clean
+	make -C $(LZMA_ALT_DIR) clean
 
 .PHONY: install
 install: mksquashfs unsquashfs

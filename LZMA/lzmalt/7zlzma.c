@@ -1,4 +1,4 @@
-#include "7z.h"
+#include "lzmalt.h"
 
 #include "stdio.h"
 #include "string.h"

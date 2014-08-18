@@ -32,8 +32,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "error.h"
-#include "7z.h"
-#include "lzmalib.h"
+#include "lzmalt.h"
+#include "lzmadaptive.h"
 
 #define LZMA_HEADER_SIZE	(LZMA_PROPS_SIZE + 8)
 
@@ -101,10 +101,11 @@ static int lzma_standard_uncompress(void *dest, void *src, int size, int outsize
 
 	if(outlen > outsize)
     {
-        /* CJH: Don't consider this an error, as many implementations omit the size field from the LZMA header
-		*error = 0;
+        /* CJH: Don't consider this an error, as some implementations omit the size field from the LZMA header
+        *error = 0;
 		return -1;
-        */
+        */		
+
         outlen = outsize;
         inlen = size - LZMA_PROPS_SIZE;
         TRACE("lzma_standard_uncompress: lzma data block does not appear to contain a valid size field\n");
