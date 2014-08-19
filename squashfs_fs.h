@@ -517,6 +517,7 @@ struct override_table
     struct lzma_override_property lc;
     struct lzma_override_property lp;
     struct lzma_override_property pb;
+    struct lzma_override_property dictionary_size;
     struct lzma_override_property offset;
 };
 

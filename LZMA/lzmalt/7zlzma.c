@@ -13,14 +13,15 @@ ISequentialOutStream out_stream;
 int decompress_lzma_alt( unsigned char* in_data, 
                           unsigned in_size, 
                           unsigned char* out_data, 
-                          unsigned out_size) {
+                          unsigned out_size,
+                          int offset) {
 //		LzmaDecoder cc;
         int RC;
 	UINT64 in_size_l  = in_size;
 	UINT64 out_size_l = out_size;
 
 
-        InStreamInit(in_data, in_size);
+        InStreamInit(in_data+offset, in_size-offset);
 
 	OutStreamInit((char *)out_data, out_size);
 

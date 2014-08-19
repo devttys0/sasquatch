@@ -10,6 +10,6 @@ int lzmalinksys_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source
 */
 
 int lzmawrt_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
-int lzmaspec_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen, int lc, int lp, int pb, int offset));
+int lzmaspec_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen, int lc, int lp, int pb, int dictionary_size, int offset));
 
 #endif

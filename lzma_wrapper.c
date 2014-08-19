@@ -128,19 +128,29 @@ static int lzma_standard_uncompress(void *dest, void *src, int size, int outsize
 // CJH: lzma_alt variant decompressor
 static int lzma_alt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
-    int retval = -1;
+    int i = 0, retval = -1;
+    /*
+     * Found some Squashfsv1.0 images that have 4 bytes 
+     * of cruft at the beginning of each comressed data block.
+     */
+    int common_offsets[2] = { 0, 4 };
 
-    if((retval = decompress_lzma_alt((unsigned char *) src, (unsigned int) size, (unsigned char *) dest, (unsigned int) outsize)) != 0)
+    for(i=0; i<2; i++)
     {
-        *error = retval;
-        TRACE("decompress_lzma_alt failed with error code %d\n", *error);
-        return -1;
+        if((retval = decompress_lzma_alt((unsigned char *) src, 
+                                         (unsigned int) size, 
+                                         (unsigned char *) dest, 
+                                         (unsigned int) outsize, 
+                                         common_offsets[i])) == 0)
+        {
+            TRACE("decompress_lzma_alt succeeded in decompressing %d bytes!\n", outsize);
+            return outsize;
+        }
     }
-    else
-    {
-        TRACE("decompress_lzma_alt succeeded in decompressing %d bytes!\n", outsize);
-        return outsize;
-    }
+            
+    *error = retval;
+    TRACE("decompress_lzma_alt failed with error code %d\n", *error);
+    return -1;
 }
 
 // CJH: lzmawrt varient decompressor
@@ -173,6 +183,7 @@ struct lzma_props
     int lc;
     int lp;
     int pb;
+    int dictionary_size;
     int offset;
     int detected;
 };
@@ -182,9 +193,14 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
 {
     int lc, lp, pb, i, offset;
     unsigned char *tmp_buf = NULL;
-    int retval = -1, expected_outsize = 0;
+    int retval = -1, expected_outsize = 0, dictionary_size = -1;
 
     expected_outsize = outsize;
+
+    if(override.dictionary_size.set)
+    {
+        dictionary_size = override.dictionary_size.value;
+    }
 
     // Properties already detected? Do it.
     if(properties.detected)
@@ -196,6 +212,7 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                                      properties.lc,
                                      properties.lp,
                                      properties.pb,
+                                     properties.dictionary_size, 
                                      properties.offset);
     
         if(retval == 0)
@@ -251,6 +268,22 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                 {
                     if(override.pb.set && override.pb.value != pb) continue;
 
+                    TRACE("Attempting to decompress: [0x%.2X 0x%.2X 0x%.2X 0x%.2X 0x%.2X 0x%.2X 0x%.2X 0x%.2X]\n",
+                                    (uint8_t) ((unsigned char *) src)[offset+0],
+                                    (uint8_t) ((unsigned char *) src)[offset+1],
+                                    (uint8_t) ((unsigned char *) src)[offset+2],
+                                    (uint8_t) ((unsigned char *) src)[offset+3],
+                                    (uint8_t) ((unsigned char *) src)[offset+4],
+                                    (uint8_t) ((unsigned char *) src)[offset+5],
+                                    (uint8_t) ((unsigned char *) src)[offset+6],
+                                    (uint8_t) ((unsigned char *) src)[offset+7]);
+                            
+                    TRACE("Trying LZMA settings [lc: %d, lp: %d, pb: %d, dict size: 0x%.8X offset: %d], ", lc,
+                                                                                                           lp,
+                                                                                                           pb,
+                                                                                                           dictionary_size,
+                                                                                                           offset);
+
                     // tmp_buf was malloc'd as expected_outsize*2
                     outsize = expected_outsize * 2;
                     retval = lzmaspec_uncompress((Bytef *) tmp_buf, 
@@ -260,7 +293,10 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                                                  lc,
                                                  lp,
                                                  pb,
+                                                 dictionary_size,
                                                  offset);
+
+                    TRACE("retval = %d, outsize = %d/%d\n\n", retval, outsize, expected_outsize);
 
                     /*
                      * If the decompression was successful, and if the expected decompressed
@@ -285,14 +321,16 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                         properties.lc = lc;
                         properties.lp = lp;
                         properties.pb = pb;
+                        properties.dictionary_size = dictionary_size;
                         properties.offset = offset;
                         properties.detected = 1;
                         memcpy(dest, tmp_buf, outsize);
 
-                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, offset: %d], ", properties.lc,
-                                                                                               properties.lp,
-                                                                                               properties.pb,
-                                                                                               properties.offset);
+                        TRACE("Detected LZMA settings [lc: %d, lp: %d, pb: %d, dict size: 0x%.8X offset: %d], ", properties.lc,
+                                                                                                                 properties.lp,
+                                                                                                                 properties.pb,
+                                                                                                                 properties.dictionary_size,
+                                                                                                                 properties.offset);
                         TRACE("decompressed %d/%d bytes\n", outsize, expected_outsize);
 
                         free(tmp_buf);

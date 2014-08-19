@@ -402,7 +402,15 @@ extern "C" int lzmawrt_uncompress OF((Bytef *dest,   uLongf *destLen,
 }
 
 // CJH: A decompressor used for brute forcing commonly modified LZMA fields
-extern "C" int lzmaspec_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen, int lc, int lp, int pb, int offset))
+extern "C" int lzmaspec_uncompress OF((Bytef *dest, 
+                                       uLongf *destLen, 
+                                       const Bytef *source, 
+                                       uLong sourceLen, 
+                                       int lc, 
+                                       int lp, 
+                                       int pb, 
+                                       int dictionary_size,
+                                       int offset))
 {
 	CInMemoryStream *inStreamSpec = new CInMemoryStream(source+offset, sourceLen-offset);
 	CMyComPtr<ISequentialInStream> inStream = inStreamSpec;
@@ -413,9 +421,15 @@ extern "C" int lzmaspec_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef
 	NCompress::NLZMA::CDecoder *decoderSpec = 
 		new NCompress::NLZMA::CDecoder;
 	CMyComPtr<ICompressCoder> decoder = decoderSpec;
-	
+
+    // CJH: Use the default dictionary size if none was specified
+    if (dictionary_size <= 0)
+    {
+            dictionary_size = (1 << 23);
+    }
+
 	if (decoderSpec->SetDecoderPropertiesRaw(lc, 
-		lp, pb, (1 << 23)) != S_OK) return Z_DATA_ERROR;
+		lp, pb, dictionary_size) != S_OK) return Z_DATA_ERROR;
 	
 	UInt64 fileSize = *destLen;
 	

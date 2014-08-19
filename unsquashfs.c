@@ -2758,6 +2758,14 @@ int main(int argc, char *argv[])
             }
             override.pb.value = atoi(argv[i]);
             override.pb.set = TRUE;
+        } else if(strcmp(argv[i], "-dict") == 0) {
+            if(++i == argc) {
+                fprintf(stderr, "%s: -dict missing value option\n",
+                    argv[0]);
+                exit(1);
+            }
+            override.dictionary_size.value = atoi(argv[i]);
+            override.dictionary_size.set = TRUE;
         } else if(strcmp(argv[i], "-lzma-offset") == 0) {
             if(++i == argc) {
                 fprintf(stderr, "%s: -lzma-offset missing value option\n",
@@ -2849,6 +2857,7 @@ options:
             ERROR("\t-lc <value>\t\tSet the lzma-adaptive lc parameter [0-4]\n");
             ERROR("\t-lp <value>\t\tSet the lzma-adaptive lp parameter [0-4]\n");
             ERROR("\t-pb <value>\t\tSet the lzma-adaptive pb parameter [0-8]\n");
+            ERROR("\t-dict <value>\t\tSet the lzma-adaptive dictionary size\n");
             ERROR("\t-lzma-offset <value>\tSet the lzma-adaptive LZMA data offset\n");
             ERROR("\t-major <version>\tManually set the SquashFS major "
                 "version number\n");
