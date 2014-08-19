@@ -12,4 +12,23 @@ Very beta.
 Prerequisites
 =============
 
-You need a C/C++ compiler, plus the liblzma and zlib libraries (if installing from a package repo, install the development packages).
+You need a C/C++ compiler, plus the liblzma and zlib development libraries.
+
+Modified Files
+==============
+
+The following files have been modified from their original version. They have been formatted to fit your screen:
+
+ * compressor.c
+ * compressor.h
+ * error.h
+ * lzma_wrapper.c
+ * Makefile
+ * process_fragments.c
+ * read_fs.c
+ * squashfs_fs.h
+ * unsquashfs.c
+ * LZMA/lzmalt/LZMADecoder.c
+ * LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp
+ * LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h
+
