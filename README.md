@@ -30,6 +30,7 @@ The following files have been modified from their original version. They have be
  * read_fs.c
  * squashfs_fs.h
  * unsquashfs.c
+ * LZMA/lzmalt/WindowOut.h
  * LZMA/lzmalt/LZMADecoder.c
  * LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp
  * LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h
