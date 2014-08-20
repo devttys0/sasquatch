@@ -327,8 +327,8 @@ clean:
 	make -C $(LZMA_ADAPT_DIR) clean
 	make -C $(LZMA_ALT_DIR) clean
 
+# CJH: Added cp sasquatch
 .PHONY: install
-install: mksquashfs unsquashfs
+install: sasquatch
 	mkdir -p $(INSTALL_DIR)
-	cp mksquashfs $(INSTALL_DIR)
-	cp unsquashfs $(INSTALL_DIR)
+	cp sasquatch $(INSTALL_DIR)
