@@ -153,7 +153,10 @@ static int lzma_alt_uncompress(void *dest, void *src, int size, int outsize, int
     return -1;
 }
 
-// CJH: lzmawrt varient decompressor
+/*
+ * CJH: lzmawrt varient decompressor, generally unused ATM as 
+ * lzmadaptive takes care of DD-WRT images.
+ */
 static int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
@@ -363,7 +366,7 @@ struct compressor lzma_alt_comp_ops = {
 	.uncompress = lzma_alt_uncompress,
 	.options = NULL,
 	.usage = NULL,
-	.id = LZMA_BRCM_COMPRESSION,
+	.id = LZMA_ALT_COMPRESSION,
 	.name = "lzma-alt",
 	.supported = 1
 };

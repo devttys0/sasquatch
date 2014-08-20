@@ -280,7 +280,7 @@ typedef long long		squashfs_inode;
 // CJH: Added #defines for additional decompressors
 #define LZMA_WRT_COMPRESSION        6
 #define LZMA_ADAPTIVE_COMPRESSION   7
-#define LZMA_BRCM_COMPRESSION       8
+#define LZMA_ALT_COMPRESSION        8
 
 // CJH: A generic super block structure used for auto-detecting endianess
 #include <stdint.h>

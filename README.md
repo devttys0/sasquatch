@@ -5,7 +5,9 @@ A modified unsquashfs utility that attempts to support as many hacked-up vendor-
 
 If the vendor has done something simple like just muck a bit with the header fields, this tool should sort it out.
 
-If the vendor has made changes to the underlying LZMA compression options, or how these options are stored in the compressed data blocks, this tool will attempt to resolve such customizations via a brute-force method.
+If the vendor has made changes to the underlying LZMA compression options, or to how these options are stored in the compressed data blocks, this tool will attempt to automatically resolve such customizations via a brute-force method.
+
+Additional advanced command line options have been added for testing/debugging.
 
 Very beta.
 
