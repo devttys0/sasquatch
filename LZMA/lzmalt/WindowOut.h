@@ -29,7 +29,12 @@ INLINE void OutWindowCopyBackBlock(UINT32 aDistance, UINT32 aLen)
     UINT32  i;
     aDistance++;
     for(i = 0; i < aLen; i++)
-      p[i] = p[i - aDistance];
+      /*
+       * CJH: The freddy77 patch to prevent segfaults in 64 bit.
+       *      http://www.neufbox4.org/forum/viewtopic.php?pid=11019
+       */
+      //p[i] = p[i - aDistance];
+      p[i] = *(p+i-aDistance);
     out_window.Pos += aLen;
   }
 
