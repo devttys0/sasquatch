@@ -160,8 +160,9 @@ static int lzma_alt_uncompress(void *dest, void *src, int size, int outsize, int
 static int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int *error)
 {
     int retval = -1;
+    uLongf ulong_outsize = (uLongf) outsize;
 
-    if((retval = lzmawrt_uncompress((Bytef *) dest, (uLongf *) &outsize, (const Bytef *) src, (uLong) size)) != 0)
+    if((retval = lzmawrt_uncompress((Bytef *) dest, &ulong_outsize, (const Bytef *) src, (uLong) size)) != 0)
     {
         *error = retval;
         retval = -1;
@@ -169,6 +170,7 @@ static int lzma_wrt_uncompress(void *dest, void *src, int size, int outsize, int
     }
     else
     {
+        outsize = (int) ulong_outsize;
         TRACE("lzmawrt_uncompress succeeded: [%d] [%d]\n", retval, outsize);
         retval = outsize;
     }
@@ -208,8 +210,9 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
     // Properties already detected? Do it.
     if(properties.detected)
     {
+        uLongf ulong_outsize = (uLongf) outsize;
         retval = lzmaspec_uncompress((Bytef *) dest, 
-                                     (uLongf *) &outsize, 
+                                     &ulong_outsize, 
                                      (const Bytef *) src, 
                                      (uLong) size,
                                      properties.lc,
@@ -218,6 +221,8 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                                      properties.dictionary_size, 
                                      properties.offset);
     
+        outsize = (int) ulong_outsize;
+
         if(retval == 0)
         {
             return outsize;
@@ -289,8 +294,10 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
 
                     // tmp_buf was malloc'd as expected_outsize*2
                     outsize = expected_outsize * 2;
+                    uLongf ulong_outsize = (uLongf) outsize;
+
                     retval = lzmaspec_uncompress((Bytef *) tmp_buf, 
-                                                 (uLongf *) &outsize, 
+                                                 &ulong_outsize,
                                                  (const Bytef *) src, 
                                                  (uLong) size,
                                                  lc,
@@ -299,6 +306,7 @@ static int lzma_adaptive_uncompress(void *dest, void *src, int size, int outsize
                                                  dictionary_size,
                                                  offset);
 
+                    outsize = (int) ulong_outsize;
                     TRACE("retval = %d, outsize = %d/%d\n\n", retval, outsize, expected_outsize);
 
                     /*

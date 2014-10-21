@@ -418,8 +418,7 @@ extern "C" int lzmaspec_uncompress OF((Bytef *dest,
 	COutMemoryStream *outStreamSpec = new COutMemoryStream(dest, *destLen);
 	CMyComPtr<ISequentialOutStream> outStream = outStreamSpec;
 	
-	NCompress::NLZMA::CDecoder *decoderSpec = 
-		new NCompress::NLZMA::CDecoder;
+	NCompress::NLZMA::CDecoder *decoderSpec = new NCompress::NLZMA::CDecoder;
 	CMyComPtr<ICompressCoder> decoder = decoderSpec;
 
     // CJH: Use the default dictionary size if none was specified
@@ -432,7 +431,7 @@ extern "C" int lzmaspec_uncompress OF((Bytef *dest,
 		lp, pb, dictionary_size) != S_OK) return Z_DATA_ERROR;
 	
 	UInt64 fileSize = *destLen;
-	
+
 	if (decoder->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
 	{
         return Z_DATA_ERROR;
