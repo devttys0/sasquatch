@@ -14,7 +14,19 @@ Very beta.
 Prerequisites
 =============
 
-You need a C/C++ compiler, plus the liblzma and zlib development libraries.
+You need a C/C++ compiler, plus the liblzma, liblzo and zlib development libraries:
+
+```bash
+$ sudo apt-get install build-essential liblzma-dev liblzo2-dev zlib1g-dev
+```
+
+Installation
+============
+
+```bash
+$ make
+$ sudo make install
+```
 
 Modified Files
 ==============
