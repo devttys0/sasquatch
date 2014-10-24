@@ -41,8 +41,7 @@ static int lzma_compress(void *strm, void *dest, void *src, int size, int block_
 		int *error)
 {
 	unsigned char *d = dest;
-	size_t props_size = LZMA_PROPS_SIZE,
-		outlen = block_size - LZMA_HEADER_SIZE;
+	size_t props_size = LZMA_PROPS_SIZE, outlen = block_size - LZMA_HEADER_SIZE;
 	int res;
 
 	res = LzmaCompress(dest + LZMA_HEADER_SIZE, &outlen, src, size, dest,
