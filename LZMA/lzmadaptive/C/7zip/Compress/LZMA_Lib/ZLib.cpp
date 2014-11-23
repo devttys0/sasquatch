@@ -28,6 +28,12 @@
 #include <stdio.h>
 #include <zlib.h>
 
+// CJH: For Gentoo zlib compatibility.
+#ifdef _Z_OF
+#undef OF
+#define OF _Z_OF
+#endif
+
 #define ZLIB_LC 3
 #define ZLIB_LP 0
 #define ZLIB_PB 2

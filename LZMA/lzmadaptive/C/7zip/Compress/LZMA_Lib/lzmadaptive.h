@@ -3,6 +3,12 @@
 
 #include <zlib.h>
 
+// CJH: For Gentoo zlib compatibility
+#ifdef _Z_OF
+#undef OF
+#define OF _Z_OF
+#endif
+
 /* CJH: Depreciated.
 int lzmalib_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
 int lzma7z_uncompress OF((Bytef *dest, uLongf *destLen, const Bytef *source, uLong sourceLen));
