@@ -199,7 +199,7 @@ int compressor_uncompress(struct compressor *comp, void *dest, void *src, int si
             comp = compressor[i];
             
             if(comp->id != default_compressor_id && 
-               comp->id != detected_compressor_index && 
+               comp->id != compressor[detected_compressor_index]->id && 
                comp->uncompress)
             {
                 ERROR("Trying to decompress with %s...\n", comp->name);
