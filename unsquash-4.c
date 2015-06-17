@@ -33,6 +33,14 @@ int read_fragment_table_4(long long *directory_table_end)
 	int res, i;
 	int bytes = SQUASHFS_FRAGMENT_BYTES(sBlk.s.fragments);
 	int  indexes = SQUASHFS_FRAGMENT_INDEXES(sBlk.s.fragments);
+	size_t bytes = SQUASHFS_FRAGMENT_BYTES(sBlk.s.fragments);
+	size_t  indexes = SQUASHFS_FRAGMENT_INDEXES(sBlk.s.fragments);
+
+	if ( bytes > indexes ) {
+		EXIT_UNSQUASH("read_fragment_table: stack overflow via integer overflow averted;\n\t" \
+		"indexes = %zu\n\tbytes=%zu\n", indexes, bytes);
+	}
+
 	long long fragment_table_index[indexes];
 
 	TRACE("read_fragment_table: %d fragments, reading %d fragment indexes "
