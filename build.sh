@@ -1,6 +1,11 @@
 #!/bin/sh
 # Script to download squashfs-tools v4.3, apply the patches, perform a clean build, and install.
 
+# Install prerequisites
+if hash apt-get &>/dev/null; then
+    sudo apt-get install build-essential liblzma-dev liblzo2-dev zlib1g-dev
+fi
+
 # If not root, perform 'make install' with sudo
 if [ "$UID" = "0" ]
 then
