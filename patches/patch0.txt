@@ -1,6 +1,6 @@
 diff --strip-trailing-cr -NBbaur squashfs-tools/compressor.c squashfs-tools-patched/compressor.c
---- squashfs-tools/compressor.c	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/compressor.c	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/compressor.c	2014-03-09 13:31:58.000000000 +0800
++++ squashfs-tools-patched/compressor.c	2017-06-07 03:30:35.138205948 +0800
 @@ -25,6 +25,9 @@
  #include "compressor.h"
  #include "squashfs_fs.h"
@@ -121,8 +121,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/compressor.c squashfs-tools-patc
 +}
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/compressor.h squashfs-tools-patched/compressor.h
---- squashfs-tools/compressor.h	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/compressor.h	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/compressor.h	2014-05-10 12:54:13.000000000 +0800
++++ squashfs-tools-patched/compressor.h	2017-06-07 03:30:35.138205948 +0800
 @@ -59,11 +59,14 @@
  }
  
@@ -139,8 +139,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/compressor.h squashfs-tools-patc
  
  /*
 diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/error.h
---- squashfs-tools/error.h	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/error.h	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/error.h	2014-05-10 12:54:13.000000000 +0800
++++ squashfs-tools-patched/error.h	2017-06-07 03:30:35.141539135 +0800
 @@ -30,14 +30,18 @@
  extern void progressbar_error(char *fmt, ...);
  extern void progressbar_info(char *fmt, ...);
@@ -163,8 +163,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/e
  #define INFO(s, args...) \
  		do {\
 diff --strip-trailing-cr -NBbaur squashfs-tools/LICENSE squashfs-tools-patched/LICENSE
---- squashfs-tools/LICENSE	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LICENSE	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LICENSE	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LICENSE	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,339 @@
 +                    GNU GENERAL PUBLIC LICENSE
 +                       Version 2, June 1991
@@ -506,8 +506,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LICENSE squashfs-tools-patched/L
 +library.  If this is what you want to do, use the GNU Lesser General
 +Public License instead of this License.
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/7zC.txt squashfs-tools-patched/LZMA/lzma465/7zC.txt
---- squashfs-tools/LZMA/lzma465/7zC.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/7zC.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/7zC.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/7zC.txt	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,194 @@
 +7z ANSI-C Decoder 4.62
 +----------------------
@@ -704,8 +704,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/7zC.txt squashfs-to
 +http://www.7-zip.org/sdk.html
 +http://www.7-zip.org/support.html
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/7zFormat.txt squashfs-tools-patched/LZMA/lzma465/7zFormat.txt
---- squashfs-tools/LZMA/lzma465/7zFormat.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/7zFormat.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/7zFormat.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/7zFormat.txt	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,471 @@
 +7z Format description (2.30 Beta 25)
 +-----------------------------------
@@ -1179,8 +1179,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/7zFormat.txt squash
 +---
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf2.c squashfs-tools-patched/LZMA/lzma465/C/7zBuf2.c
---- squashfs-tools/LZMA/lzma465/C/7zBuf2.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf2.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zBuf2.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf2.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,45 @@
 +/* 7zBuf2.c -- Byte Buffer
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -1228,8 +1228,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf2.c squashfs
 +  p->pos = 0;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf.c squashfs-tools-patched/LZMA/lzma465/C/7zBuf.c
---- squashfs-tools/LZMA/lzma465/C/7zBuf.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zBuf.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,36 @@
 +/* 7zBuf.c -- Byte Buffer
 +2008-03-28
@@ -1268,8 +1268,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf.c squashfs-
 +  p->size = 0;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf.h squashfs-tools-patched/LZMA/lzma465/C/7zBuf.h
---- squashfs-tools/LZMA/lzma465/C/7zBuf.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zBuf.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zBuf.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,31 @@
 +/* 7zBuf.h -- Byte Buffer
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -1303,8 +1303,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zBuf.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zCrc.c squashfs-tools-patched/LZMA/lzma465/C/7zCrc.c
---- squashfs-tools/LZMA/lzma465/C/7zCrc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zCrc.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zCrc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zCrc.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,35 @@
 +/* 7zCrc.c -- CRC32 calculation
 +2008-08-05
@@ -1342,8 +1342,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zCrc.c squashfs-
 +  return CrcUpdate(CRC_INIT_VAL, data, size) ^ 0xFFFFFFFF;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zCrc.h squashfs-tools-patched/LZMA/lzma465/C/7zCrc.h
---- squashfs-tools/LZMA/lzma465/C/7zCrc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zCrc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zCrc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zCrc.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,24 @@
 +/* 7zCrc.h -- CRC32 calculation
 +2008-03-13
@@ -1370,8 +1370,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zCrc.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zFile.c squashfs-tools-patched/LZMA/lzma465/C/7zFile.c
---- squashfs-tools/LZMA/lzma465/C/7zFile.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zFile.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zFile.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zFile.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,263 @@
 +/* 7zFile.c -- File IO
 +2008-11-22 : Igor Pavlov : Public domain */
@@ -1637,8 +1637,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zFile.c squashfs
 +  p->s.Write = FileOutStream_Write;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zFile.h squashfs-tools-patched/LZMA/lzma465/C/7zFile.h
---- squashfs-tools/LZMA/lzma465/C/7zFile.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zFile.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zFile.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zFile.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,74 @@
 +/* 7zFile.h -- File IO
 +2008-11-22 : Igor Pavlov : Public domain */
@@ -1715,8 +1715,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zFile.h squashfs
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zStream.c squashfs-tools-patched/LZMA/lzma465/C/7zStream.c
---- squashfs-tools/LZMA/lzma465/C/7zStream.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zStream.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zStream.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zStream.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,169 @@
 +/* 7zStream.c -- 7z Stream functions
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -1888,8 +1888,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zStream.c squash
 +  p->s.Read = SecToRead_Read;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zVersion.h squashfs-tools-patched/LZMA/lzma465/C/7zVersion.h
---- squashfs-tools/LZMA/lzma465/C/7zVersion.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/7zVersion.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/7zVersion.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/7zVersion.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,7 @@
 +#define MY_VER_MAJOR 4
 +#define MY_VER_MINOR 65
@@ -1899,8 +1899,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/7zVersion.h squas
 +#define MY_COPYRIGHT ": Igor Pavlov : Public domain"
 +#define MY_VERSION_COPYRIGHT_DATE MY_VERSION " " MY_COPYRIGHT " : " MY_DATE
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Alloc.c squashfs-tools-patched/LZMA/lzma465/C/Alloc.c
---- squashfs-tools/LZMA/lzma465/C/Alloc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Alloc.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Alloc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Alloc.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,127 @@
 +/* Alloc.c -- Memory allocation functions
 +2008-09-24
@@ -2030,8 +2030,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Alloc.c squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Alloc.h squashfs-tools-patched/LZMA/lzma465/C/Alloc.h
---- squashfs-tools/LZMA/lzma465/C/Alloc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Alloc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Alloc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Alloc.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,32 @@
 +/* Alloc.h -- Memory allocation functions
 +2008-03-13
@@ -2066,8 +2066,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Alloc.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,77 @@
 +/* 7zAlloc.c -- Allocation functions
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -2147,8 +2147,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAllo
 +  free(address);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAlloc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zAlloc.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,15 @@
 +/* 7zAlloc.h -- Allocation functions
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -2166,8 +2166,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zAllo
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.c	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,254 @@
 +/* 7zDecode.c -- Decoding from 7z folder
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -2424,8 +2424,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDeco
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDecode.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zDecode.h	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,13 @@
 +/* 7zDecode.h -- Decoding from 7z folder
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -2441,8 +2441,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zDeco
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsp squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsp
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsp	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,199 @@
 +# Microsoft Developer Studio Project File - Name="7z" - Package Owner=<4>
 +# Microsoft Developer Studio Generated Build File, Format Version 6.00
@@ -2644,8 +2644,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsp
 +# End Target
 +# End Project
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsw squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsw
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsw	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsw	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsw	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7z.dsw	2017-06-07 03:30:35.141539135 +0800
 @@ -0,0 +1,29 @@
 +Microsoft Developer Studio Workspace File, Format Version 6.00
 +# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
@@ -2677,8 +2677,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7z.dsw
 +###############################################################################
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,93 @@
 +/* 7zExtract.c -- Extracting from 7z archive
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -2774,8 +2774,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtr
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtract.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zExtract.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,41 @@
 +/* 7zExtract.h -- Extracting from 7z archive
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -2819,8 +2819,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zExtr
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,6 @@
 +/*  7zHeader.c -- 7z Headers
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -2829,8 +2829,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHead
 +
 +Byte k7zSignature[k7zSignatureSize] = {'7', 'z', 0xBC, 0xAF, 0x27, 0x1C};
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHeader.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zHeader.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,57 @@
 +/* 7zHeader.h -- 7z Headers
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -2890,8 +2890,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zHead
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,1204 @@
 +/* 7zIn.c -- 7z Input functions
 +2008-12-31 : Igor Pavlov : Public domain */
@@ -4098,8 +4098,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.c
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zIn.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,41 @@
 +/* 7zIn.h -- 7z Input functions
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -4143,8 +4143,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zIn.h
 + 
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,127 @@
 +/* 7zItem.c -- 7z Items
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -4274,8 +4274,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem
 +  SzAr_Init(p);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.h squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.h
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zItem.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,84 @@
 +/* 7zItem.h -- 7z Items
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -4362,8 +4362,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zItem
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zMain.c squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zMain.c
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zMain.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zMain.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/7zMain.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/7zMain.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,262 @@
 +/* 7zMain.c - Test application for 7z Decoder
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -4628,8 +4628,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/7zMain
 +  return 1;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,33 @@
 +MY_STATIC_LINK=1
 +
@@ -4665,8 +4665,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefi
 +$(C_OBJS): ../../$(*B).c
 +	$(COMPL_O2)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile.gcc squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile.gcc
---- squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile.gcc	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile.gcc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile.gcc	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,61 @@
 +PROG = 7zDec
 +CXX = g++
@@ -4730,8 +4730,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefi
 +	-$(RM) $(PROG) $(OBJS)
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bcj2.c squashfs-tools-patched/LZMA/lzma465/C/Bcj2.c
---- squashfs-tools/LZMA/lzma465/C/Bcj2.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Bcj2.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Bcj2.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Bcj2.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,132 @@
 +/* Bcj2.c -- Converter for x86 code (BCJ2)
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -4866,8 +4866,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bcj2.c squashfs-t
 +  return (outPos == outSize) ? SZ_OK : SZ_ERROR_DATA;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bcj2.h squashfs-tools-patched/LZMA/lzma465/C/Bcj2.h
---- squashfs-tools/LZMA/lzma465/C/Bcj2.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Bcj2.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Bcj2.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Bcj2.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,30 @@
 +/* Bcj2.h -- Converter for x86 code (BCJ2)
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -4900,8 +4900,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bcj2.h squashfs-t
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra86.c squashfs-tools-patched/LZMA/lzma465/C/Bra86.c
---- squashfs-tools/LZMA/lzma465/C/Bra86.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Bra86.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Bra86.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Bra86.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,85 @@
 +/* Bra86.c -- Converter for x86 code (BCJ)
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -4989,8 +4989,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra86.c squashfs-
 +  return bufferPos;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra.c squashfs-tools-patched/LZMA/lzma465/C/Bra.c
---- squashfs-tools/LZMA/lzma465/C/Bra.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Bra.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Bra.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Bra.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,133 @@
 +/* Bra.c -- Converters for RISC code
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -5126,8 +5126,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra.c squashfs-to
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra.h squashfs-tools-patched/LZMA/lzma465/C/Bra.h
---- squashfs-tools/LZMA/lzma465/C/Bra.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Bra.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Bra.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Bra.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,60 @@
 +/* Bra.h -- Branch converters for executables
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -5190,8 +5190,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Bra.h squashfs-to
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/BraIA64.c squashfs-tools-patched/LZMA/lzma465/C/BraIA64.c
---- squashfs-tools/LZMA/lzma465/C/BraIA64.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/BraIA64.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/BraIA64.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/BraIA64.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,67 @@
 +/* BraIA64.c -- Converter for IA-64 code
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -5261,8 +5261,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/BraIA64.c squashf
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/CpuArch.h squashfs-tools-patched/LZMA/lzma465/C/CpuArch.h
---- squashfs-tools/LZMA/lzma465/C/CpuArch.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/CpuArch.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/CpuArch.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/CpuArch.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,69 @@
 +/* CpuArch.h
 +2008-08-05
@@ -5334,8 +5334,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/CpuArch.h squashf
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFind.c squashfs-tools-patched/LZMA/lzma465/C/LzFind.c
---- squashfs-tools/LZMA/lzma465/C/LzFind.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzFind.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzFind.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzFind.c	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,751 @@
 +/* LzFind.c -- Match finder for LZ algorithms
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -6089,8 +6089,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFind.c squashfs
 +  }
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFind.h squashfs-tools-patched/LZMA/lzma465/C/LzFind.h
---- squashfs-tools/LZMA/lzma465/C/LzFind.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzFind.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzFind.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzFind.h	2017-06-07 03:30:35.144872321 +0800
 @@ -0,0 +1,107 @@
 +/* LzFind.h -- Match finder for LZ algorithms
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -6200,8 +6200,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFind.h squashfs
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFindMt.c squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.c
---- squashfs-tools/LZMA/lzma465/C/LzFindMt.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzFindMt.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.c	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,793 @@
 +/* LzFindMt.c -- multithreaded Match finder for LZ algorithms
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -6997,8 +6997,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFindMt.c squash
 +  }
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFindMt.h squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.h
---- squashfs-tools/LZMA/lzma465/C/LzFindMt.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzFindMt.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzFindMt.h	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,97 @@
 +/* LzFindMt.h -- multithreaded Match finder for LZ algorithms
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -7098,8 +7098,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzFindMt.h squash
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzHash.h squashfs-tools-patched/LZMA/lzma465/C/LzHash.h
---- squashfs-tools/LZMA/lzma465/C/LzHash.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzHash.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzHash.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzHash.h	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,54 @@
 +/* LzHash.h -- HASH functions for LZ algorithms
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -7156,8 +7156,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzHash.h squashfs
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaDec.c squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.c
---- squashfs-tools/LZMA/lzma465/C/LzmaDec.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaDec.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.c	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,1007 @@
 +/* LzmaDec.c -- LZMA Decoder
 +2008-11-06 : Igor Pavlov : Public domain */
@@ -8167,8 +8167,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaDec.c squashf
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaDec.h squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.h
---- squashfs-tools/LZMA/lzma465/C/LzmaDec.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaDec.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaDec.h	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,223 @@
 +/* LzmaDec.h -- LZMA Decoder
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -8394,8 +8394,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaDec.h squashf
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaEnc.c squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.c
---- squashfs-tools/LZMA/lzma465/C/LzmaEnc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaEnc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.c	2017-06-07 03:30:35.148205508 +0800
 @@ -0,0 +1,2281 @@
 +/* LzmaEnc.c -- LZMA Encoder
 +2009-02-02 : Igor Pavlov : Public domain */
@@ -10679,8 +10679,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaEnc.c squashf
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaEnc.h squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.h
---- squashfs-tools/LZMA/lzma465/C/LzmaEnc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaEnc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaEnc.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,72 @@
 +/*  LzmaEnc.h -- LZMA Encoder
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -10755,16 +10755,16 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaEnc.h squashf
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.def squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.def
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.def	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.def	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.def	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.def	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,4 @@
 +EXPORTS
 +  LzmaCompress
 +  LzmaUncompress
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsp	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,178 @@
 +# Microsoft Developer Studio Project File - Name="LzmaLib" - Package Owner=<4>
 +# Microsoft Developer Studio Generated Build File, Format Version 6.00
@@ -10945,8 +10945,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.d
 +# End Target
 +# End Project
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLib.dsw	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,29 @@
 +Microsoft Developer Studio Workspace File, Format Version 6.00
 +# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
@@ -10978,8 +10978,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLib.d
 +###############################################################################
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/LzmaLibExports.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,12 @@
 +/* LzmaLibExports.c -- LZMA library DLL Entry point
 +2008-10-04 : Igor Pavlov : Public domain */
@@ -10994,8 +10994,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/LzmaLibEx
 +  return TRUE;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/makefile squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/makefile
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/makefile	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/makefile	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,37 @@
 +MY_STATIC_LINK=1
 +SLIB = sLZMA.lib
@@ -11035,16 +11035,16 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/makefile 
 +$(C_OBJS): ../$(*B).c
 +	$(COMPL_O2)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib/resource.rc squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/resource.rc
---- squashfs-tools/LZMA/lzma465/C/LzmaLib/resource.rc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/resource.rc	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib/resource.rc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib/resource.rc	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,4 @@
 +#include "../../CPP/7zip/MyVersionInfo.rc"
 +
 +MY_VERSION_INFO_DLL("LZMA library", "LZMA")
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib.c squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.c
---- squashfs-tools/LZMA/lzma465/C/LzmaLib.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,46 @@
 +/* LzmaLib.c -- LZMA library wrapper
 +2008-08-05
@@ -11093,8 +11093,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib.c squashf
 +  return LzmaDecode(dest, destLen, src, srcLen, props, (unsigned)propsSize, LZMA_FINISH_ANY, &status, &g_Alloc);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib.h squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.h
---- squashfs-tools/LZMA/lzma465/C/LzmaLib.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaLib.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaLib.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,135 @@
 +/* LzmaLib.h -- LZMA library interface
 +2008-08-05
@@ -11232,8 +11232,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaLib.h squashf
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,61 @@
 +/* Lzma86Dec.c -- LZMA + x86 (BCJ) Filter Decoder
 +2008-04-07
@@ -11297,8 +11297,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86De
 +  return SZ_OK;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Dec.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,45 @@
 +/* Lzma86Dec.h -- LZMA + x86 (BCJ) Filter Decoder
 +2008-08-05
@@ -11346,8 +11346,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86De
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,113 @@
 +/* Lzma86Enc.c -- LZMA + x86 (BCJ) Filter Encoder
 +2008-08-05
@@ -11463,8 +11463,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86En
 +  return mainResult;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/Lzma86Enc.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,72 @@
 +/* Lzma86Enc.h -- LZMA + x86 (BCJ) Filter Encoder
 +2008-08-05
@@ -11539,8 +11539,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/Lzma86En
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,254 @@
 +/* LzmaUtil.c -- Test application for LZMA compression
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -11797,8 +11797,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsp	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,168 @@
 +# Microsoft Developer Studio Project File - Name="LzmaUtil" - Package Owner=<4>
 +# Microsoft Developer Studio Generated Build File, Format Version 6.00
@@ -11969,8 +11969,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil
 +# End Target
 +# End Project
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/LzmaUtil.dsw	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,29 @@
 +Microsoft Developer Studio Workspace File, Format Version 6.00
 +# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
@@ -12002,8 +12002,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/LzmaUtil
 +###############################################################################
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,29 @@
 +MY_STATIC_LINK=1
 +PROG = LZMAc.exe
@@ -12035,8 +12035,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile
 +$(C_OBJS): ../$(*B).c
 +	$(COMPL_O2)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile.gcc squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile.gcc
---- squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile.gcc	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile.gcc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile.gcc	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,44 @@
 +PROG = lzma
 +CXX = g++
@@ -12083,8 +12083,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile
 +clean:
 +	-$(RM) $(PROG) $(OBJS)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Threads.c squashfs-tools-patched/LZMA/lzma465/C/Threads.c
---- squashfs-tools/LZMA/lzma465/C/Threads.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Threads.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Threads.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Threads.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,109 @@
 +/* Threads.c -- multithreading library
 +2008-08-05
@@ -12196,8 +12196,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Threads.c squashf
 +}
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Threads.h squashfs-tools-patched/LZMA/lzma465/C/Threads.h
---- squashfs-tools/LZMA/lzma465/C/Threads.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Threads.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Threads.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Threads.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,68 @@
 +/* Threads.h -- multithreading library
 +2008-11-22 : Igor Pavlov : Public domain */
@@ -12268,8 +12268,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Threads.h squashf
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Types.h squashfs-tools-patched/LZMA/lzma465/C/Types.h
---- squashfs-tools/LZMA/lzma465/C/Types.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/C/Types.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/C/Types.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/C/Types.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,208 @@
 +/* Types.h -- Basic types
 +2008-11-23 : Igor Pavlov : Public domain */
@@ -12480,8 +12480,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Types.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/history.txt squashfs-tools-patched/LZMA/lzma465/history.txt
---- squashfs-tools/LZMA/lzma465/history.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/history.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/history.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/history.txt	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,236 @@
 +HISTORY of the LZMA SDK
 +-----------------------
@@ -12720,8 +12720,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/history.txt squashf
 +
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/lzma.txt squashfs-tools-patched/LZMA/lzma465/lzma.txt
---- squashfs-tools/LZMA/lzma465/lzma.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/lzma.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/lzma.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/lzma.txt	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,594 @@
 +LZMA SDK 4.65
 +-------------
@@ -13318,8 +13318,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/lzma.txt squashfs-t
 +http://www.7-zip.org/sdk.html
 +http://www.7-zip.org/support.html
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/Methods.txt squashfs-tools-patched/LZMA/lzma465/Methods.txt
---- squashfs-tools/LZMA/lzma465/Methods.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzma465/Methods.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzma465/Methods.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzma465/Methods.txt	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,137 @@
 +7-Zip method IDs (4.65)
 +-----------------------
@@ -13459,8 +13459,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/Methods.txt squashf
 +---
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/7zC.txt squashfs-tools-patched/LZMA/lzmadaptive/7zC.txt
---- squashfs-tools/LZMA/lzmadaptive/7zC.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/7zC.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/7zC.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/7zC.txt	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,235 @@
 +7z ANSI-C Decoder 4.23
 +----------------------
@@ -13698,8 +13698,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/7zC.txt squashf
 +http://www.7-zip.org
 +http://www.7-zip.org/support.html
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/7zFormat.txt squashfs-tools-patched/LZMA/lzmadaptive/7zFormat.txt
---- squashfs-tools/LZMA/lzmadaptive/7zFormat.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/7zFormat.txt	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/7zFormat.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/7zFormat.txt	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,471 @@
 +7z Format description (2.30 Beta 25)
 +-----------------------------------
@@ -14173,8 +14173,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/7zFormat.txt sq
 +---
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.c	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,70 @@
 +/* 7zAlloc.c */
 +
@@ -14247,8 +14247,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  free(address);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zAlloc.h	2017-06-07 03:30:35.151538693 +0800
 @@ -0,0 +1,20 @@
 +/* 7zAlloc.h */
 +
@@ -14271,8 +14271,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,29 @@
 +/* 7zBuffer.c */
 +
@@ -14304,8 +14304,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  buffer->Capacity = 0;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zBuffer.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,19 @@
 +/* 7zBuffer.h */
 +
@@ -14327,8 +14327,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,178 @@
 +# Microsoft Developer Studio Project File - Name="7z_C" - Package Owner=<4>
 +# Microsoft Developer Studio Generated Build File, Format Version 6.00
@@ -14509,8 +14509,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +# End Target
 +# End Project
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7z_C.dsw	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,29 @@
 +Microsoft Developer Studio Workspace File, Format Version 6.00
 +# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
@@ -14542,8 +14542,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +###############################################################################
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,76 @@
 +/* 7zCrc.c */
 +
@@ -14622,8 +14622,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return (CrcCalculateDigest(data, size) == digest);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zCrc.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,24 @@
 +/* 7zCrc.h */
 +
@@ -14650,8 +14650,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,150 @@
 +/* 7zDecode.c */
 +
@@ -14804,8 +14804,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return SZE_NOTIMPL;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zDecode.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,21 @@
 +/* 7zDecode.h */
 +
@@ -14829,8 +14829,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,116 @@
 +/* 7zExtract.c */
 +
@@ -14949,8 +14949,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zExtract.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,40 @@
 +/* 7zExtract.h */
 +
@@ -14993,8 +14993,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,5 @@
 +/*  7zHeader.c */
 +
@@ -15002,8 +15002,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +Byte k7zSignature[k7zSignatureSize] = {'7', 'z', 0xBC, 0xAF, 0x27, 0x1C};
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zHeader.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,55 @@
 +/* 7zHeader.h */
 +
@@ -15061,8 +15061,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,1292 @@
 +/* 7zIn.c */
 +
@@ -16357,8 +16357,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zIn.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,55 @@
 +/* 7zIn.h */
 +
@@ -16416,8 +16416,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 + 
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,133 @@
 +/* 7zItem.c */
 +
@@ -16553,8 +16553,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  SzArchiveDatabaseInit(db);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zItem.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,90 @@
 +/* 7zItem.h */
 +
@@ -16647,8 +16647,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMain.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,223 @@
 +/* 
 +7zMain.c
@@ -16874,8 +16874,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return 1;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.c	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,14 @@
 +/* 7zMethodID.c */
 +
@@ -16892,8 +16892,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +  return 1;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zMethodID.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,18 @@
 +/* 7zMethodID.h */
 +
@@ -16914,8 +16914,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/7zTypes.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,61 @@
 +/* 7zTypes.h */
 +
@@ -16979,8 +16979,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,55 @@
 +PROG = 7zDec.exe
 +
@@ -17038,8 +17038,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +$O\LzmaDecode.obj: ../../Compress/LZMA_C/$(*B).c
 +	$(COMPL_O2)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,50 @@
 +PROG = 7zDec
 +CXX = g++
@@ -17092,8 +17092,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 +	-$(RM) $(PROG) $(OBJS)
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,251 @@
 +// FileStreams.cpp
 +
@@ -17347,8 +17347,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/F
 +  
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/FileStreams.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,98 @@
 +// FileStreams.h
 +
@@ -17449,8 +17449,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/F
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,80 @@
 +// InBuffer.cpp
 +
@@ -17533,8 +17533,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/I
 +  return *_buffer++;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/InBuffer.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,76 @@
 +// InBuffer.h
 +
@@ -17613,8 +17613,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/I
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,117 @@
 +// OutByte.cpp
 +
@@ -17734,8 +17734,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/O
 +  #endif
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/OutBuffer.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,64 @@
 +// OutBuffer.h
 +
@@ -17802,8 +17802,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/O
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StdAfx.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,9 @@
 +// StdAfx.h
 +
@@ -17815,8 +17815,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/S
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,44 @@
 +// StreamUtils.cpp
 +
@@ -17863,8 +17863,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/S
 +  return S_OK;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Common/StreamUtils.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,11 @@
 +// StreamUtils.h
 +
@@ -17878,8 +17878,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Common/S
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,16 @@
 +// ARM.cpp
 +
@@ -17898,8 +17898,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::ARM_Convert(data, size, _bufferPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARM.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,10 @@
 +// ARM.h
 +
@@ -17912,8 +17912,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.cpp	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,16 @@
 +// ARMThumb.cpp
 +
@@ -17932,8 +17932,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::ARMThumb_Convert(data, size, _bufferPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/ARMThumb.h	2017-06-07 03:30:35.154871880 +0800
 @@ -0,0 +1,10 @@
 +// ARMThumb.h
 +
@@ -17946,8 +17946,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,26 @@
 +// BranchARM.c
 +
@@ -17976,8 +17976,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARM.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// BranchARM.h
 +
@@ -17990,8 +17990,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,35 @@
 +// BranchARMThumb.c
 +
@@ -18029,8 +18029,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchARMThumb.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// BranchARMThumb.h
 +
@@ -18043,8 +18043,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,18 @@
 +// BranchCoder.cpp
 +
@@ -18065,8 +18065,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return processedSize;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchCoder.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,54 @@
 +// BranchCoder.h
 +
@@ -18123,8 +18123,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,65 @@
 +// BranchIA64.c
 +
@@ -18192,8 +18192,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchIA64.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// BranchIA64.h
 +
@@ -18206,8 +18206,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,36 @@
 +// BranchPPC.c
 +
@@ -18246,8 +18246,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchPPC.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// BranchPPC.h
 +
@@ -18260,8 +18260,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,36 @@
 +// BranchSPARC.c
 +
@@ -18300,8 +18300,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return i;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchSPARC.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// BranchSPARC.h
 +
@@ -18314,8 +18314,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.c	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,101 @@
 +/* BranchX86.c */
 +
@@ -18419,8 +18419,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return bufferPos;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/BranchX86.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,19 @@
 +/* BranchX86.h */
 +
@@ -18442,8 +18442,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,16 @@
 +// IA64.cpp
 +
@@ -18462,8 +18462,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::IA64_Convert(data, size, _bufferPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/IA64.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// IA64.h
 +
@@ -18476,8 +18476,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,17 @@
 +// PPC.cpp
 +
@@ -18497,8 +18497,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::PPC_B_Convert(data, size, _bufferPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/PPC.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// PPC.h
 +
@@ -18511,8 +18511,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,17 @@
 +// SPARC.cpp
 +
@@ -18532,8 +18532,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::SPARC_Convert(data, size, _bufferPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/SPARC.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,10 @@
 +// SPARC.h
 +
@@ -18546,8 +18546,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/StdAfx.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,8 @@
 +// StdAfx.h
 +
@@ -18558,8 +18558,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,412 @@
 +// x86_2.cpp
 +
@@ -18974,8 +18974,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  catch(...) { return S_FALSE; }
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86_2.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,133 @@
 +// x86_2.h
 +
@@ -19111,8 +19111,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,18 @@
 +// x86.cpp
 +
@@ -19133,8 +19133,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return ::x86_Convert(data, size, _bufferPos, &_prevMask, &_prevPos, 0);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/Branch/x86.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,19 @@
 +// x86.h
 +
@@ -19156,8 +19156,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree2.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,12 @@
 +// BinTree2.h
 +
@@ -19172,8 +19172,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,16 @@
 +// BinTree3.h
 +
@@ -19192,8 +19192,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree3Z.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,16 @@
 +// BinTree3Z.h
 +
@@ -19212,8 +19212,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4b.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,20 @@
 +// BinTree4b.h
 +
@@ -19236,8 +19236,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree4.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,18 @@
 +// BinTree4.h
 +
@@ -19258,8 +19258,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTree.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,55 @@
 +// BinTree.h
 +
@@ -19317,8 +19317,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/BinTree/BinTreeMain.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,444 @@
 +// BinTreeMain.h
 +
@@ -19765,8 +19765,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 + 
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC2.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,13 @@
 +// HC2.h
 +
@@ -19782,8 +19782,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC3.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,17 @@
 +// HC3.h
 +
@@ -19803,8 +19803,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4b.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,21 @@
 +// HC4b.h
 +
@@ -19828,8 +19828,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC4.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,19 @@
 +// HC4.h
 +
@@ -19851,8 +19851,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HC.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,55 @@
 +// HC.h
 +
@@ -19910,8 +19910,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/HashChain/HCMain.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,350 @@
 +// HC.h
 +
@@ -20264,8 +20264,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 + 
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/IMatchFinder.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,63 @@
 +// MatchFinders/IMatchFinder.h
 +
@@ -20331,8 +20331,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,102 @@
 +// LZInWindow.cpp
 +
@@ -20437,8 +20437,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  AfterMoveBlock();
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZInWindow.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,84 @@
 +// LZInWindow.h
 +
@@ -20525,8 +20525,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.cpp	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,17 @@
 +// LZOutWindow.cpp
 +
@@ -20546,8 +20546,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/LZOutWindow.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,64 @@
 +// LZOutWindow.h
 +
@@ -20614,8 +20614,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2.h	2017-06-07 03:30:35.158205066 +0800
 @@ -0,0 +1,22 @@
 +// Pat2.h
 +
@@ -20640,8 +20640,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2H.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,24 @@
 +// Pat2H.h
 +
@@ -20668,8 +20668,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat2R.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,20 @@
 +// Pat2R.h
 +
@@ -20692,8 +20692,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat3H.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,24 @@
 +// Pat3H.h
 +
@@ -20720,8 +20720,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat4H.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,24 @@
 +// Pat4H.h
 +
@@ -20748,8 +20748,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/Pat.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,318 @@
 +// Pat.h
 +
@@ -21070,8 +21070,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +// #endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/Patricia/PatMain.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,989 @@
 +// PatMain.h
 +
@@ -22063,8 +22063,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZ/StdAfx.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,6 @@
 +// StdAfx.h
 +
@@ -22073,8 +22073,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.cpp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,342 @@
 +// LZMADecoder.cpp
 +
@@ -22419,8 +22419,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,249 @@
 +// LZMA/Decoder.h
 +
@@ -22672,8 +22672,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.cpp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,1504 @@
 +// LZMA/Encoder.cpp
 +
@@ -24180,8 +24180,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,416 @@
 +// LZMA/Encoder.h
 +
@@ -24600,8 +24600,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,82 @@
 +// LZMA.h
 +
@@ -24686,8 +24686,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA/StdAfx.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,8 @@
 +// StdAfx.h
 +
@@ -24698,8 +24698,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,523 @@
 +# Microsoft Developer Studio Project File - Name="AloneLZMA" - Package Owner=<4>
 +# Microsoft Developer Studio Generated Build File, Format Version 6.00
@@ -25225,8 +25225,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +# End Target
 +# End Project
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/AloneLZMA.dsw	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,29 @@
 +Microsoft Developer Studio Workspace File, Format Version 6.00
 +# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
@@ -25258,8 +25258,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +###############################################################################
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaAlone.cpp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,509 @@
 +// LzmaAlone.cpp
 +
@@ -25771,8 +25771,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  }
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.cpp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,508 @@
 +// LzmaBench.cpp
 +
@@ -26283,8 +26283,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return 0;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaBench.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,11 @@
 +// LzmaBench.h
 +
@@ -26298,8 +26298,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.cpp	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,228 @@
 +// LzmaRam.cpp
 +
@@ -26530,8 +26530,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  #endif
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.c	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,79 @@
 +/* LzmaRamDecode.c */
 +
@@ -26613,8 +26613,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return 0;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRamDecode.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,55 @@
 +/* LzmaRamDecode.h */
 +
@@ -26672,8 +26672,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/LzmaRam.h	2017-06-07 03:30:35.161538253 +0800
 @@ -0,0 +1,46 @@
 +// LzmaRam.h
 +
@@ -26722,8 +26722,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,100 @@
 +PROG = lzma.exe
 +CFLAGS = $(CFLAGS) -I ../../../
@@ -26826,8 +26826,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +$O\FileIO.obj: ../../../Windows/FileIO.cpp
 +	$(COMPL)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,113 @@
 +PROG = lzma
 +CXX = g++ -O2 -Wall
@@ -26943,15 +26943,15 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +	-$(RM) $(PROG) $(OBJS)
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.cpp	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,3 @@
 +// StdAfx.cpp
 +
 +#include "StdAfx.h"
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/StdAfx.h	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,8 @@
 +// StdAfx.h
 +
@@ -26962,8 +26962,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.c	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,588 @@
 +/*
 +  LzmaDecode.c
@@ -27554,8 +27554,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return LZMA_RESULT_OK;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecode.h	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,131 @@
 +/* 
 +  LzmaDecode.h
@@ -27689,8 +27689,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaDecodeSize.c	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,716 @@
 +/*
 +  LzmaDecodeSize.c
@@ -28409,8 +28409,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return LZMA_RESULT_OK;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.c	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,521 @@
 +/*
 +  LzmaStateDecode.c
@@ -28934,8 +28934,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return LZMA_RESULT_OK;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateDecode.h	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,115 @@
 +/* 
 +  LzmaStateDecode.h
@@ -29053,8 +29053,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaStateTest.c	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,195 @@
 +/* 
 +LzmaStateTest.c
@@ -29252,8 +29252,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/LzmaTest.c	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,342 @@
 +/* 
 +LzmaTest.c
@@ -29598,8 +29598,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +  return res;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,43 @@
 +PROG = lzmaDec.exe
 +
@@ -29645,8 +29645,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +$O\LzmaDecode.obj: ../../Compress/LZMA_C/$(*B).c
 +	$(COMPL_O2)
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,23 @@
 +PROG = lzmadec
 +CXX = gcc 
@@ -29672,8 +29672,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +	-$(RM) $(PROG) $(OBJS)
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/lzmadaptive.h	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,21 @@
 +#ifndef __LZMA_LIB_H__
 +#define __LZMA_LIB_H__
@@ -29697,8 +29697,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,92 @@
 +PROG = liblzmalib.a
 +CXX = g++ -O3 -Wall
@@ -29793,8 +29793,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +	-$(RM) $(PROG) $(OBJS)
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/ZLib.cpp	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,451 @@
 +/*
 + * lzma zlib simplified wrapper
@@ -30248,8 +30248,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +}
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.cpp	2017-06-07 03:30:35.164871439 +0800
 @@ -0,0 +1,80 @@
 +// Compress/RangeCoder/RangeCoderBit.cpp
 +
@@ -30332,8 +30332,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +}}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBit.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,120 @@
 +// Compress/RangeCoder/RangeCoderBit.h
 +
@@ -30456,8 +30456,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderBitTree.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,161 @@
 +// Compress/RangeCoder/RangeCoderBitTree.h
 +
@@ -30621,8 +30621,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoder.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,205 @@
 +// Compress/RangeCoder/RangeCoder.h
 +
@@ -30830,8 +30830,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/RangeCoderOpt.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,31 @@
 +// Compress/RangeCoder/RangeCoderOpt.h
 +
@@ -30865,8 +30865,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/RangeCoder/StdAfx.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,6 @@
 +// StdAfx.h
 +
@@ -30875,8 +30875,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/ICoder.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/ICoder.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/ICoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/ICoder.h	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/ICoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/ICoder.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,156 @@
 +// ICoder.h
 +
@@ -31035,8 +31035,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/ICoder.h
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/IStream.h squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/IStream.h
---- squashfs-tools/LZMA/lzmadaptive/C/7zip/IStream.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/IStream.h	2016-08-25 09:06:03.227530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/7zip/IStream.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/IStream.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,62 @@
 +// IStream.h
 +
@@ -31101,8 +31101,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/IStream.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,118 @@
 +// Common/Alloc.cpp
 +
@@ -31223,8 +31223,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Alloc.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,29 @@
 +// Common/Alloc.h
 +
@@ -31256,8 +31256,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Alloc.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,78 @@
 +// Common/C_FileIO.h
 +
@@ -31338,8 +31338,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/C_File
 +
 +}}}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/C_FileIO.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/C_FileIO.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,45 @@
 +// Common/C_FileIO.h
 +
@@ -31387,8 +31387,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/C_File
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,263 @@
 +// CommandLineParser.cpp
 +
@@ -31654,8 +31654,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Comman
 +
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/CommandLineParser.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CommandLineParser.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,82 @@
 +// Common/CommandLineParser.h
 +
@@ -31740,8 +31740,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Comman
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/ComTry.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/ComTry.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/ComTry.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/ComTry.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/ComTry.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/ComTry.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,17 @@
 +// ComTry.h
 +
@@ -31761,8 +31761,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/ComTry
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,61 @@
 +// Common/CRC.cpp
 +
@@ -31826,8 +31826,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.cp
 +  _value = v;
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/CRC.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,36 @@
 +// Common/CRC.h
 +
@@ -31866,8 +31866,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/CRC.h 
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Defs.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Defs.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Defs.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Defs.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Defs.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Defs.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,20 @@
 +// Common/Defs.h
 +
@@ -31890,8 +31890,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Defs.h
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyCom.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyCom.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/MyCom.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyCom.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/MyCom.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyCom.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,203 @@
 +// MyCom.h
 +
@@ -32097,8 +32097,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyCom.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyGuidDef.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyGuidDef.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/MyGuidDef.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyGuidDef.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/MyGuidDef.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyGuidDef.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,54 @@
 +// Common/MyGuidDef.h
 +
@@ -32155,8 +32155,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyGuid
 +    MY_EXTERN_C const GUID name
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyInitGuid.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyInitGuid.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/MyInitGuid.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyInitGuid.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/MyInitGuid.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyInitGuid.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,13 @@
 +// Common/MyInitGuid.h
 +
@@ -32172,8 +32172,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyInit
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyUnknown.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyUnknown.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/MyUnknown.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyUnknown.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/MyUnknown.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyUnknown.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,24 @@
 +// MyUnknown.h
 +
@@ -32200,8 +32200,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyUnkn
 +  
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyWindows.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyWindows.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/MyWindows.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyWindows.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/MyWindows.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/MyWindows.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,183 @@
 +// MyWindows.h
 +
@@ -32387,8 +32387,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/MyWind
 +#endif
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,114 @@
 +// NewHandler.cpp
 + 
@@ -32505,8 +32505,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/NewHan
 +}
 +*/
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/NewHandler.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/NewHandler.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,14 @@
 +// Common/NewHandler.h
 +
@@ -32523,8 +32523,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/NewHan
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StdAfx.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StdAfx.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,9 @@
 +// StdAfx.h
 +
@@ -32536,8 +32536,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StdAfx
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,93 @@
 +// Common/StringConvert.cpp
 +
@@ -32633,8 +32633,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/StringConvert.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringConvert.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,71 @@
 +// Common/StringConvert.h
 +
@@ -32708,8 +32708,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/String.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/String.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,198 @@
 +// Common/String.cpp
 +
@@ -32910,8 +32910,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +}
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/String.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/String.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/String.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,631 @@
 +// Common/String.h
 +
@@ -33545,8 +33545,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,68 @@
 +// Common/StringToInt.cpp
 +
@@ -33617,8 +33617,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +  return ConvertStringToUInt64(s, end);
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/StringToInt.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/StringToInt.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,17 @@
 +// Common/StringToInt.h
 +
@@ -33638,8 +33638,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/String
 +
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Types.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Types.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Types.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Types.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Types.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Types.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,19 @@
 +// Common/Types.h
 +
@@ -33661,8 +33661,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Types.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.cpp	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,74 @@
 +// Common/Vector.cpp
 +
@@ -33739,8 +33739,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Vector
 +  }
 +}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.h squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.h
---- squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Common/Vector.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Common/Vector.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,211 @@
 +// Common/Vector.h
 +
@@ -33954,8 +33954,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Common/Vector
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/Defs.h squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/Defs.h
---- squashfs-tools/LZMA/lzmadaptive/C/Windows/Defs.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/Defs.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Windows/Defs.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/Defs.h	2017-06-07 03:30:35.168204626 +0800
 @@ -0,0 +1,18 @@
 +// Windows/Defs.h
 +
@@ -33976,8 +33976,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/Defs.
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.cpp squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.cpp
---- squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.cpp	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.cpp	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.cpp	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.cpp	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,245 @@
 +// Windows/FileIO.cpp
 +
@@ -34225,8 +34225,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/FileI
 +
 +}}}
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.h squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.h
---- squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Windows/FileIO.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/FileIO.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,98 @@
 +// Windows/FileIO.h
 +
@@ -34327,8 +34327,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/FileI
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/StdAfx.h squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/StdAfx.h
---- squashfs-tools/LZMA/lzmadaptive/C/Windows/StdAfx.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/StdAfx.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/C/Windows/StdAfx.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/C/Windows/StdAfx.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,9 @@
 +// StdAfx.h
 +
@@ -34340,8 +34340,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/Windows/StdAf
 +
 +#endif 
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/CPL.html squashfs-tools-patched/LZMA/lzmadaptive/CPL.html
---- squashfs-tools/LZMA/lzmadaptive/CPL.html	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/CPL.html	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/CPL.html	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/CPL.html	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,224 @@
 +<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 +<HTML><HEAD><TITLE>Common Public License - v 1.0</TITLE>
@@ -34568,8 +34568,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/CPL.html squash
 +<P><FONT size=2></FONT><FONT size=2></FONT>
 +<P><FONT size=2></FONT></P></BODY></HTML>
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/history.txt squashfs-tools-patched/LZMA/lzmadaptive/history.txt
---- squashfs-tools/LZMA/lzmadaptive/history.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/history.txt	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/history.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/history.txt	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,147 @@
 +HISTORY of the LZMA SDK
 +-----------------------
@@ -34719,8 +34719,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/history.txt squ
 +
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/LGPL.txt squashfs-tools-patched/LZMA/lzmadaptive/LGPL.txt
---- squashfs-tools/LZMA/lzmadaptive/LGPL.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/LGPL.txt	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/LGPL.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/LGPL.txt	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,504 @@
 +      GNU LESSER GENERAL PUBLIC LICENSE
 +           Version 2.1, February 1999
@@ -35227,8 +35227,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/LGPL.txt squash
 +
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/lzma.txt squashfs-tools-patched/LZMA/lzmadaptive/lzma.txt
---- squashfs-tools/LZMA/lzmadaptive/lzma.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/lzma.txt	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/LZMA/lzmadaptive/lzma.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/lzma.txt	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,637 @@
 +LZMA SDK 4.32
 +-------------
@@ -35868,8 +35868,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/lzma.txt squash
 +http://www.7-zip.org
 +http://www.7-zip.org/support.html
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/Methods.txt squashfs-tools-patched/LZMA/lzmadaptive/Methods.txt
---- squashfs-tools/LZMA/lzmadaptive/Methods.txt	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmadaptive/Methods.txt	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmadaptive/Methods.txt	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmadaptive/Methods.txt	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,114 @@
 +Compression method IDs (4.27)
 +-----------------------------
@@ -35986,8 +35986,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/Methods.txt squ
 +---
 +End of document
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/7zlzma.c squashfs-tools-patched/LZMA/lzmalt/7zlzma.c
---- squashfs-tools/LZMA/lzmalt/7zlzma.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/7zlzma.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/7zlzma.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/7zlzma.c	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,58 @@
 +#include "lzmalt.h"
 +
@@ -36048,8 +36048,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/7zlzma.c squashfs-to
 +
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/AriBitCoder.h squashfs-tools-patched/LZMA/lzmalt/AriBitCoder.h
---- squashfs-tools/LZMA/lzmalt/AriBitCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/AriBitCoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/AriBitCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/AriBitCoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,51 @@
 +#ifndef __COMPRESSION_BITCODER_H
 +#define __COMPRESSION_BITCODER_H
@@ -36103,8 +36103,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/AriBitCoder.h squash
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/BitTreeCoder.h squashfs-tools-patched/LZMA/lzmalt/BitTreeCoder.h
---- squashfs-tools/LZMA/lzmalt/BitTreeCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/BitTreeCoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/BitTreeCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/BitTreeCoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,160 @@
 +#ifndef __BITTREECODER_H
 +#define __BITTREECODER_H
@@ -36267,8 +36267,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/BitTreeCoder.h squas
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/IInOutStreams.c squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.c
---- squashfs-tools/LZMA/lzmalt/IInOutStreams.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/IInOutStreams.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.c	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,39 @@
 +#include "stdlib.h"
 +#include "IInOutStreams.h"
@@ -36310,8 +36310,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/IInOutStreams.c squa
 +    }
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/IInOutStreams.h squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.h
---- squashfs-tools/LZMA/lzmalt/IInOutStreams.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/IInOutStreams.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/IInOutStreams.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,62 @@
 +#ifndef __IINOUTSTREAMS_H
 +#define __IINOUTSTREAMS_H
@@ -36376,8 +36376,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/IInOutStreams.h squa
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LenCoder.h squashfs-tools-patched/LZMA/lzmalt/LenCoder.h
---- squashfs-tools/LZMA/lzmalt/LenCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/LenCoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/LenCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/LenCoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,75 @@
 +#ifndef __LENCODER_H
 +#define __LENCODER_H
@@ -36455,8 +36455,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LenCoder.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LiteralCoder.h squashfs-tools-patched/LZMA/lzmalt/LiteralCoder.h
---- squashfs-tools/LZMA/lzmalt/LiteralCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/LiteralCoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/LiteralCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/LiteralCoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,146 @@
 +#ifndef __LITERALCODER_H
 +#define __LITERALCODER_H
@@ -36605,8 +36605,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LiteralCoder.h squas
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMADecoder.c squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.c
---- squashfs-tools/LZMA/lzmalt/LZMADecoder.c	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/LZMADecoder.c	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.c	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,417 @@
 +#include "Portable.h"
 +#include "stdio.h"
@@ -37026,8 +37026,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMADecoder.c squash
 +}
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMADecoder.h squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.h
---- squashfs-tools/LZMA/lzmalt/LZMADecoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/LZMADecoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/LZMADecoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,60 @@
 +#ifndef __LZARITHMETIC_DECODER_H
 +#define __LZARITHMETIC_DECODER_H
@@ -37090,8 +37090,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMADecoder.h squash
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMA.h squashfs-tools-patched/LZMA/lzmalt/LZMA.h
---- squashfs-tools/LZMA/lzmalt/LZMA.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/LZMA.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/LZMA.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/LZMA.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,83 @@
 +#include "LenCoder.h"
 +
@@ -37177,8 +37177,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/LZMA.h squashfs-tool
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/lzmalt.h squashfs-tools-patched/LZMA/lzmalt/lzmalt.h
---- squashfs-tools/LZMA/lzmalt/lzmalt.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/lzmalt.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/lzmalt.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/lzmalt.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,16 @@
 +#ifndef __7Z_H
 +#define __7Z_H
@@ -37197,8 +37197,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/lzmalt.h squashfs-to
 +#endif
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/Makefile squashfs-tools-patched/LZMA/lzmalt/Makefile
---- squashfs-tools/LZMA/lzmalt/Makefile	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/Makefile	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/Makefile	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/Makefile	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,10 @@
 +INCLUDEDIR = .
 +
@@ -37211,8 +37211,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/Makefile squashfs-to
 +clean :
 +	rm -f *.o
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/Portable.h squashfs-tools-patched/LZMA/lzmalt/Portable.h
---- squashfs-tools/LZMA/lzmalt/Portable.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/Portable.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/Portable.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/Portable.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,59 @@
 +#ifndef __PORTABLE_H
 +#define __PORTABLE_H
@@ -37274,8 +37274,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/Portable.h squashfs-
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/RangeCoder.h squashfs-tools-patched/LZMA/lzmalt/RangeCoder.h
---- squashfs-tools/LZMA/lzmalt/RangeCoder.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/RangeCoder.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/RangeCoder.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/RangeCoder.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,56 @@
 +#ifndef __COMPRESSION_RANGECODER_H
 +#define __COMPRESSION_RANGECODER_H
@@ -37334,8 +37334,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/RangeCoder.h squashf
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/RCDefs.h squashfs-tools-patched/LZMA/lzmalt/RCDefs.h
---- squashfs-tools/LZMA/lzmalt/RCDefs.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/RCDefs.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/RCDefs.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/RCDefs.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,43 @@
 +#ifndef __RCDEFS_H
 +#define __RCDEFS_H
@@ -37381,8 +37381,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/RCDefs.h squashfs-to
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/vxTypesOld.h squashfs-tools-patched/LZMA/lzmalt/vxTypesOld.h
---- squashfs-tools/LZMA/lzmalt/vxTypesOld.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/vxTypesOld.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/vxTypesOld.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/vxTypesOld.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,289 @@
 +/* vxTypesOld.h - old VxWorks type definition header */
 +
@@ -37674,8 +37674,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/vxTypesOld.h squashf
 +
 +#endif /* __INCvxTypesOldh */
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/WindowOut.h squashfs-tools-patched/LZMA/lzmalt/WindowOut.h
---- squashfs-tools/LZMA/lzmalt/WindowOut.h	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/LZMA/lzmalt/WindowOut.h	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/LZMA/lzmalt/WindowOut.h	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/LZMA/lzmalt/WindowOut.h	2017-06-07 03:30:35.171537812 +0800
 @@ -0,0 +1,52 @@
 +#ifndef __STREAM_WINDOWOUT_H
 +#define __STREAM_WINDOWOUT_H
@@ -37730,8 +37730,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/WindowOut.h squashfs
 +
 +#endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/lzma_wrapper.c squashfs-tools-patched/lzma_wrapper.c
---- squashfs-tools/lzma_wrapper.c	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/lzma_wrapper.c	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/lzma_wrapper.c	2014-03-09 13:31:58.000000000 +0800
++++ squashfs-tools-patched/lzma_wrapper.c	2017-06-07 03:30:35.171537812 +0800
 @@ -27,14 +27,21 @@
  #include "squashfs_fs.h"
  #include "compressor.h"
@@ -38077,8 +38077,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/lzma_wrapper.c squashfs-tools-pa
 +};
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/Makefile
---- squashfs-tools/Makefile	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/Makefile	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/Makefile	2014-05-12 02:56:00.000000000 +0800
++++ squashfs-tools-patched/Makefile	2017-06-07 03:30:35.171537812 +0800
 @@ -26,7 +26,7 @@
  # To build using XZ Utils liblzma - install the library and uncomment
  # the XZ_SUPPORT line below.
@@ -38215,8 +38215,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/
 -	cp unsquashfs $(INSTALL_DIR)
 +	cp sasquatch $(INSTALL_DIR)
 diff --strip-trailing-cr -NBbaur squashfs-tools/process_fragments.c squashfs-tools-patched/process_fragments.c
---- squashfs-tools/process_fragments.c	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/process_fragments.c	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/process_fragments.c	2014-05-10 12:54:13.000000000 +0800
++++ squashfs-tools-patched/process_fragments.c	2017-06-07 03:30:35.174870999 +0800
 @@ -192,9 +192,10 @@
  
  		res = compressor_uncompress(comp, buffer->data, data, size,
@@ -38232,8 +38232,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/process_fragments.c squashfs-too
  		memcpy(buffer->data, compressed_buffer->data, size);
  	else {
 diff --strip-trailing-cr -NBbaur squashfs-tools/read_fs.c squashfs-tools-patched/read_fs.c
---- squashfs-tools/read_fs.c	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/read_fs.c	2016-08-25 09:06:03.231530353 -0400
+--- squashfs-tools/read_fs.c	2014-05-10 12:54:13.000000000 +0800
++++ squashfs-tools-patched/read_fs.c	2017-06-07 03:30:35.174870999 +0800
 @@ -87,8 +87,9 @@
  		res = compressor_uncompress(comp, block, buffer, c_byte,
  			outlen, &error);
@@ -38247,14 +38247,14 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/read_fs.c squashfs-tools-patched
  		}
  	} else {
 diff --strip-trailing-cr -NBbaur squashfs-tools/README.md squashfs-tools-patched/README.md
---- squashfs-tools/README.md	1969-12-31 19:00:00.000000000 -0500
-+++ squashfs-tools-patched/README.md	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/README.md	1970-01-01 08:00:00.000000000 +0800
++++ squashfs-tools-patched/README.md	2017-06-07 03:30:35.174870999 +0800
 @@ -0,0 +1,2 @@
 +This is the raw, patched source code for squashfs-tools. It is included in this repository for documentation and administrative purposes only. Any bugs or patches not directly related to the modifications made by the sasquatch patches should be reported to the squashfs-tools project.
 +
 diff --strip-trailing-cr -NBbaur squashfs-tools/squashfs_fs.h squashfs-tools-patched/squashfs_fs.h
---- squashfs-tools/squashfs_fs.h	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/squashfs_fs.h	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/squashfs_fs.h	2014-05-10 12:54:13.000000000 +0800
++++ squashfs-tools-patched/squashfs_fs.h	2017-06-07 03:30:35.174870999 +0800
 @@ -277,6 +277,22 @@
  #define LZO_COMPRESSION		3
  #define XZ_COMPRESSION		4
@@ -38301,8 +38301,17 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/squashfs_fs.h squashfs-tools-pat
 +
  #endif
 diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patched/unsquashfs.c
---- squashfs-tools/unsquashfs.c	2016-08-25 09:06:22.983529595 -0400
-+++ squashfs-tools-patched/unsquashfs.c	2016-08-25 09:06:03.223530354 -0400
+--- squashfs-tools/unsquashfs.c	2014-05-13 06:18:35.000000000 +0800
++++ squashfs-tools-patched/unsquashfs.c	2017-06-07 03:31:05.326876067 +0800
+@@ -32,7 +32,7 @@
+ #include "stdarg.h"
+ 
+ #include <sys/sysinfo.h>
+-#include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <sys/time.h>
+ #include <sys/resource.h>
+ #include <limits.h>
 @@ -44,13 +44,19 @@
  pthread_mutex_t	fragment_mutex;
  
