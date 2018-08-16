@@ -5,8 +5,7 @@
 set -e
 
 # If not root, perform 'make install' with sudo
-if [ "$UID" = "0" ]
-then
+if [ "$(id -u)" -eq 0 ]; then
     SUDO=""
 else
     SUDO="sudo"
@@ -18,7 +17,7 @@ if command -v apt-get >/dev/null 2>&1; then
 fi
 
 # Make sure we're working in the same directory as the build.sh script
-cd $(dirname $(readlink -f "$0"))
+cd "$(dirname "$0")"
 
 # Download squashfs4.3.tar.gz if it does not already exist
 if [ ! -e squashfs4.3.tar.gz ]; then
