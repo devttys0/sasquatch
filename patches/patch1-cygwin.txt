@@ -1,0 +1,550 @@
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/action.c squashfs-tools/action.c
+--- squashfs-tools_orig/action.c        2014-05-10 07:54:13.000000000 +0300
++++ squashfs-tools/action.c     2018-10-17 10:51:26.335387000 +0300
+@@ -44,6 +44,10 @@
+ #include "action.h"
+ #include "error.h"
+
++#if !defined(FNM_EXTMATCH)
++#define FNM_EXTMATCH 0
++#endif
++
+ /*
+  * code to parse actions
+  */
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/gzip_wrapper.h squashfs-tools/gzip_wrapper.h
+--- squashfs-tools_orig/gzip_wrapper.h  2014-05-12 02:29:29.000000000 +0300
++++ squashfs-tools/gzip_wrapper.h       2018-10-17 12:32:51.583269500 +0300
+@@ -25,9 +25,11 @@
+  */
+
+ #ifndef linux
++#ifndef __CYGWIN__
+ #define __BYTE_ORDER BYTE_ORDER
+ #define __BIG_ENDIAN BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
++#endif /* __CYGWIN__ */
+ #else
+ #include <endian.h>
+ #endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h
+--- squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h    2018-10-17 00:38:45.742271100 +0300
++++ squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA.h 1970-01-01 03:00:00.000000000 +0300
+@@ -1,82 +0,0 @@
+-// LZMA.h
+-
+-#ifndef __LZMA_H
+-#define __LZMA_H
+-
+-namespace NCompress {
+-namespace NLZMA {
+-
+-const UInt32 kNumRepDistances = 4;
+-
+-const int kNumStates = 12;
+-
+-const Byte kLiteralNextStates[kNumStates] = {0, 0, 0, 0, 1, 2, 3, 4,  5,  6,   4, 5};
+-const Byte kMatchNextStates[kNumStates]   = {7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 10};
+-const Byte kRepNextStates[kNumStates]     = {8, 8, 8, 8, 8, 8, 8, 11, 11, 11, 11, 11};
+-const Byte kShortRepNextStates[kNumStates]= {9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11};
+-
+-class CState
+-{
+-public:
+-  Byte Index;
+-  void Init() { Index = 0; }
+-  void UpdateChar() { Index = kLiteralNextStates[Index]; }
+-  void UpdateMatch() { Index = kMatchNextStates[Index]; }
+-  void UpdateRep() { Index = kRepNextStates[Index]; }
+-  void UpdateShortRep() { Index = kShortRepNextStates[Index]; }
+-  bool IsCharState() const { return Index < 7; }
+-};
+-
+-const int kNumPosSlotBits = 6;
+-const int kDicLogSizeMin = 0;
+-const int kDicLogSizeMax = 32;
+-const int kDistTableSizeMax = kDicLogSizeMax * 2;
+-
+-const UInt32 kNumLenToPosStates = 4;
+-
+-inline UInt32 GetLenToPosState(UInt32 len)
+-{
+-  len -= 2;
+-  if (len < kNumLenToPosStates)
+-    return len;
+-  return kNumLenToPosStates - 1;
+-}
+-
+-namespace NLength {
+-
+-const int kNumPosStatesBitsMax = 4;
+-const UInt32 kNumPosStatesMax = (1 << kNumPosStatesBitsMax);
+-
+-const int kNumPosStatesBitsEncodingMax = 4;
+-const UInt32 kNumPosStatesEncodingMax = (1 << kNumPosStatesBitsEncodingMax);
+-
+-const int kNumLowBits = 3;
+-const int kNumMidBits = 3;
+-const int kNumHighBits = 8;
+-const UInt32 kNumLowSymbols = 1 << kNumLowBits;
+-const UInt32 kNumMidSymbols = 1 << kNumMidBits;
+-const UInt32 kNumSymbolsTotal = kNumLowSymbols + kNumMidSymbols + (1 << kNumHighBits);
+-
+-}
+-
+-const UInt32 kMatchMinLen = 2;
+-const UInt32 kMatchMaxLen = kMatchMinLen + NLength::kNumSymbolsTotal - 1;
+-
+-const int kNumAlignBits = 4;
+-const UInt32 kAlignTableSize = 1 << kNumAlignBits;
+-const UInt32 kAlignMask = (kAlignTableSize - 1);
+-
+-const UInt32 kStartPosModelIndex = 4;
+-const UInt32 kEndPosModelIndex = 14;
+-const UInt32 kNumPosModels = kEndPosModelIndex - kStartPosModelIndex;
+-
+-const UInt32 kNumFullDistances = 1 << (kEndPosModelIndex / 2);
+-
+-const int kNumLitPosStatesBitsEncodingMax = 4;
+-const int kNumLitContextBitsMax = 8;
+-
+-const int kNumMoveBits = 5;
+-
+-}}
+-
+-#endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA2.h squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA2.h
+--- squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA2.h   1970-01-01 03:00:00.000000000 +0300
++++ squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMA2.h        2018-10-17 00:38:45.742271100 +0300
+@@ -0,0 +1,82 @@
++// LZMA.h
++
++#ifndef __LZMA_H
++#define __LZMA_H
++
++namespace NCompress {
++namespace NLZMA {
++
++const UInt32 kNumRepDistances = 4;
++
++const int kNumStates = 12;
++
++const Byte kLiteralNextStates[kNumStates] = {0, 0, 0, 0, 1, 2, 3, 4,  5,  6,   4, 5};
++const Byte kMatchNextStates[kNumStates]   = {7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 10};
++const Byte kRepNextStates[kNumStates]     = {8, 8, 8, 8, 8, 8, 8, 11, 11, 11, 11, 11};
++const Byte kShortRepNextStates[kNumStates]= {9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11};
++
++class CState
++{
++public:
++  Byte Index;
++  void Init() { Index = 0; }
++  void UpdateChar() { Index = kLiteralNextStates[Index]; }
++  void UpdateMatch() { Index = kMatchNextStates[Index]; }
++  void UpdateRep() { Index = kRepNextStates[Index]; }
++  void UpdateShortRep() { Index = kShortRepNextStates[Index]; }
++  bool IsCharState() const { return Index < 7; }
++};
++
++const int kNumPosSlotBits = 6;
++const int kDicLogSizeMin = 0;
++const int kDicLogSizeMax = 32;
++const int kDistTableSizeMax = kDicLogSizeMax * 2;
++
++const UInt32 kNumLenToPosStates = 4;
++
++inline UInt32 GetLenToPosState(UInt32 len)
++{
++  len -= 2;
++  if (len < kNumLenToPosStates)
++    return len;
++  return kNumLenToPosStates - 1;
++}
++
++namespace NLength {
++
++const int kNumPosStatesBitsMax = 4;
++const UInt32 kNumPosStatesMax = (1 << kNumPosStatesBitsMax);
++
++const int kNumPosStatesBitsEncodingMax = 4;
++const UInt32 kNumPosStatesEncodingMax = (1 << kNumPosStatesBitsEncodingMax);
++
++const int kNumLowBits = 3;
++const int kNumMidBits = 3;
++const int kNumHighBits = 8;
++const UInt32 kNumLowSymbols = 1 << kNumLowBits;
++const UInt32 kNumMidSymbols = 1 << kNumMidBits;
++const UInt32 kNumSymbolsTotal = kNumLowSymbols + kNumMidSymbols + (1 << kNumHighBits);
++
++}
++
++const UInt32 kMatchMinLen = 2;
++const UInt32 kMatchMaxLen = kMatchMinLen + NLength::kNumSymbolsTotal - 1;
++
++const int kNumAlignBits = 4;
++const UInt32 kAlignTableSize = 1 << kNumAlignBits;
++const UInt32 kAlignMask = (kAlignTableSize - 1);
++
++const UInt32 kStartPosModelIndex = 4;
++const UInt32 kEndPosModelIndex = 14;
++const UInt32 kNumPosModels = kEndPosModelIndex - kStartPosModelIndex;
++
++const UInt32 kNumFullDistances = 1 << (kEndPosModelIndex / 2);
++
++const int kNumLitPosStatesBitsEncodingMax = 4;
++const int kNumLitContextBitsMax = 8;
++
++const int kNumMoveBits = 5;
++
++}}
++
++#endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h
+--- squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h     2018-10-17 00:38:45.726645700 +0300
++++ squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMADecoder.h  2018-10-17 13:03:27.348797000 +0300
+@@ -9,7 +9,7 @@
+ #include "../LZ/LZOutWindow.h"
+ #include "../RangeCoder/RangeCoderBitTree.h"
+
+-#include "LZMA.h"
++#include "LZMA2.h"
+
+ namespace NCompress {
+ namespace NLZMA {
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h
+--- squashfs-tools_orig/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h     2018-10-17 00:38:45.742271100 +0300
++++ squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA/LZMAEncoder.h  2018-10-17 13:06:41.369858100 +0300
+@@ -9,7 +9,7 @@
+ #include "../LZ/IMatchFinder.h"
+ #include "../RangeCoder/RangeCoderBitTree.h"
+
+-#include "LZMA.h"
++#include "LZMA2.h"
+
+ namespace NCompress {
+ namespace NLZMA {
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmalt/LZMA.h squashfs-tools/LZMA/lzmalt/LZMA.h
+--- squashfs-tools_orig/LZMA/lzmalt/LZMA.h      2018-10-17 00:38:46.023523600 +0300
++++ squashfs-tools/LZMA/lzmalt/LZMA.h   1970-01-01 03:00:00.000000000 +0300
+@@ -1,83 +0,0 @@
+-#include "LenCoder.h"
+-
+-#ifndef __LZMA_H
+-#define __LZMA_H
+-
+-
+-#define kNumRepDistances 4
+-
+-#define kNumStates 12
+-
+-static const BYTE kLiteralNextStates[kNumStates] = {0, 0, 0, 0, 1, 2, 3, 4,  5,  6,   4, 5};
+-static const BYTE kMatchNextStates[kNumStates]   = {7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 10};
+-static const BYTE kRepNextStates[kNumStates]     = {8, 8, 8, 8, 8, 8, 8, 11, 11, 11, 11, 11};
+-static const BYTE kShortRepNextStates[kNumStates]= {9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11};
+-
+-typedef BYTE CState;
+-
+-INLINE void CStateInit(CState *m_Index)
+-    { *m_Index = 0; }
+-INLINE void CStateUpdateChar(CState *m_Index)
+-    { *m_Index = kLiteralNextStates[*m_Index]; }
+-INLINE void CStateUpdateMatch(CState *m_Index)
+-    { *m_Index = kMatchNextStates[*m_Index]; }
+-INLINE void CStateUpdateRep(CState *m_Index)
+-    { *m_Index = kRepNextStates[*m_Index]; }
+-INLINE void CStateUpdateShortRep(CState *m_Index)
+-    { *m_Index = kShortRepNextStates[*m_Index]; }
+-
+-
+-#define kNumPosSlotBits 6
+-#define kDicLogSizeMax 28
+-#define kDistTableSizeMax 56
+-
+-//extern UINT32 kDistStart[kDistTableSizeMax];
+-static const BYTE kDistDirectBits[kDistTableSizeMax] =
+-{
+-  0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
+-  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19,
+-  20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26
+-};
+-
+-#define kNumLenToPosStates 4
+-INLINE UINT32 GetLenToPosState(UINT32 aLen)
+-{
+-  aLen -= 2;
+-  if (aLen < kNumLenToPosStates)
+-    return aLen;
+-  return kNumLenToPosStates - 1;
+-}
+-
+-#define kMatchMinLen 2
+-
+-#define kMatchMaxLen (kMatchMinLen + kNumSymbolsTotal - 1)
+-
+-#define kNumAlignBits 4
+-#define kAlignTableSize 16
+-#define kAlignMask 15
+-
+-#define kStartPosModelIndex 4
+-#define kEndPosModelIndex 14
+-#define kNumPosModels 10
+-
+-#define kNumFullDistances (1 << (kEndPosModelIndex / 2))
+-
+-
+-#define kMainChoiceLiteralIndex 0
+-#define kMainChoiceMatchIndex 1
+-
+-#define kMatchChoiceDistanceIndex0
+-#define kMatchChoiceRepetitionIndex 1
+-
+-#define kNumMoveBitsForMainChoice 5
+-#define kNumMoveBitsForPosCoders 5
+-
+-#define kNumMoveBitsForAlignCoders 5
+-
+-#define kNumMoveBitsForPosSlotCoder 5
+-
+-#define kNumLitPosStatesBitsEncodingMax 4
+-#define kNumLitContextBitsMax 8
+-
+-
+-#endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmalt/LZMA3.h squashfs-tools/LZMA/lzmalt/LZMA3.h
+--- squashfs-tools_orig/LZMA/lzmalt/LZMA3.h     1970-01-01 03:00:00.000000000 +0300
++++ squashfs-tools/LZMA/lzmalt/LZMA3.h  2018-10-17 00:38:46.023523600 +0300
+@@ -0,0 +1,83 @@
++#include "LenCoder.h"
++
++#ifndef __LZMA_H
++#define __LZMA_H
++
++
++#define kNumRepDistances 4
++
++#define kNumStates 12
++
++static const BYTE kLiteralNextStates[kNumStates] = {0, 0, 0, 0, 1, 2, 3, 4,  5,  6,   4, 5};
++static const BYTE kMatchNextStates[kNumStates]   = {7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 10};
++static const BYTE kRepNextStates[kNumStates]     = {8, 8, 8, 8, 8, 8, 8, 11, 11, 11, 11, 11};
++static const BYTE kShortRepNextStates[kNumStates]= {9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11};
++
++typedef BYTE CState;
++
++INLINE void CStateInit(CState *m_Index)
++    { *m_Index = 0; }
++INLINE void CStateUpdateChar(CState *m_Index)
++    { *m_Index = kLiteralNextStates[*m_Index]; }
++INLINE void CStateUpdateMatch(CState *m_Index)
++    { *m_Index = kMatchNextStates[*m_Index]; }
++INLINE void CStateUpdateRep(CState *m_Index)
++    { *m_Index = kRepNextStates[*m_Index]; }
++INLINE void CStateUpdateShortRep(CState *m_Index)
++    { *m_Index = kShortRepNextStates[*m_Index]; }
++
++
++#define kNumPosSlotBits 6
++#define kDicLogSizeMax 28
++#define kDistTableSizeMax 56
++
++//extern UINT32 kDistStart[kDistTableSizeMax];
++static const BYTE kDistDirectBits[kDistTableSizeMax] =
++{
++  0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
++  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19,
++  20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26
++};
++
++#define kNumLenToPosStates 4
++INLINE UINT32 GetLenToPosState(UINT32 aLen)
++{
++  aLen -= 2;
++  if (aLen < kNumLenToPosStates)
++    return aLen;
++  return kNumLenToPosStates - 1;
++}
++
++#define kMatchMinLen 2
++
++#define kMatchMaxLen (kMatchMinLen + kNumSymbolsTotal - 1)
++
++#define kNumAlignBits 4
++#define kAlignTableSize 16
++#define kAlignMask 15
++
++#define kStartPosModelIndex 4
++#define kEndPosModelIndex 14
++#define kNumPosModels 10
++
++#define kNumFullDistances (1 << (kEndPosModelIndex / 2))
++
++
++#define kMainChoiceLiteralIndex 0
++#define kMainChoiceMatchIndex 1
++
++#define kMatchChoiceDistanceIndex0
++#define kMatchChoiceRepetitionIndex 1
++
++#define kNumMoveBitsForMainChoice 5
++#define kNumMoveBitsForPosCoders 5
++
++#define kNumMoveBitsForAlignCoders 5
++
++#define kNumMoveBitsForPosSlotCoder 5
++
++#define kNumLitPosStatesBitsEncodingMax 4
++#define kNumLitContextBitsMax 8
++
++
++#endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/LZMA/lzmalt/LZMADecoder.h squashfs-tools/LZMA/lzmalt/LZMADecoder.h
+--- squashfs-tools_orig/LZMA/lzmalt/LZMADecoder.h       2018-10-17 00:38:46.023523600 +0300
++++ squashfs-tools/LZMA/lzmalt/LZMADecoder.h    2018-10-17 13:28:51.232233900 +0300
+@@ -2,7 +2,7 @@
+ #define __LZARITHMETIC_DECODER_H
+
+ #include "WindowOut.h"
+-#include "LZMA.h"
++#include "LZMA3.h"
+ #include "LenCoder.h"
+ #include "LiteralCoder.h"
+
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/lzo_wrapper.h squashfs-tools/lzo_wrapper.h
+--- squashfs-tools_orig/lzo_wrapper.h   2014-03-09 07:31:59.000000000 +0200
++++ squashfs-tools/lzo_wrapper.h        2018-10-17 13:32:10.832476800 +0300
+@@ -25,9 +25,11 @@
+  */
+
+ #ifndef linux
++#ifndef __CYGWIN__
+ #define __BYTE_ORDER BYTE_ORDER
+ #define __BIG_ENDIAN BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
++#endif /* __CYGWIN__ */
+ #else
+ #include <endian.h>
+ #endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/mksquashfs.c squashfs-tools/mksquashfs.c
+--- squashfs-tools_orig/mksquashfs.c    2014-05-13 01:18:20.000000000 +0300
++++ squashfs-tools/mksquashfs.c 2018-10-17 10:51:05.882087200 +0300
+@@ -1286,6 +1286,10 @@
+                dir_size + 3, directory_block, directory_offset, NULL, NULL,
+                dir, 0);
+
++#if !defined(FNM_EXTMATCH)
++#define FNM_EXTMATCH 0
++#endif
++
+ #ifdef SQUASHFS_TRACE
+        {
+                unsigned char *dirp;
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/pseudo.c squashfs-tools/pseudo.c
+--- squashfs-tools_orig/pseudo.c        2014-05-10 07:54:13.000000000 +0300
++++ squashfs-tools/pseudo.c     2018-10-17 10:57:11.257757200 +0300
+@@ -32,6 +32,7 @@
+ #include <stdlib.h>
+ #include <sys/types.h>
+ #include <sys/wait.h>
++#include <sys/stat.h>
+ #include <ctype.h>
+
+ #include "pseudo.h"
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/read_xattrs.c squashfs-tools/read_xattrs.c
+--- squashfs-tools_orig/read_xattrs.c   2014-03-09 07:31:59.000000000 +0200
++++ squashfs-tools/read_xattrs.c        2018-10-17 13:33:35.709560100 +0300
+@@ -32,9 +32,11 @@
+ #include <string.h>
+
+ #ifndef linux
++#ifndef __CYGWIN__
+ #define __BYTE_ORDER BYTE_ORDER
+ #define __BIG_ENDIAN BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
++#endif /* __CYGWIN__ */
+ #else
+ #include <endian.h>
+ #endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/unsquashfs.c squashfs-tools/unsquashfs.c
+--- squashfs-tools_orig/unsquashfs.c    2018-10-17 00:38:46.054773600 +0300
++++ squashfs-tools/unsquashfs.c 2018-10-17 12:30:50.052420800 +0300
+@@ -39,6 +39,21 @@
+ #include <limits.h>
+ #include <ctype.h>
+
++
++#include <stddef.h>
++#ifdef HAVE_SYS_SYSCTL_H
++    #include <sys/sysctl.h>
++#endif
++
++#ifdef _WIN32
++       #define WIN32_LEAN_AND_MEAN
++       #include <Windows.h>
++       //#include <sys/types.h>
++       //#include <sys/sysctl.h>
++#endif
++
++
++
+ struct cache *fragment_cache, *data_cache;
+ struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
+ pthread_t *thread, *inflator_thread;
+@@ -1422,6 +1437,9 @@
+        free(paths);
+ }
+
++#if !defined(FNM_EXTMATCH)
++#define FNM_EXTMATCH 0
++#endif
+
+ int matches(struct pathnames *paths, char *name, struct pathnames **new)
+ {
+@@ -2291,6 +2309,9 @@
+                EXIT_UNSQUASH("Failed to set signal mask in initialise_threads"
+                        "\n");
+
++#ifdef __CYGWIN__
++       processors = atoi(getenv("NUMBER_OF_PROCESSORS"));
++#else /* __CYGWIN__ */
+        if(processors == -1) {
+ #ifndef linux
+                int mib[2];
+@@ -2312,6 +2333,7 @@
+                processors = sysconf(_SC_NPROCESSORS_ONLN);
+ #endif
+        }
++#endif /* __CYGWIN__ */
+
+        if(add_overflow(processors, 3) ||
+                        multiply_overflow(processors + 3, sizeof(pthread_t)))
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/unsquashfs.h squashfs-tools/unsquashfs.h
+--- squashfs-tools_orig/unsquashfs.h    2014-05-10 07:54:13.000000000 +0300
++++ squashfs-tools/unsquashfs.h 2018-10-17 12:23:44.588451800 +0300
+@@ -48,9 +48,11 @@
+ #include <sys/time.h>
+
+ #ifndef linux
++#ifndef __CYGWIN__
+ #define __BYTE_ORDER BYTE_ORDER
+ #define __BIG_ENDIAN BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
++#endif /* __CYGWIN__ */
+ #else
+ #include <endian.h>
+ #endif
+diff --strip-trailing-cr -NBbaur squashfs-tools_orig/xz_wrapper.h squashfs-tools/xz_wrapper.h
+--- squashfs-tools_orig/xz_wrapper.h    2014-03-09 07:31:59.000000000 +0200
++++ squashfs-tools/xz_wrapper.h 2018-10-17 12:35:15.323374400 +0300
+@@ -25,9 +25,11 @@
+  */
+
+ #ifndef linux
++#ifndef __CYGWIN__
+ #define __BYTE_ORDER BYTE_ORDER
+ #define __BIG_ENDIAN BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
++#endif /* __CYGWIN__ */
+ #else
+ #include <endian.h>
+ #endif
+ 
