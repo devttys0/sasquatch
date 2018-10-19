@@ -14,10 +14,16 @@ Very beta.
 Prerequisites
 =============
 
-You need a C/C++ compiler, plus the liblzma, liblzo and zlib development libraries:
+You need a C/C++ compiler, plus the liblzma, liblzo and zlib development libraries
 
+For most distributions, use:
 ```bash
 $ sudo apt-get install build-essential liblzma-dev liblzo2-dev zlib1g-dev
+```
+
+For *Cygwin*, use either the original [apt-cyg](https://github.com/transcode-open/apt-cyg) or maintained [apt-cyg](https://github.com/kou1okada/apt-cyg) with: 
+```bash
+$ apt-cyg install patch liblzma-devel liblzo2-devel zlib-devel
 ```
 
 Installation
@@ -28,3 +34,4 @@ The included `build.sh` script will download squashfs-tools v4.3, patch the sour
 ```bash
 $ ./build.sh
 ```
+
