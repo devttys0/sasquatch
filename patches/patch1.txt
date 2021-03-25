@@ -1,0 +1,22 @@
+--- squashfs-tools/error.h.ORG	2021-01-07 11:35:14.319831139 +0100
++++ squashfs-tools/error.h	2021-01-07 11:24:33.990265302 +0100
+@@ -31,7 +31,7 @@
+ extern void progressbar_info(char *fmt, ...);
+ 
+ // CJH: Updated so that TRACE prints if -verbose is specified on the command line
+-int verbose;
++extern int verbose;
+ //#ifdef SQUASHFS_TRACE
+ #define TRACE(s, args...) \
+ 		do { \
+--- squashfs-tools/unsquashfs.c.ORG	2021-01-07 11:35:44.381280225 +0100
++++ squashfs-tools/unsquashfs.c	2021-01-07 11:26:42.350182860 +0100
+@@ -39,6 +39,8 @@
+ #include <limits.h>
+ #include <ctype.h>
+ 
++int verbose;
++
+ struct cache *fragment_cache, *data_cache;
+ struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
+ pthread_t *thread, *inflator_thread;
