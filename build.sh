@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Script to download squashfs-tools v4.3, apply the patches, perform a clean build, and install.
 
 # If not root, perform 'make install' with sudo
-if [ "$UID" = "0" ]
+if [ $UID -eq 0 ]
 then
     SUDO=""
 else
