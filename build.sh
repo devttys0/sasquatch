@@ -12,7 +12,7 @@ fi
 # Install prerequisites
 if hash apt-get &>/dev/null
 then
-    $SUDO apt-get install build-essential liblzma-dev liblzo2-dev zlib1g-dev
+    $SUDO apt install build-essential liblzma-dev liblzo2-dev zlib1g-dev
 fi
 
 # Make sure we're working in the same directory as the build.sh script
