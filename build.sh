@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to download squashfs-tools v4.3, apply the patches, perform a clean build, and install.
+# Script to download squashfs-tools v4.4, apply the patches, perform a clean build, and install.
 
 # If not root, perform 'make install' with sudo
 if [ $UID -eq 0 ]
@@ -19,19 +19,19 @@ fi
 cd $(dirname `readlink  -f $0`)
 
 # Download squashfs4.3.tar.gz if it does not already exist
-if [ ! -e squashfs4.3.tar.gz ]
+if [ ! -e squashfs4.4.tar.gz ]
 then
-    wget https://downloads.sourceforge.net/project/squashfs/squashfs/squashfs4.3/squashfs4.3.tar.gz
+    wget https://downloads.sourceforge.net/project/squashfs/squashfs/squashfs4.4/squashfs4.4.tar.gz
 fi
 
 # Remove any previous squashfs4.3 directory to ensure a clean patch/build
-rm -rf squashfs4.3
+rm -rf squashfs4.4
 
 # Extract squashfs4.3.tar.gz
-tar -zxvf squashfs4.3.tar.gz
+tar -zxvf squashfs4.4.tar.gz
 
 # Patch, build, and install the source
-cd squashfs4.3
+cd squashfs4.4
 patch -p0 < ../patches/patch0.txt
 cd squashfs-tools
 make && $SUDO make install
