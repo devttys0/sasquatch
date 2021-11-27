@@ -147,7 +147,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/e
  
 -#ifdef SQUASHFS_TRACE
 +// CJH: Updated so that TRACE prints if -verbose is specified on the command line
-+int verbose;
++extern int verbose;
 +//#ifdef SQUASHFS_TRACE
  #define TRACE(s, args...) \
  		do { \
@@ -38312,9 +38312,11 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  #include <sys/time.h>
  #include <sys/resource.h>
  #include <limits.h>
-@@ -44,13 +44,19 @@
+@@ -44,13 +44,21 @@
  pthread_mutex_t	fragment_mutex;
  
++int verbose;
++
  /* user options that control parallelisation */
 -int processors = -1;
 +//int processors = -1;
