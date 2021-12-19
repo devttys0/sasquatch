@@ -34,4 +34,4 @@ tar -zxvf squashfs4.3.tar.gz
 cd squashfs4.3
 patch -p0 < ../patches/patch0.txt
 cd squashfs-tools
-make && $SUDO make install
+CFLAGS="-fcommon -Wno-misleading-indentation" make && $SUDO make install
