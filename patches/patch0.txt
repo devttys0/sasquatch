@@ -147,7 +147,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/e
  
 -#ifdef SQUASHFS_TRACE
 +// CJH: Updated so that TRACE prints if -verbose is specified on the command line
-+int verbose;
++extern int verbose;
 +//#ifdef SQUASHFS_TRACE
  #define TRACE(s, args...) \
  		do { \
@@ -12526,7 +12526,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/history.txt squashf
 +
 +4.57           2007-12-12
 +-------------------------
-+- Speed optimizations in Ñ++ LZMA Decoder. 
++- Speed optimizations in ï¿½++ LZMA Decoder. 
 +- Small changes for more compatibility with some C/C++ compilers.
 +
 +
@@ -38118,12 +38118,12 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/
  	unsquash-4.o swap.o compressor.o unsquashfs_info.o
  
 -CFLAGS ?= -O2
-+# CJH: Added -g, -Werror and -DSQUASHFS_TRACE
++# CJH: Added -g and -DSQUASHFS_TRACE
 +CFLAGS ?= -g -O2
  CFLAGS += $(EXTRA_CFLAGS) $(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 \
  	-D_LARGEFILE_SOURCE -D_GNU_SOURCE -DCOMP_DEFAULT=\"$(COMP_DEFAULT)\" \
 -	-Wall
-+	-Wall -Werror #-DSQUASHFS_TRACE
++	-Wall #-DSQUASHFS_TRACE
  
  LIBS = -lpthread -lm
  ifeq ($(GZIP_SUPPORT),1)
@@ -38172,7 +38172,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/
  
  lzma_xz_wrapper.o: lzma_xz_wrapper.c compressor.h squashfs_fs.h
  
-@@ -275,8 +289,13 @@
+@@ -275,31 +289,45 @@
  
  xz_wrapper.o: xz_wrapper.c squashfs_fs.h xz_wrapper.h compressor.h
  
@@ -38180,24 +38180,41 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/
  unsquashfs: $(UNSQUASHFS_OBJS)
 -	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
 +	$(CC) $(LDFLAGS) $(EXTRA_LDFLAGS) $(UNSQUASHFS_OBJS) $(LZMA_EXTRA_OBJS) $(LIBS) -o $@
-+
+ 
+-unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
 +# CJH: Added sasquatch target
 +sasquatch: $(UNSQUASHFS_OBJS)
 +	$(CXX) $(LDFLAGS) $(EXTRA_LDFLAGS) $(LZMA_EXTRA_OBJS) $(UNSQUASHFS_OBJS) $(LIBS) -o $@
- 
- unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
++
++unsquashfs.o: unsquashfs.h error.h unsquashfs.c squashfs_fs.h squashfs_swap.h \
  	squashfs_compat.h xattr.h read_fs.h compressor.h
-@@ -294,12 +313,22 @@
  
- unsquashfs_info.o: unsquashfs.h squashfs_fs.h
+-unsquash-1.o: unsquashfs.h unsquash-1.c squashfs_fs.h squashfs_compat.h
++unsquash-1.o: error.h unsquashfs.h unsquash-1.c squashfs_fs.h squashfs_compat.h
++
++unsquash-2.o: error.h unsquashfs.h unsquash-2.c squashfs_fs.h squashfs_compat.h
  
+-unsquash-2.o: unsquashfs.h unsquash-2.c squashfs_fs.h squashfs_compat.h
++unsquash-3.o: error.h unsquashfs.h unsquash-3.c squashfs_fs.h squashfs_compat.h
+ 
+-unsquash-3.o: unsquashfs.h unsquash-3.c squashfs_fs.h squashfs_compat.h
++unsquash-4.o: error.h unsquashfs.h unsquash-4.c squashfs_fs.h squashfs_swap.h read_fs.h
+ 
+-unsquash-4.o: unsquashfs.h unsquash-4.c squashfs_fs.h squashfs_swap.h \
+-	read_fs.h
++unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h error.h
+ 
+-unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h
++unsquashfs_info.o: unsquashfs.h squashfs_fs.h error.h
+ 
+-unsquashfs_info.o: unsquashfs.h squashfs_fs.h
 +# CJH: Added lzmalt, lzmadaptive
 +.PHONY: lzmalt lzmadaptive
 +lzmalt:
 +	make -C $(LZMA_ALT_DIR)
 +lzmadaptive:
 +	make -C $(LZMA_ADAPT_DIR)
-+
+ 
 +# CJH: Added lzmalt, lzmadaptive
  .PHONY: clean
  clean:
@@ -38303,16 +38320,16 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/squashfs_fs.h squashfs-tools-pat
 diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patched/unsquashfs.c
 --- squashfs-tools/unsquashfs.c	2016-08-25 09:06:22.983529595 -0400
 +++ squashfs-tools-patched/unsquashfs.c	2016-08-25 09:06:03.223530354 -0400
-@@ -32,7 +32,8 @@
+@@ -32,7 +32,7 @@
  #include "stdarg.h"
-
+ 
  #include <sys/sysinfo.h>
- #include <sys/types.h>
+-#include <sys/types.h>
 +#include <sys/sysmacros.h>
  #include <sys/time.h>
  #include <sys/resource.h>
  #include <limits.h>
-@@ -44,13 +44,19 @@
+@@ -44,13 +44,20 @@
  pthread_mutex_t	fragment_mutex;
  
  /* user options that control parallelisation */
@@ -38321,6 +38338,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
 +// CJH: Temporarily set the default processor count to 1 to prevent threading bug
 +//      until a proper fix is implemented.
 +int processors = 1;
++int verbose = 0;
  
  struct super_block sBlk;
  squashfs_operations s_ops;
@@ -38336,7 +38354,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  	dev_count = 0, fifo_count = 0;
  char *inode_table = NULL, *directory_table = NULL;
  struct hash_table_entry *inode_table_hash[65536], *directory_table_hash[65536];
-@@ -701,8 +707,9 @@
+@@ -701,8 +708,9 @@
  			outlen, &error);
  
  		if(res == -1) {
@@ -38348,7 +38366,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  			goto failed;
  		}
  	} else {
-@@ -720,7 +727,10 @@
+@@ -720,7 +728,10 @@
  	 * is of the expected size
  	 */
  	if(expected && expected != res)
@@ -38359,7 +38377,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  	else
  		return res;
  
-@@ -747,8 +757,9 @@
+@@ -747,8 +758,9 @@
  			block_size, &error);
  
  		if(res == -1) {
@@ -38371,7 +38389,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  			goto failed;
  		}
  
-@@ -1622,7 +1633,7 @@
+@@ -1622,7 +1634,7 @@
  	dir_count ++;
  }
  
@@ -38380,7 +38398,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  void squashfs_stat(char *source)
  {
  	time_t mkfs_time = (time_t) sBlk.s.mkfs_time;
-@@ -1640,9 +1651,10 @@
+@@ -1640,9 +1652,10 @@
  
  	printf("Creation or last append time %s", mkfs_str ? mkfs_str :
  		"failed to get time\n");
@@ -38394,7 +38412,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  
  	if(sBlk.s.s_major == 4) {
  		printf("Compression %s\n", comp->name);
-@@ -1714,25 +1726,25 @@
+@@ -1714,25 +1727,25 @@
  		printf("Number of gids %d\n", sBlk.no_guids);
  	}
  
@@ -38428,7 +38446,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  	}
  }
  
-@@ -1745,9 +1757,11 @@
+@@ -1745,9 +1758,11 @@
  	if(!comp->supported) {
  		ERROR("Filesystem uses %s compression, this is "
  			"unsupported by this version\n", comp->name);
@@ -38443,7 +38461,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  	}
  
  	/*
-@@ -1777,17 +1791,74 @@
+@@ -1777,17 +1792,74 @@
  {
  	squashfs_super_block_3 sBlk_3;
  	struct squashfs_super_block sBlk_4;
@@ -38519,29 +38537,30 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  		s_ops.squashfs_opendir = squashfs_opendir_4;
  		s_ops.read_fragment = read_fragment_4;
  		s_ops.read_fragment_table = read_fragment_table_4;
-@@ -1799,7 +1870,11 @@
+@@ -1799,7 +1871,9 @@
  		/*
  		 * Check the compression type
  		 */
+-		comp = lookup_compressor_id(sBlk.s.compression);
 +        // CJH: Check to see if comp has alredy been defined
 +		if(!comp)
-+        {
- 		comp = lookup_compressor_id(sBlk.s.compression);
-+        }
++            comp = lookup_compressor_id(sBlk.s.compression);
  		return TRUE;
  	}
  
-@@ -1813,6 +1888,9 @@
+@@ -1813,7 +1887,10 @@
  	/*
  	 * Check it is a SQUASHFS superblock
  	 */
+-	swap = 0;
 +	/*
 +	 * CJH: swap detection already done generically above
 +     *
- 	swap = 0;
++    swap = 0;
  	if(sBlk_3.s_magic != SQUASHFS_MAGIC) {
  		if(sBlk_3.s_magic == SQUASHFS_MAGIC_SWAP) {
-@@ -1828,6 +1906,13 @@
+ 			squashfs_super_block_3 sblk;
+@@ -1828,6 +1905,13 @@
  			goto failed_mount;
  		}
  	}
@@ -38555,7 +38574,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  
  	sBlk.s.s_magic = sBlk_3.s_magic;
  	sBlk.s.inodes = sBlk_3.inodes;
-@@ -1850,14 +1935,22 @@
+@@ -1850,14 +1934,22 @@
  	sBlk.guid_start = sBlk_3.guid_start;
  	sBlk.s.xattr_id_table_start = SQUASHFS_INVALID_BLK;
  
@@ -38579,19 +38598,29 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  		if(sBlk.s.s_major == 1) {
  			sBlk.s.block_size = sBlk_3.block_size_1;
  			sBlk.s.fragment_table_start = sBlk.uid_start;
-@@ -1893,7 +1986,11 @@
+@@ -1893,7 +1985,9 @@
  	/*
  	 * 1.x, 2.x and 3.x filesystems use gzip compression.
  	 */
+-	comp = lookup_compressor("gzip");
 +    // CJH: Check to see if comp has alredy been defined
 +    if(!comp)
-+    {
- 	comp = lookup_compressor("gzip");
-+    }
++	    comp = lookup_compressor("gzip");
  	return TRUE;
  
  failed_mount:
-@@ -2106,11 +2203,15 @@
+@@ -2081,8 +2175,9 @@
+ 			set_attributes(file->pathname, file->mode, file->uid,
+ 				file->gid, file->time, file->xattr, force);
+ 		else {
+-			ERROR("Failed to write %s, skipping\n", file->pathname);
++			ERROR("Failed to write %s\n", file->pathname);
+ 			unlink(file->pathname);
++			exit(1);
+ 		}
+ 		free(file->pathname);
+ 		free(file);
+@@ -2106,11 +2201,15 @@
  			SQUASHFS_COMPRESSED_SIZE_BLOCK(entry->size), block_size,
  			&error);
  
@@ -38607,7 +38636,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  
  		/*
  		 * block has been either successfully decompressed, or an error
-@@ -2505,6 +2606,9 @@
+@@ -2505,6 +2604,9 @@
  	int fragment_buffer_size = FRAGMENT_BUFFER_DEFAULT;
  	int data_buffer_size = DATA_BUFFER_DEFAULT;
  
@@ -38617,7 +38646,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  	pthread_mutex_init(&screen_mutex, NULL);
  	root_process = geteuid() == 0;
  	if(root_process)
-@@ -2611,6 +2715,83 @@
+@@ -2611,6 +2713,83 @@
  		} else if(strcmp(argv[i], "-regex") == 0 ||
  				strcmp(argv[i], "-r") == 0)
  			use_regex = TRUE;
@@ -38701,7 +38730,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patc
  		else
  			goto options;
  	}
-@@ -2674,6 +2855,22 @@
+@@ -2674,6 +2853,22 @@
  				"regular expressions\n");
  			ERROR("\t\t\t\trather than use the default shell "
  				"wildcard\n\t\t\t\texpansion (globbing)\n");
