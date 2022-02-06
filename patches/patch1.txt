@@ -1,0 +1,23 @@
+diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/error.h
+--- squashfs-tools/error.h	2022-01-13 13:02:42.162534509 -0500
++++ squashfs-tools-patched/error.h	2022-01-13 13:03:10.842309065 -0500
+@@ -31,7 +31,7 @@
+ extern void progressbar_info(char *fmt, ...);
+ 
+ // CJH: Updated so that TRACE prints if -verbose is specified on the command line
+-int verbose;
++extern int verbose;
+ //#ifdef SQUASHFS_TRACE
+ #define TRACE(s, args...) \
+ 		do { \
+diff --strip-trailing-cr -NBbaur squashfs-tools/unsquashfs.c squashfs-tools-patched/unsquashfs.c
+--- squashfs-tools/unsquashfs.c	2022-01-13 13:02:42.182534352 -0500
++++ squashfs-tools-patched/unsquashfs.c	2022-01-13 13:03:18.406249609 -0500
+@@ -43,6 +43,7 @@
+ struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
+ pthread_t *thread, *inflator_thread;
+ pthread_mutex_t	fragment_mutex;
++int verbose;
+ 
+ /* user options that control parallelisation */
+ //int processors = -1;
