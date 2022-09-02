@@ -147,7 +147,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/error.h squashfs-tools-patched/e
  
 -#ifdef SQUASHFS_TRACE
 +// CJH: Updated so that TRACE prints if -verbose is specified on the command line
-+int verbose;
++static int verbose;
 +//#ifdef SQUASHFS_TRACE
  #define TRACE(s, args...) \
  		do { \
@@ -4667,9 +4667,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefi
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile.gcc squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile.gcc
 --- squashfs-tools/LZMA/lzma465/C/Archive/7z/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzma465/C/Archive/7z/makefile.gcc	2016-08-25 09:06:03.231530353 -0400
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,60 @@
 +PROG = 7zDec
-+CXX = g++
 +LIB =
 +RM = rm -f
 +CFLAGS = -c -O2 -Wall
@@ -12037,9 +12036,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile.gcc squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile.gcc
 --- squashfs-tools/LZMA/lzma465/C/LzmaUtil/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzma465/C/LzmaUtil/makefile.gcc	2016-08-25 09:06:03.231530353 -0400
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,43 @@
 +PROG = lzma
-+CXX = g++
 +LIB =
 +RM = rm -f
 +CFLAGS = -c -O2 -Wall
@@ -17040,9 +17038,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc
 --- squashfs-tools/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Archive/7z_C/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
-@@ -0,0 +1,50 @@
+@@ -0,0 +1,40 @@
 +PROG = 7zDec
-+CXX = g++
 +LIB = 
 +RM = rm -f
 +CFLAGS = -c -O2 -Wall
@@ -26828,10 +26825,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc
 --- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Alone/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
-@@ -0,0 +1,113 @@
+@@ -0,0 +1,111 @@
 +PROG = lzma
-+CXX = g++ -O2 -Wall
-+CXX_C = gcc -O2 -Wall
 +LIB = -lm
 +RM = rm -f
 +CFLAGS = -c -I ../../../
@@ -29647,9 +29642,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc
 --- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_C/makefile.gcc	2016-08-25 09:06:03.227530354 -0400
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,22 @@
 +PROG = lzmadec
-+CXX = gcc 
 +LIB = 
 +RM = rm -f
 +CFLAGS = -c -O2 -Wall -pedantic -D _LZMA_PROB32 
@@ -29699,9 +29693,8 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile
 --- squashfs-tools/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzmadaptive/C/7zip/Compress/LZMA_Lib/makefile	2016-08-25 09:06:03.223530354 -0400
-@@ -0,0 +1,92 @@
+@@ -0,0 +1,91 @@
 +PROG = liblzmalib.a
-+CXX = g++ -O3 -Wall
 +AR = ar
 +RM = rm -f
 +CFLAGS = -c  -I ../../../
@@ -37199,10 +37192,9 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/lzmalt.h squashfs-to
 diff --strip-trailing-cr -NBbaur squashfs-tools/LZMA/lzmalt/Makefile squashfs-tools-patched/LZMA/lzmalt/Makefile
 --- squashfs-tools/LZMA/lzmalt/Makefile	1969-12-31 19:00:00.000000000 -0500
 +++ squashfs-tools-patched/LZMA/lzmalt/Makefile	2016-08-25 09:06:03.231530353 -0400
-@@ -0,0 +1,10 @@
+@@ -0,0 +1,9 @@
 +INCLUDEDIR = .
 +
-+CC=gcc
 +
 +CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2
 +
@@ -38123,7 +38115,7 @@ diff --strip-trailing-cr -NBbaur squashfs-tools/Makefile squashfs-tools-patched/
  CFLAGS += $(EXTRA_CFLAGS) $(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 \
  	-D_LARGEFILE_SOURCE -D_GNU_SOURCE -DCOMP_DEFAULT=\"$(COMP_DEFAULT)\" \
 -	-Wall
-+	-Wall -Werror #-DSQUASHFS_TRACE
++	-Wall #-Werror -DSQUASHFS_TRACE
  
  LIBS = -lpthread -lm
  ifeq ($(GZIP_SUPPORT),1)
